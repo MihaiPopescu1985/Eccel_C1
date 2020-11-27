@@ -2,8 +2,11 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"time"
 
 	"example.com/c1/dbcommunication"
+	"example.com/c1/tcpcommunication"
 	"example.com/c1/wscommunication"
 )
 
@@ -21,10 +24,14 @@ func main() {
 
 	go func() {
 		for b := range operationalChannel {
-			msg += string(b)
+			msg = string(b)
 			fmt.Println(msg)
 		}
 	}()
+
+	time.Sleep(time.Second * 1)
+	log.Println("tcp connection:")
+	go tcpcommunication.TCPControl("192.168.0.10:8080")
 
 	fmt.Scanln()
 }
