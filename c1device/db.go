@@ -1,4 +1,4 @@
-package dbcommunication
+package c1device
 
 import (
 	"database/sql"

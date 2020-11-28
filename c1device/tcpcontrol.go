@@ -1,4 +1,4 @@
-package tcpcommunication
+package c1device
 
 import (
 	"log"

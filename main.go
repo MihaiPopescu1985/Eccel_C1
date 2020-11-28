@@ -5,9 +5,7 @@ import (
 	"log"
 	"time"
 
-	"example.com/c1/dbcommunication"
-	"example.com/c1/tcpcommunication"
-	"example.com/c1/wscommunication"
+	"example.com/c1/c1device"
 )
 
 const operational string = "ws://192.168.0.10/wscomm.cgi"
@@ -17,10 +15,10 @@ func main() {
 	//c1commands.PrintCommands()
 
 	operationalChannel := make(chan []byte)
-	wscommunication.ReadFromC1(operational, operationalChannel)
+	c1device.ReadFromC1(operational, operationalChannel)
 	var msg string = ""
 
-	go dbcommunication.DbConnect()
+	go c1device.DbConnect()
 
 	go func() {
 		for b := range operationalChannel {
@@ -31,7 +29,7 @@ func main() {
 
 	time.Sleep(time.Second * 1)
 	log.Println("tcp connection:")
-	go tcpcommunication.TCPControl("192.168.0.10:8080")
+	go c1device.TCPControl("192.168.0.10:8080")
 
 	fmt.Scanln()
 }

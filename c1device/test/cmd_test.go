@@ -1,4 +1,4 @@
-package c1commands
+package test/c1device
 
 import (
 	"reflect"

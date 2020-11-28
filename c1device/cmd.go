@@ -1,4 +1,4 @@
-package c1commands
+package c1device
 
 import "fmt"
 

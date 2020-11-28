@@ -1,4 +1,4 @@
-package wscommunication
+package c1device
 
 import (
 	"log"
