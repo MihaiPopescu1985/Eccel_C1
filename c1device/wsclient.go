@@ -6,17 +6,17 @@ import (
 	"golang.org/x/net/websocket"
 )
 
-const localhost string = "htt://localhost"
+// WsRead connects to a given C1 device via websocket
+// and sends the data through device's channel
+func (dev C1Device) WsRead() {
 
-// ReadFromC1 connects to a given url received as parameters
-// and sends the data through a channel
-func ReadFromC1(url string, chn chan []byte) {
+	url := wsPrefix + dev.IP + wsSufix
 	con, error := websocket.Dial(url, "ws", localhost)
 	if error != nil {
 		log.Println(error)
 	}
 	go func() {
-		defer close(chn)
+		defer close(dev.WsChannel)
 		defer con.Close()
 
 		for {
@@ -28,7 +28,7 @@ func ReadFromC1(url string, chn chan []byte) {
 			}
 			if lenght != 0 {
 				msg = msg[:lenght]
-				chn <- msg
+				dev.WsChannel <- msg
 			}
 		}
 	}()
