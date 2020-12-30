@@ -1,14 +1,13 @@
 package c1device
 
-var wsPrefix string = "ws://"
-var wsSufix string = "/wscomm.cgi"
-var localhost string = "http://localhost"
-var port string = "8080"
+import "golang.org/x/net/websocket"
 
 // C1Device describes a C1 device
 type C1Device struct {
-	Name      string
-	IP        string
-	TCPPort   string
-	WsChannel chan []byte
+	Name    string
+	IP      string
+	TCPPort string
+
+	WsConnection *websocket.Conn
+	WsChannel    chan []byte
 }
