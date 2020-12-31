@@ -1,12 +1,14 @@
 package c1device
 
 import (
+	"fmt"
 	"testing"
+	"time"
 
 	"example.com/c1/c1device"
 )
 
-const WsConnectionResponse string = "{ \"frame\":	\"version\", \"string\": \" 1.6 Oct 15 2020 14:19:44 \" }"
+//go test -run Method
 
 func TestWebsocketConnection(t *testing.T) {
 
@@ -36,4 +38,27 @@ func TestReceivingMessageViaWebsocket(t *testing.T) {
 		t.Error("Received no message from device.")
 		t.FailNow()
 	}
+}
+
+// go test -run ReceivingAllMessagesViaWebsocket
+func TestReceivingAllMessagesViaWebsocket(t *testing.T) {
+
+	device := c1device.C1Device{
+		IP:        "192.168.0.10",
+		WsChannel: make(chan []byte),
+	}
+
+	device.WsConnect()
+	device.WsRead()
+
+	go func() {
+		fmt.Println("Scan card")
+
+		for msg := range device.WsChannel {
+			fmt.Println(string(msg))
+			device.WsRead()
+		}
+	}()
+
+	time.Sleep(time.Second * 10)
 }
