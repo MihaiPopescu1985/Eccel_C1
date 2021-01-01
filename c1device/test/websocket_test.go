@@ -8,7 +8,9 @@ import (
 	"example.com/c1/c1device"
 )
 
-//go test -run Method
+/*
+go test -run Method
+*/
 
 func TestWebsocketConnection(t *testing.T) {
 
@@ -53,15 +55,22 @@ Example of card reading
         "known_tag":    true
 }
 */
-func TestReceivingAllMessagesViaWebsocket(t *testing.T) {
+func TestReceivingAllMessagesViaWebsocketInCertainDuration(t *testing.T) {
+	const testDuration = 10
+	const IP = "192.168.0.10"
 
 	device := c1device.C1Device{
-		IP:        "192.168.0.10",
+		IP:        IP,
 		WsChannel: make(chan []byte),
 	}
 
 	device.WsConnect()
 	device.WsRead()
+
+	if device.WsChannel == nil {
+		t.Error("Device channel is nil")
+		t.FailNow()
+	}
 
 	go func() {
 		fmt.Println("Scan card")
@@ -72,7 +81,7 @@ func TestReceivingAllMessagesViaWebsocket(t *testing.T) {
 		}
 	}()
 
-	time.Sleep(time.Second * 10)
+	time.Sleep(time.Second * testDuration)
 }
 
 func TestParseMessageMethod(t *testing.T) {

@@ -1,4 +1,4 @@
-package db
+package service
 
 import (
 	"database/sql"
@@ -35,4 +35,10 @@ func (dao *DAO) IsConnected() bool {
 		return false
 	}
 	return true
+}
+
+// InsertWorkday insert into database the time witch work is started or is stopped
+func (dao *DAO) InsertWorkday(deviceName, cardUID string) string {
+	var command string
+	return command
 }
