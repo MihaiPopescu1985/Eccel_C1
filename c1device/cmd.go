@@ -107,7 +107,7 @@ func GetCommand(buff []byte) []byte {
 	return protocolBuffOut
 }
 
-// PrintCommands returns nothing, print's known commands
+// PrintCommands - print known commands.
 func PrintCommands() {
 	fmt.Println("Let's calculate some commands")
 	fmt.Println("General commands")

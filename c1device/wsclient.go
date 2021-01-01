@@ -12,17 +12,9 @@ const wsSufix string = "/wscomm.cgi"
 const port string = "8080"
 const origin string = "http://localhost/"
 
-// WsRead connects to a given C1 device via websocket
-// and sends the data through device's channel
-// The message is a slice of bytes encoding json.
-// The json has the fields:
-// - device-name
-// - known_tag
-// - memory
-// - sak
-// - string
-// - type
-// - uid
+// WsRead reads data sent by a C1 device via websocket.
+// Data is passed to device's []byte channel.
+// A connection to device must be established first.
 func (dev *C1Device) WsRead() {
 	msg := make([]byte, 1024)
 	lenght, err := dev.WsConnection.Read(msg)
@@ -33,26 +25,6 @@ func (dev *C1Device) WsRead() {
 	go func() {
 		dev.WsChannel <- msg
 	}()
-
-	/*
-		go func() {
-			defer close(dev.WsChannel)
-			defer dev.WsConnection.Close()
-
-			for {
-				msg := make([]byte, 1024)
-				lenght, err := dev.WsConnection.Read(msg)
-				if err != nil {
-					log.Println(err)
-					break
-				}
-				if lenght != 0 {
-					msg = msg[:lenght]
-					dev.WsChannel <- msg
-				}
-			}
-		}()
-	*/
 }
 
 // WsConnect connects to a C1 device via websocket.
@@ -61,7 +33,7 @@ func (dev *C1Device) WsConnect() {
 	var error error
 	dev.WsConnection, error = websocket.Dial(url, "", origin)
 	if error != nil {
-		log.Println("Error while connecting to " + dev.Name)
+		log.Println("Error while connecting to " + dev.IP)
 		log.Println(error)
 	}
 }
