@@ -109,14 +109,13 @@ func TestParseMessageMethod(t *testing.T) {
 
 	device := c1device.C1Device{}
 
-	gotDeviceMessage := device.ParseMessage(jsonMessage)
+	gotDeviceName, gotCardUID := device.ParseMessage(jsonMessage)
 
-	if expectedDeviceName != gotDeviceMessage.DeviceName {
-		t.Error("got device name = " + gotDeviceMessage.DeviceName)
+	if expectedDeviceName != gotDeviceName {
 		t.Error("got device name != expected device name")
 		t.FailNow()
 	}
-	if expectedCardUID != gotDeviceMessage.CardUID {
+	if expectedCardUID != gotCardUID {
 		t.Error("Got card UID != expected card UID")
 		t.FailNow()
 	}

@@ -1,6 +1,8 @@
 package c1device
 
 import (
+	"encoding/json"
+
 	"golang.org/x/net/websocket"
 )
 
@@ -14,23 +16,29 @@ type C1Device struct {
 	WsChannel    chan []byte
 }
 
-// DeviceMessage stores data from C1 device
-type DeviceMessage struct {
-	CardUID    string
-	DeviceName string
+// CardReading is a structure that resamble the reading from C1 device.
+type CardReading struct {
+	Type       string `json:"type"`
+	UID        string `json:"uid"`
+	Sak        int    `json:"sak"`
+	CardType   string `json:"string"`
+	DeviceName string `json:"device-name"`
+	Memory     string `json:"memory"`
+	IsTagKnown bool   `json:"known_tag"`
 }
 
 // ParseMessage returns device name and rfid card's uid when reading.
-func (device *C1Device) ParseMessage(message []byte) DeviceMessage {
+func (device *C1Device) ParseMessage(message []byte) (string, string) {
 
-	const (
-		deviceNameStartIndex = 27
-		deviceNameEndIndex   = 41
-		cardUIDStartIndex    = 104
-		cardUIDEndIndex      = 120
-	)
-	return DeviceMessage{
-		CardUID:    string(message[deviceNameStartIndex:deviceNameEndIndex]),
-		DeviceName: string(message[cardUIDStartIndex:cardUIDEndIndex]),
+	var cardReading CardReading
+	err := json.Unmarshal(message, &cardReading)
+
+	var deviceName string
+	var cardUID string
+
+	if err == nil {
+		deviceName = cardReading.DeviceName
+		cardUID = cardReading.UID
 	}
+	return deviceName, cardUID
 }

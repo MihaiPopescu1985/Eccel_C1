@@ -24,15 +24,15 @@ func main() {
 		}
 		device.WsConnect()
 		device.WsRead()
-		var deviceMessage c1device.DeviceMessage
 
 		for msg := range device.WsChannel {
 
-			deviceMessage = device.ParseMessage(msg)
-			command :=
-				dao.InsertIntoWorkday(deviceMessage.DeviceName, deviceMessage.CardUID)
+			deviceName, cardUID := device.ParseMessage(msg)
 
-			if dao.IsConnected() {
+			command :=
+				dao.InsertIntoWorkday(deviceName, cardUID)
+
+			if dao.IsConnected() && deviceName != "" && cardUID != "" {
 				fmt.Println(command)
 				dao.Execute(command)
 			}
