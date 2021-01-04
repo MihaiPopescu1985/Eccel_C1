@@ -56,7 +56,7 @@ Example of card reading
 }
 */
 func TestReceivingAllMessagesViaWebsocketInCertainDuration(t *testing.T) {
-	const testDuration = 10
+	const testDuration = 30
 	const IP = "192.168.0.10"
 
 	device := c1device.C1Device{
