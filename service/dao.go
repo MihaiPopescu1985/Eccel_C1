@@ -1,5 +1,16 @@
 package service
 
+/*
+
+Two devices are assigned for entrance and exit.
+The worker is comming to work, enabling one of this devices.
+After that point, the worker is able to start working.
+
+In order for the worker to start working,
+he must enable another device.
+
+*/
+
 import (
 	"database/sql"
 	"fmt"
@@ -38,7 +49,7 @@ func (dao *DAO) IsConnected() bool {
 	return true
 }
 
-// InsertIntoWorkday returns the sql command to start/stop time on workday
+// InsertIntoWorkday returns the sql command to start/stop time on workday.
 func (dao *DAO) InsertIntoWorkday(deviceName, cardUID string) string {
 	var command string = "CALL INSERT_INTO_WORKDAY(\"" + deviceName + "\", \"" + cardUID + "\");"
 	return command

@@ -2,7 +2,9 @@ package c1device
 
 import (
 	"encoding/json"
+	"fmt"
 
+	"example.com/c1/service"
 	"golang.org/x/net/websocket"
 )
 
@@ -41,4 +43,30 @@ func (device *C1Device) ParseMessage(message []byte) (string, string) {
 		cardUID = cardReading.UID
 	}
 	return deviceName, cardUID
+}
+
+// UseDevice put at use a C1 device.
+// The normal use is:
+// - initiate a connection to device via websocket,
+// - reads cards data
+// - calls a dao to save data into database
+func (device *C1Device) UseDevice(dao service.DAO) {
+
+	device.WsConnect()
+	device.WsRead()
+
+	go func() {
+		for msg := range device.WsChannel {
+			deviceName, cardUID := device.ParseMessage(msg)
+
+			command :=
+				dao.InsertIntoWorkday(deviceName, cardUID)
+
+			if dao.IsConnected() && deviceName != "" && cardUID != "" {
+				fmt.Println(command) // TODO: must be replaced with a proper logger
+				dao.Execute(command)
+			}
+			device.WsRead()
+		}
+	}()
 }

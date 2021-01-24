@@ -13,6 +13,7 @@ type Worker struct {
 	LastName   string
 	Position   string
 	CardNumber string
+	IsActive   bool
 }
 
 // Project ...
@@ -23,7 +24,7 @@ type Project struct {
 	Description string
 	IPAddress   string
 	Device      c1device.C1Device
-	Active      bool
+	IsActive    bool
 }
 
 // Workday ...
@@ -33,4 +34,12 @@ type Workday struct {
 	Project   Project
 	StartTime time.Time
 	StopTime  time.Time
+}
+
+// Device ...
+type Device struct {
+	ID         int
+	Name       string
+	IP         string
+	IsEndpoint bool
 }
