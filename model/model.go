@@ -14,6 +14,8 @@ type Worker struct {
 	Position   string
 	CardNumber string
 	IsActive   bool
+	Nickname   string
+	Password   string
 }
 
 // Project ...

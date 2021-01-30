@@ -1,16 +1,10 @@
 package main
 
-import (
-	"log"
-	"net/http"
-
-	"example.com/c1/web/controller"
-)
-
 func main() {
+	/*	router := mux.NewRouter()
 
-	handler := http.HandlerFunc(controller.HomePageHandler)
-	if err := http.ListenAndServe(":8080", handler); err != nil {
-		log.Fatalf("could not listen on port 8080 %v", err)
-	}
+		router.HandleFunc("/", controller.HomePageHandler)
+		router.NotFoundHandler = controller.PageNotFoundHandler{}
+		log.Fatal(http.ListenAndServe(":8080", router))
+	*/
 }
