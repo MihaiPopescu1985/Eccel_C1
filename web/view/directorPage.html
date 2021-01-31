@@ -2,6 +2,11 @@
 <html>
     <head>
         <title>Pagina directorului</title>
+        <style>
+            table, th, td {
+                border: 1px solid black;
+            }
+        </style>
     </head>
     <body>
         <table id="activeWorkdays">
@@ -9,9 +14,17 @@
                 <th>Id</th>
                 <th>Worker</th>
                 <th>Project RO number</th>
-                <th>Project Ge number</th>
+                <th>Project GE number</th>
                 <th>Project description</th>
             </tr>
+            {{range $k,$v:=.}}
+                <tr>
+                    <td>{{$k}}</td>
+                    {{range $s := $v}} 
+                        <td>{{$s}}</td>
+                    {{end}}
+                </tr> 
+            {{end}}
         </table>
     </body>
 </html>

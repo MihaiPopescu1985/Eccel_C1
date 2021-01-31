@@ -44,6 +44,13 @@ func (dao *DAO) Connect() {
 	}
 }
 
+// CloseConnection closes the connection to database
+func (dao *DAO) CloseConnection() {
+	if dao.IsConnected() {
+		dao.db.Close()
+	}
+}
+
 // IsConnected verify database connection.
 func (dao *DAO) IsConnected() bool {
 	err := dao.db.Ping()
@@ -64,7 +71,7 @@ func (dao *DAO) SelectActiveWorkday() string {
 	return "CALL SELECT_ACTIVE_WORKDAY;"
 }
 
-// Execute executes a command against database
+// Execute executes a command against database with no returning result set.
 func (dao *DAO) Execute(command string) {
 	// TODO: make sure the command is proper executed, no error is triggered
 	dao.db.Exec(command)
@@ -82,6 +89,18 @@ func (dao *DAO) ExecuteQuery(command string) *sql.Rows {
 }
 
 // RetrieveActiveWorkdays - TODO write about behavior
-func (dao *DAO) RetrieveActiveWorkdays(rows *sql.Rows) ([]string, map[int]string) {
-	return nil, nil
+func (dao *DAO) RetrieveActiveWorkdays(rows *sql.Rows) map[int][]string {
+
+	table := make(map[int][]string)
+	var id int
+	var worker string
+	var roNumber string
+	var geNumber string
+	var description string
+
+	for rows.Next() {
+		rows.Scan(&id, &worker, &roNumber, &geNumber, &description)
+		table[id] = []string{worker, roNumber, geNumber, description}
+	}
+	return table
 }
