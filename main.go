@@ -8,8 +8,6 @@ import (
 	"github.com/gorilla/mux"
 )
 
-const homePage string = "/home/mihai/Documents/C1/project/web/view/directorPage.html"
-
 func main() {
 	router := mux.NewRouter()
 
