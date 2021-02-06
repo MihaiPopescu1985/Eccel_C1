@@ -15,6 +15,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"strconv"
 
 	_ "github.com/go-sql-driver/mysql" // import mysql driver
 )
@@ -84,7 +85,6 @@ func (dao *DAO) ExecuteQuery(command string) *sql.Rows {
 	if err != nil {
 		fmt.Println(err)
 	}
-
 	return rows
 }
 
@@ -97,10 +97,54 @@ func (dao *DAO) RetrieveActiveWorkdays(rows *sql.Rows) map[int][]string {
 	var roNumber string
 	var geNumber string
 	var description string
+	var workedTime string
 
 	for rows.Next() {
-		rows.Scan(&id, &worker, &roNumber, &geNumber, &description)
-		table[id] = []string{worker, roNumber, geNumber, description}
+		rows.Scan(&id, &worker, &roNumber, &geNumber, &description, &workedTime)
+		table[id] = []string{worker, roNumber, geNumber, description, workedTime}
 	}
 	return table
+}
+
+// RetrieveCurrentMonthTimeRaport - TODO write about behavior
+func (dao *DAO) RetrieveCurrentMonthTimeRaport(rows *sql.Rows) map[int][]string {
+	table := make(map[int][]string)
+	var id int
+	var geNo string
+	var roNo string
+	var description string
+	var start string
+	var stop string
+	var minutes string
+
+	for rows.Next() {
+		rows.Scan(&id, &geNo, &roNo, &description, &start, &stop, &minutes)
+		table[id] = []string{geNo, roNo, description, start, stop, toHoursAndMinutes(minutes)}
+	}
+	return table
+}
+
+// RetrieveWorkerStatus - TODO write about behavior
+func (dao *DAO) RetrieveWorkerStatus(rows *sql.Rows) (string, string) {
+	var status string
+	var workedMinutes int
+
+	rows.Next()
+	rows.Scan(&status)
+	rows.Next()
+	rows.Scan(&workedMinutes)
+
+	workedTime := toHoursAndMinutes(strconv.Itoa(workedMinutes))
+	return status, workedTime
+}
+
+func toHoursAndMinutes(minutes string) string {
+
+	workedMinutes, _ := strconv.Atoi(minutes)
+
+	workedHours := workedMinutes / 60
+	workedMinutes = workedMinutes - (workedHours * 60)
+
+	workedTime := strconv.Itoa(workedHours) + "h" + strconv.Itoa(workedMinutes) + "m"
+	return workedTime
 }

@@ -1,9 +1,32 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        <style>
+            table, th, td {
+                border: 1px solid black;
+            }
+        </style>
     </head>
     <body>
         <h1>Stage one page</h1>
+        <h1>Status lucrator: {{.Status}}</h1>
+        <h1>Timp lucrat azi: {{.WorkedTime}}</h1>
+        <table>
+            <tr>
+                <th>Numar Germania</th>
+                <th>Numar Romania</th>
+                <th>Descriere</th>
+                <th>Inceput</th>
+                <th>Sfarsit</th>
+                <th>Timp lucrat</th>
+            </tr>
+            {{range $k, $v := .TimeRaport}}
+                <tr>
+                    {{range $vValue := $v}}
+                        <td>{{$vValue}}</td>
+                    {{end}}
+                </tr>
+            {{end}}
+        </table>
     </body>
 </html>
