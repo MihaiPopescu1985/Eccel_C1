@@ -2,8 +2,6 @@ package model
 
 import (
 	"time"
-
-	"example.com/c1/c1device"
 )
 
 // Worker ...
@@ -25,8 +23,10 @@ type Project struct {
 	RoNumber    string
 	Description string
 	IPAddress   string
-	Device      c1device.C1Device
+	DeviceID    int
 	IsActive    bool
+	Begin       time.Time
+	End         time.Time
 }
 
 // Workday ...

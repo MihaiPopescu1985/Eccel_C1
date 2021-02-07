@@ -17,6 +17,7 @@ import (
 	"log"
 	"strconv"
 
+	"example.com/c1/model"
 	_ "github.com/go-sql-driver/mysql" // import mysql driver
 )
 
@@ -147,4 +148,40 @@ func toHoursAndMinutes(minutes string) string {
 
 	workedTime := strconv.Itoa(workedHours) + "h" + strconv.Itoa(workedMinutes) + "m"
 	return workedTime
+}
+
+// RetrieveActiveProjects ...
+func (dao *DAO) RetrieveActiveProjects(rows *sql.Rows) []model.Project {
+	projects := make([]model.Project, 0)
+
+	for rows.Next() {
+		var proj model.Project
+		rows.Scan(&proj.ID,
+			&proj.GeNumber,
+			&proj.RoNumber,
+			&proj.Description,
+			&proj.DeviceID,
+			&proj.IsActive,
+			&proj.Begin,
+			&proj.End)
+		projects = append(projects, proj)
+	}
+	return projects
+}
+
+// RetrieveAllWorkers ...
+func (dao *DAO) RetrieveAllWorkers(rows *sql.Rows) []model.Worker {
+	workers := make([]model.Worker, 0)
+
+	for rows.Next() {
+		var worker model.Worker
+		rows.Scan(&worker.ID,
+			&worker.FirstName,
+			&worker.LastName,
+			&worker.CardNumber,
+			&worker.Position,
+			&worker.IsActive)
+		workers = append(workers, worker)
+	}
+	return workers
 }

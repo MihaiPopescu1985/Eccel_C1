@@ -1,9 +1,55 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        <style>
+            table, th, td {
+                border: 1px solid black;
+            }
+        </style>
     </head>
     <body>
         <h1>Stage one page</h1>
+        <h2>Proiecte active</h2>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Numar Germania</th>
+                <th>Numar Romania</th>
+                <th>Descriere</th>
+                <th>Id dispozitiv</th>
+                <th>Data inceput</th>
+            </tr>
+            {{range $project := .ActiveProjects}}
+                <tr>
+                    <td>{{$project.ID}}</td>
+                    <td>{{$project.GeNumber}}</td>
+                    <td>{{$project.RoNumber}}</td>
+                    <td>{{$project.Description}}</td>
+                    <td>{{$project.DeviceID}}</td>
+                    <td>{{$project.Begin}}</td>
+                </tr>
+            {{end}}
+        </table>
+        <h2>Lucratori</h2>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Prenume</th>
+                <th>Nume</th>
+                <th>Numar card</th>
+                <th>Pozitia ocupata</th>
+                <th>Activ</th>
+            </tr>
+            {{range $worker := .Workers}}
+                <tr>
+                    <td>{{$worker.ID}}</td>
+                    <td>{{$worker.FirstName}}</td>
+                    <td>{{$worker.LastName}}</td>
+                    <td>{{$worker.CardNumber}}</td>
+                    <td>{{$worker.Position}}</td>
+                    <td>{{$worker.IsActive}}</td>
+                </tr>
+            {{end}}
+        </table>
     </body>
 </html>

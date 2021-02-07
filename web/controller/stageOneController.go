@@ -20,16 +20,16 @@ type workerStatus struct {
 }
 
 // StageOneHandler TODO: edit function & function description.
-// Based on worker's id (e.g. retrieved from cookie),
+// Based on worker's id got from url query,
 // retrieve current month time report by calling
 // database stored procedure: SELECT_TIME_RAPORT(WORKER_ID, CURRENT_MONTH).
 // This page must also display worker's status (inactive/active/break)
 // and current working time.
 func StageOneHandler(writer http.ResponseWriter, request *http.Request) {
 
-	// TODO: get worker's id
-	workerPage := workerStatus{
-		2,
+	workerID, _ := strconv.Atoi(request.URL.Query().Get("workerId"))
+	pageContent := workerStatus{
+		workerID,
 		make(map[int][]string, 0),
 		"INACTIVE",
 		"0",
@@ -39,20 +39,20 @@ func StageOneHandler(writer http.ResponseWriter, request *http.Request) {
 	dao.Connect()
 	defer dao.CloseConnection()
 
-	var command string = "CALL SELECT_WORKER_STATUS(" + strconv.Itoa(workerPage.WorkerID) + ");"
-	workerPage.Status, workerPage.WorkedTime = dao.RetrieveWorkerStatus(dao.ExecuteQuery(command))
+	var command string = "CALL SELECT_WORKER_STATUS(" + strconv.Itoa(pageContent.WorkerID) + ");"
+	pageContent.Status, pageContent.WorkedTime = dao.RetrieveWorkerStatus(dao.ExecuteQuery(command))
 
 	currentMonth := int(time.Now().Month())
-	command = "CALL SELECT_MONTH_TIME_RAPORT(" + strconv.Itoa(workerPage.WorkerID) + ", " + strconv.Itoa(currentMonth) + ");"
+	command = "CALL SELECT_MONTH_TIME_RAPORT(" + strconv.Itoa(pageContent.WorkerID) + ", " + strconv.Itoa(currentMonth) + ");"
 
-	workerPage.TimeRaport = dao.RetrieveCurrentMonthTimeRaport(dao.ExecuteQuery(command))
+	pageContent.TimeRaport = dao.RetrieveCurrentMonthTimeRaport(dao.ExecuteQuery(command))
 
 	templ, err := template.New("stageOne").ParseFiles(stageOnePage)
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	err = templ.ExecuteTemplate(writer, "stageOneAccess.html", workerPage)
+	err = templ.ExecuteTemplate(writer, "stageOneAccess.html", pageContent)
 	if err != nil {
 		fmt.Println(err)
 	}
