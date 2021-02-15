@@ -64,23 +64,19 @@ func (dao *DAO) IsConnected() bool {
 }
 
 // InsertIntoWorkday returns the sql command to start/stop time on workday.
-func (dao *DAO) InsertIntoWorkday(deviceName, cardUID string) string {
-	return "CALL INSERT_INTO_WORKDAY(\"" + deviceName + "\", \"" + cardUID + "\");"
-}
-
-// SelectActiveWorkday returns the sql command to select active workers
-func (dao *DAO) SelectActiveWorkday() string {
-	return "CALL SELECT_ACTIVE_WORKDAY;"
+func (dao *DAO) InsertIntoWorkday(deviceName, cardUID string) {
+	command := "CALL INSERT_INTO_WORKDAY(\"" + deviceName + "\", \"" + cardUID + "\");"
+	dao.execute(command)
 }
 
 // Execute executes a command against database with no returning result set.
-func (dao *DAO) Execute(command string) {
+func (dao *DAO) execute(command string) {
 	// TODO: make sure the command is proper executed, no error is triggered
 	dao.db.Exec(command)
 }
 
 // ExecuteQuery TODO: write about the behavior of this function
-func (dao *DAO) ExecuteQuery(command string) *sql.Rows {
+func (dao *DAO) executeQuery(command string) *sql.Rows {
 	rows, err := dao.db.Query(command)
 
 	if err != nil {
@@ -90,7 +86,10 @@ func (dao *DAO) ExecuteQuery(command string) *sql.Rows {
 }
 
 // RetrieveActiveWorkdays - TODO write about behavior
-func (dao *DAO) RetrieveActiveWorkdays(rows *sql.Rows) map[int][]string {
+func (dao *DAO) RetrieveActiveWorkdays() map[int][]string {
+
+	command := "CALL SELECT_ACTIVE_WORKDAY;"
+	rows := dao.executeQuery(command)
 
 	table := make(map[int][]string)
 	var id int
@@ -108,7 +107,11 @@ func (dao *DAO) RetrieveActiveWorkdays(rows *sql.Rows) map[int][]string {
 }
 
 // RetrieveCurrentMonthTimeRaport - TODO write about behavior
-func (dao *DAO) RetrieveCurrentMonthTimeRaport(rows *sql.Rows) map[int][]string {
+func (dao *DAO) RetrieveCurrentMonthTimeRaport(workerID, currentMonth int) map[int][]string {
+
+	command := "CALL SELECT_MONTH_TIME_RAPORT(" + strconv.Itoa(workerID) + ", " + strconv.Itoa(currentMonth) + ");"
+	rows := dao.executeQuery(command)
+
 	table := make(map[int][]string)
 	var id int
 	var geNo string
@@ -126,7 +129,11 @@ func (dao *DAO) RetrieveCurrentMonthTimeRaport(rows *sql.Rows) map[int][]string 
 }
 
 // RetrieveWorkerStatus - TODO write about behavior
-func (dao *DAO) RetrieveWorkerStatus(rows *sql.Rows) (string, string) {
+func (dao *DAO) RetrieveWorkerStatus(id int) (string, string) {
+
+	var command string = "CALL SELECT_WORKER_STATUS(" + strconv.Itoa(id) + ");"
+	rows := dao.executeQuery(command)
+
 	var status string
 	var workedMinutes int
 
@@ -151,7 +158,11 @@ func toHoursAndMinutes(minutes string) string {
 }
 
 // RetrieveActiveProjects ...
-func (dao *DAO) RetrieveActiveProjects(rows *sql.Rows) []model.Project {
+func (dao *DAO) RetrieveActiveProjects() []model.Project {
+
+	var command string = "CALL GET_ACTIVE_PROJECTS();"
+	rows := dao.executeQuery(command)
+
 	projects := make([]model.Project, 0)
 
 	for rows.Next() {
@@ -170,7 +181,11 @@ func (dao *DAO) RetrieveActiveProjects(rows *sql.Rows) []model.Project {
 }
 
 // RetrieveAllWorkers ...
-func (dao *DAO) RetrieveAllWorkers(rows *sql.Rows) []model.Worker {
+func (dao *DAO) RetrieveAllWorkers() []model.Worker {
+
+	command := "CALL GET_ALL_WORKERS();"
+	rows := dao.executeQuery(command)
+
 	workers := make([]model.Worker, 0)
 
 	for rows.Next() {
@@ -184,4 +199,25 @@ func (dao *DAO) RetrieveAllWorkers(rows *sql.Rows) []model.Worker {
 		workers = append(workers, worker)
 	}
 	return workers
+}
+
+// GetUserByNameAndPassword TODO: write about function
+func (dao *DAO) GetUserByNameAndPassword(name, password string) model.Worker {
+	var worker model.Worker
+
+	command := "SELECT * FROM WORKER WHERE NICKNAME = \"" + name + "\" AND PASSWORD = \"" + password + "\";"
+	rows := dao.executeQuery(command)
+
+	for rows.Next() {
+		rows.Scan(&worker.ID,
+			&worker.FirstName,
+			&worker.LastName,
+			&worker.CardNumber,
+			&worker.Position,
+			&worker.IsActive,
+			&worker.Nickname,
+			&worker.Password,
+			&worker.AccessLevel)
+	}
+	return worker
 }

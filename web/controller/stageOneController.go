@@ -39,13 +39,10 @@ func StageOneHandler(writer http.ResponseWriter, request *http.Request) {
 	dao.Connect()
 	defer dao.CloseConnection()
 
-	var command string = "CALL SELECT_WORKER_STATUS(" + strconv.Itoa(pageContent.WorkerID) + ");"
-	pageContent.Status, pageContent.WorkedTime = dao.RetrieveWorkerStatus(dao.ExecuteQuery(command))
-
+	pageContent.Status, pageContent.WorkedTime = dao.RetrieveWorkerStatus(workerID)
 	currentMonth := int(time.Now().Month())
-	command = "CALL SELECT_MONTH_TIME_RAPORT(" + strconv.Itoa(pageContent.WorkerID) + ", " + strconv.Itoa(currentMonth) + ");"
 
-	pageContent.TimeRaport = dao.RetrieveCurrentMonthTimeRaport(dao.ExecuteQuery(command))
+	pageContent.TimeRaport = dao.RetrieveCurrentMonthTimeRaport(workerID, currentMonth)
 
 	templ, err := template.New("stageOne").ParseFiles(stageOnePage)
 	if err != nil {

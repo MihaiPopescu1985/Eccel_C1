@@ -17,7 +17,7 @@ func StageThreeHandler(writer http.ResponseWriter, request *http.Request) {
 	dao.Connect()
 	defer dao.CloseConnection()
 
-	activeWorkdays := dao.RetrieveActiveWorkdays(dao.ExecuteQuery(dao.SelectActiveWorkday()))
+	activeWorkdays := dao.RetrieveActiveWorkdays()
 
 	templ, err := template.New("stageThree").ParseFiles(stageThreePage)
 	if err != nil {

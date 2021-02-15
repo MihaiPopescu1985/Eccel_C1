@@ -25,11 +25,8 @@ func StageTwoHandler(writer http.ResponseWriter, request *http.Request) {
 
 	var pageContent hrPage
 
-	var command string = "CALL GET_ACTIVE_PROJECTS();"
-	pageContent.ActiveProjects = dao.RetrieveActiveProjects(dao.ExecuteQuery(command))
-
-	command = "CALL GET_ALL_WORKERS();"
-	pageContent.Workers = dao.RetrieveAllWorkers(dao.ExecuteQuery(command))
+	pageContent.ActiveProjects = dao.RetrieveActiveProjects()
+	pageContent.Workers = dao.RetrieveAllWorkers()
 
 	templ, err := template.New("stageTwo").ParseFiles(stageTwoPage)
 	if err != nil {

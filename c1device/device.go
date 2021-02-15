@@ -2,7 +2,6 @@ package c1device
 
 import (
 	"encoding/json"
-	"fmt"
 
 	"example.com/c1/service"
 	"golang.org/x/net/websocket"
@@ -59,12 +58,8 @@ func (device *C1Device) UseDevice(dao service.DAO) {
 		for msg := range device.WsChannel {
 			deviceName, cardUID := device.ParseMessage(msg)
 
-			command :=
-				dao.InsertIntoWorkday(deviceName, cardUID)
-
 			if dao.IsConnected() && deviceName != "" && cardUID != "" {
-				fmt.Println(command) // TODO: must be replaced with a proper logger
-				dao.Execute(command)
+				dao.InsertIntoWorkday(deviceName, cardUID)
 			}
 			device.WsRead()
 		}
