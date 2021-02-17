@@ -21,7 +21,7 @@ func StageThreeHandler(writer http.ResponseWriter, request *http.Request) {
 
 	templ, err := template.New("stageThree").ParseFiles(stageThreePage)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 
 	err = templ.ExecuteTemplate(writer, "stageThreeAccess.html", activeWorkdays)

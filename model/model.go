@@ -46,3 +46,12 @@ type Device struct {
 	IP         string
 	IsEndpoint bool
 }
+
+// WebToken ...
+type WebToken struct {
+	ID       int
+	WorkerID int
+	Date     string
+	Token    string
+	Active   bool
+}
