@@ -18,6 +18,6 @@ func main() {
 
 	router.NotFoundHandler = controller.PageNotFoundHandler{}
 
-	router.Use(controller.LogInMiddleware)
+	router.Use(controller.AuthMiddleware)
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
