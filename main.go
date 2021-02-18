@@ -17,5 +17,7 @@ func main() {
 	router.HandleFunc("/stage-three", controller.StageThreeHandler)
 
 	router.NotFoundHandler = controller.PageNotFoundHandler{}
+
+	router.Use(controller.LogInMiddleware)
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
