@@ -9,7 +9,7 @@ import (
 	"example.com/c1/service"
 )
 
-const stageTwoPage string = "/home/mihai/Documents/C1/project/web/view/stageTwoAccess.html"
+const stageTwoPage string = "./web/view/stageTwoAccess.html"
 
 type hrPage struct {
 	Workers        []model.Worker

@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-const notFoundPage string = "/home/mihai/Documents/C1/project/web/view/notFound.html"
+const notFoundPage string = "./web/view/notFound.html"
 
 // PageNotFoundHandler ...
 type PageNotFoundHandler struct{}

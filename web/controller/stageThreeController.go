@@ -8,7 +8,7 @@ import (
 	"example.com/c1/service"
 )
 
-const stageThreePage string = "/home/mihai/Documents/C1/project/web/view/stageThreeAccess.html"
+const stageThreePage string = "./web/view/stageThreeAccess.html"
 
 // StageThreeHandler - TODO: write about
 func StageThreeHandler(writer http.ResponseWriter, request *http.Request) {

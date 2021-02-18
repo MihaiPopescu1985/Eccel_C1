@@ -10,7 +10,7 @@ import (
 	"example.com/c1/service"
 )
 
-const stageOnePage string = "/home/mihai/Documents/C1/project/web/view/stageOneAccess.html"
+const stageOnePage string = "./web/view/stageOneAccess.html"
 
 type workerStatus struct {
 	WorkerID   int

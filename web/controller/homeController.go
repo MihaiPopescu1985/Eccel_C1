@@ -9,7 +9,7 @@ import (
 	"example.com/c1/service"
 )
 
-const homePage string = "/home/mihai/Documents/C1/project/web/view/home.html"
+const homePage string = "./web/view/home.html"
 
 // HomePageHandler - home page of web interface
 // Checks for name and password, redirect user to specific pages.
@@ -25,7 +25,7 @@ func HomePageHandler(response http.ResponseWriter, request *http.Request) {
 	name := request.FormValue("name")
 
 	password := request.FormValue("password")
-	var urlRedirect string
+	var urlRedirect string = ""
 
 	if name != "" || password != "" {
 		var dao service.DAO
