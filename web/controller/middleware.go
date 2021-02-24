@@ -2,95 +2,81 @@ package controller
 
 import (
 	"net/http"
-)
+	"strconv"
 
-/*
-verifica cookie
-daca sunt cookie
-	daca se obtine id-ul lucratorului
-		se cauta token-ul salvat in baza de date (daca este activ)
-		daca token-ul este activ si corespunde cu cookie
-			se trece mai departe
-		daca token-ul nu este activ sau nu corespunde cu cookie
-			se redirectioneaza catre pagina principala
-	daca nu se obtine id-ul lucratorului
-		se redirectioneaza catre pagina principala
-daca nu sunt cookie
-	se redirectioneaza catre pagina principala
-*/
+	"example.com/c1/model"
+	"example.com/c1/service"
+)
 
 // AuthMiddleware ...
 func AuthMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Add("Cache-Control", "no-cache, no-store, must-revalidate")
-		/*
-			var dao service.DAO
-			dao.Connect()
-			defer dao.CloseConnection()
 
-			var urlRedirect string = "/"
+		nameCookie, errName := r.Cookie("name")
+		passCookie, errPass := r.Cookie("pass")
 
-			dateCookie, errDate := r.Cookie("date")
-			valueCookie, errValue := r.Cookie("value")
-			userCookie, errUser := r.Cookie("user")
+		var dao service.DAO
+		dao.Connect()
+		defer dao.CloseConnection()
 
-			if errDate != nil || errValue != nil || errUser != nil {
-				if token.Date != dateCookie.Value || token.Token != valueCookie.Value || &token != nil {
+		var worker model.Worker
+		var urlRedirect string = "/"
 
-				}
+		if errName == nil && errPass == nil {
+			worker = dao.GetUserByNameAndPassword(nameCookie.Value, passCookie.Value)
 
-				workerID, _ := strconv.Atoi(userCookie.Value)
-				token := dao.GetActiveToken(workerID)
+			if &worker != nil {
+				switch worker.AccessLevel {
+				case 1:
+					urlRedirect = "/stage-one?workerId=" + strconv.Itoa(worker.ID)
 
-				r.ParseForm()
+				case 2:
+					urlRedirect = "/stage-two"
 
-				name := r.FormValue("name")
-				password := r.FormValue("password")
-
-				if name != "" || password != "" {
-
-					worker := dao.GetUserByNameAndPassword(name, password)
-					dao.SaveWebToken(worker.ID)
-					token = dao.GetActiveToken(worker.ID)
-
-					r.AddCookie(&http.Cookie{
-						Name:   "date",
-						Value:  token.Date,
-						MaxAge: 0,
-						Secure: true,
-					})
-					r.AddCookie(&http.Cookie{
-						Name:   "value",
-						Value:  token.Token,
-						MaxAge: 0,
-						Secure: true,
-					})
-					r.AddCookie(&http.Cookie{
-						Name:   "user",
-						Value:  strconv.Itoa(token.WorkerID),
-						MaxAge: 0,
-						Secure: true,
-					})
-
-					switch worker.AccessLevel {
-					case 1:
-						urlRedirect = "/stage-one?workerId=" + strconv.Itoa(worker.ID)
-
-					case 2:
-						urlRedirect = "/stage-two"
-
-					case 3:
-						urlRedirect = "/stage-three"
-					}
+				case 3:
+					urlRedirect = "/stage-three"
 				}
 			}
+		}
 
-			if r.RequestURI == "/" {
+		r.ParseForm()
 
-				http.Redirect(w, r, urlRedirect, 300)
-			} else {
-				next.ServeHTTP(w, r)
+		nameForm := r.FormValue("name")
+		passForm := r.FormValue("password")
+
+		if nameForm != "" || passForm != "" {
+
+			worker := dao.GetUserByNameAndPassword(nameForm, passForm)
+			if &worker != nil {
+				http.SetCookie(w, &http.Cookie{
+					Name:   "name",
+					Value:  worker.Nickname,
+					Secure: true,
+				})
+				http.SetCookie(w, &http.Cookie{
+					Name:   "pass",
+					Value:  worker.Password,
+					Secure: true,
+				})
+
+				switch worker.AccessLevel {
+				case 1:
+					urlRedirect = "/stage-one?workerId=" + strconv.Itoa(worker.ID)
+
+				case 2:
+					urlRedirect = "/stage-two"
+
+				case 3:
+					urlRedirect = "/stage-three"
+				}
 			}
-		*/
+		}
+
+		if urlRedirect == r.RequestURI {
+			next.ServeHTTP(w, r)
+		} else {
+			http.Redirect(w, r, urlRedirect, 201)
+		}
 	})
 }

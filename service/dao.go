@@ -102,7 +102,6 @@ func (dao *DAO) RetrieveActiveWorkdays() map[int][]string {
 		rows.Scan(&id, &worker, &roNumber, &geNumber, &description)
 		table[id] = []string{worker, roNumber, geNumber, description}
 	}
-	fmt.Println(table)
 	return table
 }
 
@@ -220,28 +219,4 @@ func (dao *DAO) GetUserByNameAndPassword(name, password string) model.Worker {
 			&worker.AccessLevel)
 	}
 	return worker
-}
-
-// SaveWebToken TODO: WRITE ABOUT
-func (dao *DAO) SaveWebToken(worker int) {
-	command := "CALL SAVE_WEB_TOKEN(" + strconv.Itoa(worker) + ");"
-	dao.execute(command)
-}
-
-// GetActiveToken TODO: write about
-func (dao *DAO) GetActiveToken(worker int) model.WebToken {
-	var token model.WebToken
-
-	command :=
-		"SELECT * FROM SESSIONTOKENS WHERE WORKERID = " + strconv.Itoa(worker) + " AND ACTIVE = TRUE"
-	rows := dao.executeQuery(command)
-
-	for rows.Next() {
-		rows.Scan(&token.ID,
-			&token.WorkerID,
-			&token.Date,
-			&token.Token,
-			&token.Active)
-	}
-	return token
 }
