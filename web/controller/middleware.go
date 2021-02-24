@@ -11,6 +11,7 @@ import (
 // AuthMiddleware ...
 func AuthMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+
 		w.Header().Add("Cache-Control", "no-cache, no-store, must-revalidate")
 
 		nameCookie, errName := r.Cookie("name")
