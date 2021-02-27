@@ -13,6 +13,7 @@ import (
 const stageOnePage string = "./web/view/stageOneAccess.html"
 
 type workerStatus struct {
+	WorkerName string
 	WorkerID   int
 	TimeRaport map[int][]string
 	Status     string
@@ -29,20 +30,19 @@ func StageOneHandler(writer http.ResponseWriter, request *http.Request) {
 
 	workerID, _ := strconv.Atoi(request.URL.Query().Get("workerId"))
 	pageContent := workerStatus{
+		"",
 		workerID,
 		make(map[int][]string, 0),
 		"INACTIVE",
 		"0",
 	}
 
-	var dao service.DAO
-	dao.Connect()
-	defer dao.CloseConnection()
+	pageContent.WorkerName = service.Dao.RetrieveWorkerName(workerID)
 
-	pageContent.Status, pageContent.WorkedTime = dao.RetrieveWorkerStatus(workerID)
+	pageContent.Status, pageContent.WorkedTime = service.Dao.RetrieveWorkerStatus(workerID)
 	currentMonth := int(time.Now().Month())
 
-	pageContent.TimeRaport = dao.RetrieveCurrentMonthTimeRaport(workerID, currentMonth)
+	pageContent.TimeRaport = service.Dao.RetrieveCurrentMonthTimeRaport(workerID, currentMonth)
 
 	templ, err := template.New("stageOne").ParseFiles(stageOnePage)
 	if err != nil {

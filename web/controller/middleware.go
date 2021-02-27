@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -17,15 +18,11 @@ func AuthMiddleware(next http.Handler) http.Handler {
 		nameCookie, errName := r.Cookie("name")
 		passCookie, errPass := r.Cookie("pass")
 
-		var dao service.DAO
-		dao.Connect()
-		defer dao.CloseConnection()
-
 		var worker model.Worker
 		var urlRedirect string = "/"
 
 		if errName == nil && errPass == nil {
-			worker = dao.GetUserByNameAndPassword(nameCookie.Value, passCookie.Value)
+			worker = service.Dao.GetUserByNameAndPassword(nameCookie.Value, passCookie.Value)
 
 			if &worker != nil {
 				switch worker.AccessLevel {
@@ -48,7 +45,9 @@ func AuthMiddleware(next http.Handler) http.Handler {
 
 		if nameForm != "" || passForm != "" {
 
-			worker := dao.GetUserByNameAndPassword(nameForm, passForm)
+			fmt.Println("form")
+
+			worker := service.Dao.GetUserByNameAndPassword(nameForm, passForm)
 			if &worker != nil {
 				http.SetCookie(w, &http.Cookie{
 					Name:   "name",
@@ -74,10 +73,13 @@ func AuthMiddleware(next http.Handler) http.Handler {
 			}
 		}
 
-		if urlRedirect == r.RequestURI {
+		fmt.Println("redirect = " + urlRedirect)
+		fmt.Println("request = " + r.RequestURI)
+
+		if r.RequestURI == "/log-out" || urlRedirect == r.RequestURI {
 			next.ServeHTTP(w, r)
 		} else {
-			http.Redirect(w, r, urlRedirect, 201)
+			http.Redirect(w, r, urlRedirect, 300)
 		}
 	})
 }

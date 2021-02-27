@@ -27,6 +27,9 @@ const (
 	database    string = "testEccelC1"
 )
 
+// Dao represent a global variable for storing a database connection.
+var Dao DAO
+
 // DAO ...
 type DAO struct {
 	db *sql.DB
@@ -37,19 +40,12 @@ type ActiveWorkdays struct {
 	Workdays map[int][5]string
 }
 
-// Connect connects to database
+// Connect connects to database and closes the connections after 10 seconds
 func (dao *DAO) Connect() {
 	var err error = nil
 	dao.db, err = sql.Open(driver, credentials)
 	if err != nil {
 		fmt.Println(err)
-	}
-}
-
-// CloseConnection closes the connection to database
-func (dao *DAO) CloseConnection() {
-	if dao.IsConnected() {
-		dao.db.Close()
 	}
 }
 
@@ -219,4 +215,19 @@ func (dao *DAO) GetUserByNameAndPassword(name, password string) model.Worker {
 			&worker.AccessLevel)
 	}
 	return worker
+}
+
+// RetrieveWorkerName returns worker's name based on id.
+func (dao *DAO) RetrieveWorkerName(id int) string {
+
+	firstName := ""
+	lastName := ""
+
+	command := "SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = " + strconv.Itoa(id) + ";"
+	rows := dao.executeQuery(command)
+
+	for rows.Next() {
+		rows.Scan(&firstName, &lastName)
+	}
+	return firstName + " " + lastName
 }

@@ -48,8 +48,8 @@ func (device *C1Device) ParseMessage(message []byte) (string, string) {
 // The normal use is:
 // - initiate a connection to device via websocket,
 // - reads cards data
-// - calls a dao to save data into database
-func (device *C1Device) UseDevice(dao service.DAO) {
+// - calls a database connection to save data into database
+func (device *C1Device) UseDevice() {
 
 	device.WsConnect()
 	device.WsRead()
@@ -58,8 +58,8 @@ func (device *C1Device) UseDevice(dao service.DAO) {
 		for msg := range device.WsChannel {
 			deviceName, cardUID := device.ParseMessage(msg)
 
-			if dao.IsConnected() && deviceName != "" && cardUID != "" {
-				dao.InsertIntoWorkday(deviceName, cardUID)
+			if service.Dao.IsConnected() && deviceName != "" && cardUID != "" {
+				service.Dao.InsertIntoWorkday(deviceName, cardUID)
 			}
 			device.WsRead()
 		}

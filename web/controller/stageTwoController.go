@@ -19,14 +19,10 @@ type hrPage struct {
 // StageTwoHandler TODO: write about
 func StageTwoHandler(writer http.ResponseWriter, request *http.Request) {
 
-	var dao service.DAO
-	dao.Connect()
-	defer dao.CloseConnection()
-
 	var pageContent hrPage
 
-	pageContent.ActiveProjects = dao.RetrieveActiveProjects()
-	pageContent.Workers = dao.RetrieveAllWorkers()
+	pageContent.ActiveProjects = service.Dao.RetrieveActiveProjects()
+	pageContent.Workers = service.Dao.RetrieveAllWorkers()
 
 	templ, err := template.New("stageTwo").ParseFiles(stageTwoPage)
 	if err != nil {

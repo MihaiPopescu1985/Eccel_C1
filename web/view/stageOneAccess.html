@@ -2,31 +2,115 @@
 <html>
     <head>
         <style>
-            table, th, td {
-                border: 1px solid black;
+            body {
+                background-color: #284b63;
+            }
+
+            #name-holder {
+                padding: 20px;
+                background-color: #d9d9d9;
+                color: #3c6e71;
+                margin: 30px;
+                max-width: max-content;
+                border-radius: 5px;
+                box-shadow: 5px 10px #353535;
+            }
+
+            #worker-name {
+                display: inline;
+            }
+
+            #log-out-link-holder {
+                display: inline;
+                padding: 30px;
+                background-color: #3c6e71;
+                box-shadow: 5px 10px #353535;
+                max-width: max-content;
+                position: relative;
+                right: -25px;
+                bottom: -25px;
+            }
+
+            #log-out-link {
+                font-size: larger;
+            }
+
+            #log-out-link:link, #log-out-link:visited {
+                color: #ffffff;
+            }
+
+            #status {
+                margin-top: 100px;
+            }
+
+            #status, #today-worked {
+                text-align: center;
+                color: #d9d9d9;
+                text-shadow: 2px 2px #353535;
+            }
+
+            #monthly-report {
+                margin: 100px;
+                padding: 20px;
+            }
+
+            #monthly-report>h1 {
+                color: #d9d9d9;
+                background-color: #3c6e71;
+                padding: 10px;
+                max-width: max-content;
+                font-style: italic;
+                position: relative;
+                top: -75px;
+                text-shadow: 2px 2px #353535;
+            }
+
+            #monthly-report {
+                border-radius: 10px;
+                background-color: #d9d9d9;
+            }
+
+            table {
+                display: block;
+                margin: 5px;
+            }
+
+            th {
+                margin-left: auto;
+                margin-right: auto;
             }
         </style>
     </head>
     <body>
-        <h1>Stage one page</h1>
-        <h1>Status lucrator: {{.Status}}</h1>
-        <h1>Timp lucrat azi: {{.WorkedTime}}</h1>
-        <table>
-            <tr>
-                <th>Numar Germania</th>
-                <th>Numar Romania</th>
-                <th>Descriere</th>
-                <th>Inceput</th>
-                <th>Sfarsit</th>
-                <th>Timp lucrat</th>
-            </tr>
-            {{range $k, $v := .TimeRaport}}
+        <div id="name-holder">
+            <h1 id="worker-name">Salut {{.WorkerName}}</h1>
+            <div id="log-out-link-holder">
+                <a id="log-out-link" href="/log-out">Log out</a>
+            </div>
+        </div>
+        
+        <h1 id="status">Statusul tau: {{.Status}}</h1>
+        <h1 id="today-worked">Astazi ai lucrat: {{.WorkedTime}}</h1>
+
+        <div id="monthly-report">
+            <h1>Raportul lunii in curs:</h1>
+            <table>
                 <tr>
-                    {{range $vValue := $v}}
-                        <td>{{$vValue}}</td>
-                    {{end}}
+                    <th>Numar Germania</th>
+                    <th>Numar Romania</th>
+                    <th>Descriere</th>
+                    <th>Inceput</th>
+                    <th>Sfarsit</th>
+                    <th>Timp lucrat</th>
                 </tr>
-            {{end}}
-        </table>
+                {{range $k, $v := .TimeRaport}}
+                    <tr>
+                        {{range $vValue := $v}}
+                            <td>{{$vValue}}</td>
+                        {{end}}
+                    </tr>
+                {{end}}
+            </table>
+        </div>
     </body>
 </html>
