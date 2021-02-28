@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Pagina lucratorului</title>
+
         <style>
             body {
                 background-color: #284b63;
             }
 
-            #name-holder {
+            #header-holder {
                 padding: 20px;
                 background-color: #d9d9d9;
                 color: #3c6e71;
@@ -20,7 +25,7 @@
                 display: inline;
             }
 
-            #log-out-link-holder {
+            #log-out-link {
                 display: inline;
                 padding: 30px;
                 background-color: #3c6e71;
@@ -29,9 +34,6 @@
                 position: relative;
                 right: -25px;
                 bottom: -25px;
-            }
-
-            #log-out-link {
                 font-size: larger;
             }
 
@@ -71,33 +73,55 @@
             }
 
             table {
-                display: block;
                 margin: 5px;
+                width: 100%;
             }
 
             th {
                 margin-left: auto;
                 margin-right: auto;
+                font-size: 30px;
+                text-align: center;
+                height: 50px;
+                background-color: #3c6e71;
+                color: #ffffff;
+                text-shadow: 1px 1px 2px #393939;
+            }
+
+            tr:nth-child(odd) {
+                background-color: #6caeb2;
+                color: #353535;
+            }
+
+            tr:nth-child(even) {
+                background-color: #d9d9d9;
+                color: #353535;
+            }
+
+            td {
+                text-align: center;
+                font-size: 20px;
+                height: 40px;
             }
         </style>
     </head>
     <body>
-        <div id="name-holder">
+        <div id="header-holder">
             <h1 id="worker-name">Salut {{.WorkerName}}</h1>
-            <div id="log-out-link-holder">
-                <a id="log-out-link" href="/log-out">Log out</a>
-            </div>
+            <a id="log-out-link" href="/log-out">Log out</a>
         </div>
-        
-        <h1 id="status">Statusul tau: {{.Status}}</h1>
-        <h1 id="today-worked">Astazi ai lucrat: {{.WorkedTime}}</h1>
+
+        <div id="status-holder">
+            <h1 id="status">Statusul tau: {{.Status}}</h1>
+            <h1 id="today-worked">Astazi ai lucrat: {{.WorkedTime}}</h1>
+        </div>
 
         <div id="monthly-report">
             <h1>Raportul lunii in curs:</h1>
             <table>
                 <tr>
-                    <th>Numar Germania</th>
-                    <th>Numar Romania</th>
+                    <th>Nr Germania</th>
+                    <th>Nr Romania</th>
                     <th>Descriere</th>
                     <th>Inceput</th>
                     <th>Sfarsit</th>
