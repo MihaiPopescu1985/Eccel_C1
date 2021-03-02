@@ -4,14 +4,32 @@ import (
 	"log"
 	"net/http"
 
+	"example.com/c1/c1device"
 	"example.com/c1/service"
 	"example.com/c1/web/controller"
 	"github.com/gorilla/mux"
 )
 
+/*
+
+ */
+
+const serverPort string = ":8181"
+
 func main() {
 
 	service.Dao.Connect()
+
+	endPoint := c1device.C1Device{
+		IP:        "192.168.0.91",
+		WsChannel: make(chan []byte),
+	}
+	endPoint.UseDevice()
+	operational := c1device.C1Device{
+		IP:        "192.168.0.92",
+		WsChannel: make(chan []byte),
+	}
+	operational.UseDevice()
 
 	router := mux.NewRouter()
 
@@ -25,5 +43,5 @@ func main() {
 
 	router.Use(controller.AuthMiddleware)
 
-	log.Fatal(http.ListenAndServe(":8080", router))
+	log.Fatal(http.ListenAndServe(serverPort, router))
 }

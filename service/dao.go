@@ -23,8 +23,8 @@ import (
 
 const (
 	driver      string = "mysql"
-	credentials string = "root:R00tpassword@/testEccelC1"
-	database    string = "testEccelC1"
+	credentials string = "root:R00tpassword@/EccelC1"
+	database    string = "EccelC1"
 )
 
 // Dao represent a global variable for storing a database connection.
