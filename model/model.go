@@ -2,18 +2,19 @@ package model
 
 import (
 	"time"
-
-	"example.com/c1/c1device"
 )
 
 // Worker ...
 type Worker struct {
-	ID         int
-	FirstName  string
-	LastName   string
-	Position   string
-	CardNumber string
-	IsActive   bool
+	ID          int
+	FirstName   string
+	LastName    string
+	CardNumber  string
+	Position    string
+	IsActive    bool
+	Nickname    string
+	Password    string
+	AccessLevel byte
 }
 
 // Project ...
@@ -23,8 +24,10 @@ type Project struct {
 	RoNumber    string
 	Description string
 	IPAddress   string
-	Device      c1device.C1Device
+	DeviceID    int
 	IsActive    bool
+	Begin       time.Time
+	End         time.Time
 }
 
 // Workday ...

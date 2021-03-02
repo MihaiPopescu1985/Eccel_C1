@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Gestiune activitati curente</title>
+
+        <style>
+            body {
+                background-color: #284b63;
+            }
+
+            #header-title {
+                display: inline;
+            }
+
+            #header-holder {
+                padding: 20px;
+                background-color: #d9d9d9;
+                color: #3c6e71;
+                margin: 30px;
+                max-width: max-content;
+                border-radius: 5px;
+                box-shadow: 5px 10px #353535;
+            }
+
+            #log-out-link {
+                display: inline;
+                padding: 30px;
+                background-color: #3c6e71;
+                box-shadow: 5px 10px #353535;
+                max-width: max-content;
+                position: relative;
+                right: -25px;
+                bottom: -25px;
+                font-size: larger;
+            }
+
+            #log-out-link:link, #log-out-link:visited {
+                color: #ffffff;
+            }
+
+            .table-title {
+                background-color: #d9d9d9;
+                padding: 15px;
+                max-width: max-content;
+                border-radius: 5px;
+                box-shadow: 5px 10px #353535;
+                color: #3c6e71;
+                margin-top: 150px;
+                margin-left: 30px;
+            }
+
+            table {
+                width: 100%;
+            }
+
+            th {
+                margin-left: auto;
+                margin-right: auto;
+                font-size: 30px;
+                text-align: center;
+                height: 50px;
+                background-color: #3c6e71;
+                color: #ffffff;
+                text-shadow: 1px 1px 2px #393939;
+            }
+
+            tr:nth-child(odd) {
+                background-color: #6caeb2;
+                color: #353535;
+            }
+
+            tr:nth-child(even) {
+                background-color: #d9d9d9;
+                color: #353535;
+            }
+
+            td {
+                text-align: center;
+                font-size: 20px;
+                height: 40px;
+            }            
+        </style>
+    </head>
+    <body>
+        <div id="header-holder">
+            <h1 id="header-title">Gestiune activitati curente</h1>
+            <a id="log-out-link" href="/log-out">Log out</a>
+        </div>
+
+        <h2 class="table-title">Lucratori activi</h2>
+        <table id="activeWorkdays">
+            <tr>
+                <th>Id</th>
+                <th>Lucrator</th>
+                <th>Numar proiect RO</th>
+                <th>Numar Proiect GE</th>
+                <th>Descriere proiect</th>
+            </tr>
+            {{range $k,$v:=.}}
+                <tr>
+                    <td>{{$k}}</td>
+                    {{range $s := $v}} 
+                        <td>{{$s}}</td>
+                    {{end}}
+                </tr> 
+            {{end}}
+        </table>
+    </body>
+</html>
