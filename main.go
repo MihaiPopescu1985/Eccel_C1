@@ -10,10 +10,6 @@ import (
 	"github.com/gorilla/mux"
 )
 
-/*
-
- */
-
 const serverPort string = ":8181"
 
 func main() {
