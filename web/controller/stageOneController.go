@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"time"
 
-	"example.com/c1/service"
+	"example.com/c1/model"
 )
 
 const stageOnePage string = "./web/view/stageOneAccess.html"
@@ -37,12 +37,12 @@ func StageOneHandler(writer http.ResponseWriter, request *http.Request) {
 		"0",
 	}
 
-	pageContent.WorkerName = service.Dao.RetrieveWorkerName(workerID)
+	pageContent.WorkerName = model.Db.RetrieveWorkerName(workerID)
 
-	pageContent.Status, pageContent.WorkedTime = service.Dao.RetrieveWorkerStatus(workerID)
+	pageContent.Status, pageContent.WorkedTime = model.Db.RetrieveWorkerStatus(workerID)
 	currentMonth := int(time.Now().Month())
 
-	pageContent.TimeRaport = service.Dao.RetrieveCurrentMonthTimeRaport(workerID, currentMonth)
+	pageContent.TimeRaport = model.Db.RetrieveCurrentMonthTimeRaport(workerID, currentMonth)
 
 	templ, err := template.New("stageOne").ParseFiles(stageOnePage)
 	if err != nil {

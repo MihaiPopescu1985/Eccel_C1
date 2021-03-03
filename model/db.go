@@ -1,15 +1,4 @@
-package service
-
-/*
-
-Two devices are assigned for entrance and exit.
-The worker is comming to work, enabling one of this devices.
-After that point, the worker is able to start working.
-
-In order for the worker to start working,
-he must enable another device.
-
-*/
+package model
 
 import (
 	"database/sql"
@@ -17,7 +6,6 @@ import (
 	"log"
 	"strconv"
 
-	"example.com/c1/model"
 	_ "github.com/go-sql-driver/mysql" // import mysql driver
 )
 
@@ -27,12 +15,12 @@ const (
 	database    string = "EccelC1"
 )
 
-// Dao represent a global variable for storing a database connection.
-var Dao DAO
+// Db represent a global variable for storing a database connection.
+var Db DB
 
-// DAO ...
-type DAO struct {
-	db *sql.DB
+// DB ...
+type DB struct {
+	database *sql.DB
 }
 
 // ActiveWorkdays - placeholder for storing active workdays retrieved from database
@@ -41,17 +29,17 @@ type ActiveWorkdays struct {
 }
 
 // Connect connects to database and closes the connections after 10 seconds
-func (dao *DAO) Connect() {
+func (db *DB) Connect() {
 	var err error = nil
-	dao.db, err = sql.Open(driver, credentials)
+	db.database, err = sql.Open(driver, credentials)
 	if err != nil {
 		fmt.Println(err)
 	}
 }
 
 // IsConnected verify database connection.
-func (dao *DAO) IsConnected() bool {
-	err := dao.db.Ping()
+func (db *DB) IsConnected() bool {
+	err := db.database.Ping()
 	if err != nil {
 		log.Println(err)
 		return false
@@ -60,20 +48,20 @@ func (dao *DAO) IsConnected() bool {
 }
 
 // InsertIntoWorkday returns the sql command to start/stop time on workday.
-func (dao *DAO) InsertIntoWorkday(deviceName, cardUID string) {
+func (db *DB) InsertIntoWorkday(deviceName, cardUID string) {
 	command := "CALL INSERT_INTO_WORKDAY(\"" + deviceName + "\", \"" + cardUID + "\");"
-	dao.execute(command)
+	db.execute(command)
 }
 
 // Execute executes a command against database with no returning result set.
-func (dao *DAO) execute(command string) {
+func (db *DB) execute(command string) {
 	// TODO: make sure the command is proper executed, no error is triggered
-	dao.db.Exec(command)
+	db.database.Exec(command)
 }
 
 // ExecuteQuery TODO: write about the behavior of this function
-func (dao *DAO) executeQuery(command string) *sql.Rows {
-	rows, err := dao.db.Query(command)
+func (db *DB) executeQuery(command string) *sql.Rows {
+	rows, err := db.database.Query(command)
 
 	if err != nil {
 		fmt.Println(err)
@@ -82,10 +70,10 @@ func (dao *DAO) executeQuery(command string) *sql.Rows {
 }
 
 // RetrieveActiveWorkdays - TODO write about behavior
-func (dao *DAO) RetrieveActiveWorkdays() map[int][]string {
+func (db *DB) RetrieveActiveWorkdays() map[int][]string {
 
 	command := "CALL SELECT_ACTIVE_WORKDAY;"
-	rows := dao.executeQuery(command)
+	rows := db.executeQuery(command)
 
 	table := make(map[int][]string)
 	var id int
@@ -102,10 +90,10 @@ func (dao *DAO) RetrieveActiveWorkdays() map[int][]string {
 }
 
 // RetrieveCurrentMonthTimeRaport - TODO write about behavior
-func (dao *DAO) RetrieveCurrentMonthTimeRaport(workerID, currentMonth int) map[int][]string {
+func (db *DB) RetrieveCurrentMonthTimeRaport(workerID, currentMonth int) map[int][]string {
 
 	command := "CALL SELECT_MONTH_TIME_RAPORT(" + strconv.Itoa(workerID) + ", " + strconv.Itoa(currentMonth) + ");"
-	rows := dao.executeQuery(command)
+	rows := db.executeQuery(command)
 
 	table := make(map[int][]string)
 	var id int
@@ -124,10 +112,10 @@ func (dao *DAO) RetrieveCurrentMonthTimeRaport(workerID, currentMonth int) map[i
 }
 
 // RetrieveWorkerStatus - TODO write about behavior
-func (dao *DAO) RetrieveWorkerStatus(id int) (string, string) {
+func (db *DB) RetrieveWorkerStatus(id int) (string, string) {
 
 	var command string = "CALL SELECT_WORKER_STATUS(" + strconv.Itoa(id) + ");"
-	rows := dao.executeQuery(command)
+	rows := db.executeQuery(command)
 
 	var status string
 	var workedMinutes int
@@ -153,15 +141,15 @@ func toHoursAndMinutes(minutes string) string {
 }
 
 // RetrieveActiveProjects ...
-func (dao *DAO) RetrieveActiveProjects() []model.Project {
+func (db *DB) RetrieveActiveProjects() []Project {
 
 	var command string = "CALL GET_ACTIVE_PROJECTS();"
-	rows := dao.executeQuery(command)
+	rows := db.executeQuery(command)
 
-	projects := make([]model.Project, 0)
+	projects := make([]Project, 0)
 
 	for rows.Next() {
-		var proj model.Project
+		var proj Project
 		rows.Scan(&proj.ID,
 			&proj.GeNumber,
 			&proj.RoNumber,
@@ -176,15 +164,15 @@ func (dao *DAO) RetrieveActiveProjects() []model.Project {
 }
 
 // RetrieveAllWorkers ...
-func (dao *DAO) RetrieveAllWorkers() []model.Worker {
+func (db *DB) RetrieveAllWorkers() []Worker {
 
 	command := "CALL GET_ALL_WORKERS();"
-	rows := dao.executeQuery(command)
+	rows := db.executeQuery(command)
 
-	workers := make([]model.Worker, 0)
+	workers := make([]Worker, 0)
 
 	for rows.Next() {
-		var worker model.Worker
+		var worker Worker
 		rows.Scan(&worker.ID,
 			&worker.FirstName,
 			&worker.LastName,
@@ -197,11 +185,11 @@ func (dao *DAO) RetrieveAllWorkers() []model.Worker {
 }
 
 // GetUserByNameAndPassword TODO: write about function
-func (dao *DAO) GetUserByNameAndPassword(name, password string) model.Worker {
-	var worker model.Worker
+func (db *DB) GetUserByNameAndPassword(name, password string) Worker {
+	var worker Worker
 
 	command := "SELECT * FROM WORKER WHERE NICKNAME = \"" + name + "\" AND PASSWORD = \"" + password + "\";"
-	rows := dao.executeQuery(command)
+	rows := db.executeQuery(command)
 
 	for rows.Next() {
 		rows.Scan(&worker.ID,
@@ -218,13 +206,13 @@ func (dao *DAO) GetUserByNameAndPassword(name, password string) model.Worker {
 }
 
 // RetrieveWorkerName returns worker's name based on id.
-func (dao *DAO) RetrieveWorkerName(id int) string {
+func (db *DB) RetrieveWorkerName(id int) string {
 
 	firstName := ""
 	lastName := ""
 
 	command := "SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = " + strconv.Itoa(id) + ";"
-	rows := dao.executeQuery(command)
+	rows := db.executeQuery(command)
 
 	for rows.Next() {
 		rows.Scan(&firstName, &lastName)

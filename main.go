@@ -5,20 +5,16 @@ import (
 	"net/http"
 
 	"example.com/c1/c1device"
-	"example.com/c1/service"
+	"example.com/c1/model"
 	"example.com/c1/web/controller"
 	"github.com/gorilla/mux"
 )
-
-/*
-
- */
 
 const serverPort string = ":8181"
 
 func main() {
 
-	service.Dao.Connect()
+	model.Db.Connect()
 
 	endPoint := c1device.C1Device{
 		IP:        "192.168.0.91",

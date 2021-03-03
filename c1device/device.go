@@ -3,7 +3,7 @@ package c1device
 import (
 	"encoding/json"
 
-	"example.com/c1/service"
+	"example.com/c1/model"
 	"golang.org/x/net/websocket"
 )
 
@@ -58,8 +58,8 @@ func (device *C1Device) UseDevice() {
 		for msg := range device.WsChannel {
 			deviceName, cardUID := device.ParseMessage(msg)
 
-			if service.Dao.IsConnected() && deviceName != "" && cardUID != "" {
-				service.Dao.InsertIntoWorkday(deviceName, cardUID)
+			if model.Db.IsConnected() && deviceName != "" && cardUID != "" {
+				model.Db.InsertIntoWorkday(deviceName, cardUID)
 			}
 			device.WsRead()
 		}

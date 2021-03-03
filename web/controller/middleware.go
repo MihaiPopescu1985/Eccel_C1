@@ -1,12 +1,10 @@
 package controller
 
 import (
-	"fmt"
 	"net/http"
 	"strconv"
 
 	"example.com/c1/model"
-	"example.com/c1/service"
 )
 
 // AuthMiddleware ...
@@ -22,7 +20,7 @@ func AuthMiddleware(next http.Handler) http.Handler {
 		var urlRedirect string = "/"
 
 		if errName == nil && errPass == nil {
-			worker = service.Dao.GetUserByNameAndPassword(nameCookie.Value, passCookie.Value)
+			worker = model.Db.GetUserByNameAndPassword(nameCookie.Value, passCookie.Value)
 
 			if &worker != nil {
 				switch worker.AccessLevel {
@@ -45,9 +43,7 @@ func AuthMiddleware(next http.Handler) http.Handler {
 
 		if nameForm != "" || passForm != "" {
 
-			fmt.Println("form")
-
-			worker := service.Dao.GetUserByNameAndPassword(nameForm, passForm)
+			worker := model.Db.GetUserByNameAndPassword(nameForm, passForm)
 			if &worker != nil {
 				http.SetCookie(w, &http.Cookie{
 					Name:   "name",
@@ -72,9 +68,6 @@ func AuthMiddleware(next http.Handler) http.Handler {
 				}
 			}
 		}
-
-		fmt.Println("redirect = " + urlRedirect)
-		fmt.Println("request = " + r.RequestURI)
 
 		if r.RequestURI == "/log-out" || urlRedirect == r.RequestURI {
 			next.ServeHTTP(w, r)

@@ -6,7 +6,6 @@ import (
 	"text/template"
 
 	"example.com/c1/model"
-	"example.com/c1/service"
 )
 
 const stageTwoPage string = "./web/view/stageTwoAccess.html"
@@ -21,8 +20,8 @@ func StageTwoHandler(writer http.ResponseWriter, request *http.Request) {
 
 	var pageContent hrPage
 
-	pageContent.ActiveProjects = service.Dao.RetrieveActiveProjects()
-	pageContent.Workers = service.Dao.RetrieveAllWorkers()
+	pageContent.ActiveProjects = model.Db.RetrieveActiveProjects()
+	pageContent.Workers = model.Db.RetrieveAllWorkers()
 
 	templ, err := template.New("stageTwo").ParseFiles(stageTwoPage)
 	if err != nil {

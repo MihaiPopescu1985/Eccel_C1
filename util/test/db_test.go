@@ -1,12 +1,6 @@
 package service
 
-import (
-	"fmt"
-	"testing"
-
-	"example.com/c1/service"
-)
-
+/*
 func TestDbConnection(t *testing.T) {
 
 	// TODO: mock a database connection
@@ -19,7 +13,7 @@ func TestDbConnection(t *testing.T) {
 	}
 }
 
-/*
+
 func TestDeviceTableColumns(t *testing.T) {
 
 	// TODO: mock a database connection
