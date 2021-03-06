@@ -1,0 +1,11 @@
+2021-03-06 10:31:41.047367939 +0200 EET m=+0.000367962db.go:62: dial tcp 127.0.0.1:3306: connect: connection refused
+2021-03-06 10:31:41.047367939 +0200 EET m=+0.000367962db.go:62: dial tcp 127.0.0.1:3306: connect: connection refused
+2021-03-06 11:06:47.917849327 +0200 EET m=+0.000363653db.go:46: dial tcp 127.0.0.1:3306: connect: connection refused
+2021-03-06 11:08:04.180586568 +0200 EET m=+0.00040224011:08:04 dial tcp 127.0.0.1:3306: connect: connection refused
+2021-03-06 11:09:04.479634742 +0200 EET m=+0.0003340472021/03/06 dial tcp 127.0.0.1:3306: connect: connection refused
+2021-03-06 11:10:48.117356469 +0200 EET m=+0.0003457222021/03/06 11:10:48 dial tcp 127.0.0.1:3306: connect: connection refused
+2021-03-06 11:11:49.370340632 +0200 EET m=+0.0003804472021/03/06 dial tcp 127.0.0.1:3306: connect: connection refused
+2021-03-06 11:12:23.82906843 +0200 EET m=+0.00033287111:12:23 dial tcp 127.0.0.1:3306: connect: connection refused
+2021-03-06 11:12:54.518770285 +0200 EET m=+0.000374252db.go:46: dial tcp 127.0.0.1:3306: connect: connection refused
+2021-03-06 11:14:34.385139993 +0200 EET m=+0.000348135db.go:46: Error 1049: Unknown database 'EccelC1'
+2021-03-06 12:21:05.457847433 +0200 EET m=+0.000334903wsclient.go:38: websocket.Dial ws://192.168.0.91/wscomm.cgi: dial tcp 192.168.0.91:80: connect: no route to host

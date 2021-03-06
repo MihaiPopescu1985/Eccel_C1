@@ -1,9 +1,10 @@
 package controller
 
 import (
-	"fmt"
 	"io/ioutil"
 	"net/http"
+
+	"example.com/c1/util"
 )
 
 const homePage string = "./web/view/home.html"
@@ -14,8 +15,7 @@ func HomePageHandler(response http.ResponseWriter, request *http.Request) {
 
 	fileContent, err := ioutil.ReadFile(homePage)
 	if err != nil {
-		fmt.Println("Error opening homepage file.")
-		fmt.Println(err)
+		util.Log.Panicln(err)
 	}
 
 	response.Write(fileContent)

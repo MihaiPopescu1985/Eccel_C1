@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"example.com/c1/model"
+	"example.com/c1/util"
 )
 
 // AuthMiddleware ...
@@ -19,7 +20,13 @@ func AuthMiddleware(next http.Handler) http.Handler {
 		var worker model.Worker
 		var urlRedirect string = "/"
 
-		if errName == nil && errPass == nil {
+		if errName != nil {
+			util.Log.Println(errName)
+
+		} else if errPass != nil {
+			util.Log.Println(errPass)
+
+		} else {
 			worker = model.Db.GetUserByNameAndPassword(nameCookie.Value, passCookie.Value)
 
 			if &worker != nil {
@@ -36,7 +43,9 @@ func AuthMiddleware(next http.Handler) http.Handler {
 			}
 		}
 
-		r.ParseForm()
+		if err := r.ParseForm(); err != nil {
+			util.Log.Println(err)
+		}
 
 		nameForm := r.FormValue("name")
 		passForm := r.FormValue("password")

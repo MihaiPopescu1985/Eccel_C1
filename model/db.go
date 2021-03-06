@@ -2,17 +2,16 @@ package model
 
 import (
 	"database/sql"
-	"fmt"
-	"log"
 	"strconv"
 
+	"example.com/c1/util"
 	_ "github.com/go-sql-driver/mysql" // import mysql driver
 )
 
 const (
 	driver      string = "mysql"
-	credentials string = "root:R00tpassword@/EccelC1"
-	database    string = "EccelC1"
+	credentials string = "root:R00tpassword@/testEccelC1"
+	database    string = "testEccelC1"
 )
 
 // Db represent a global variable for storing a database connection.
@@ -23,40 +22,41 @@ type DB struct {
 	database *sql.DB
 }
 
-// ActiveWorkdays - placeholder for storing active workdays retrieved from database
-type ActiveWorkdays struct {
-	Workdays map[int][5]string
-}
-
-// Connect connects to database and closes the connections after 10 seconds
+// Connect connects to database.
+// The Open method is not enough to verify a
+// database connection so a Ping method should be
+// called. The Ping method is embedded inside
+// IsConnected method.
 func (db *DB) Connect() {
+
 	var err error = nil
 	db.database, err = sql.Open(driver, credentials)
+
 	if err != nil {
-		fmt.Println(err)
+		util.Log.Fatalln(err)
 	}
+	db.IsConnected()
 }
 
 // IsConnected verify database connection.
 func (db *DB) IsConnected() bool {
 	err := db.database.Ping()
+
 	if err != nil {
-		log.Println(err)
+		util.Log.Fatalln(err)
 		return false
 	}
 	return true
 }
 
-// InsertIntoWorkday returns the sql command to start/stop time on workday.
-func (db *DB) InsertIntoWorkday(deviceName, cardUID string) {
-	command := "CALL INSERT_INTO_WORKDAY(\"" + deviceName + "\", \"" + cardUID + "\");"
-	db.execute(command)
-}
-
 // Execute executes a command against database with no returning result set.
 func (db *DB) execute(command string) {
-	// TODO: make sure the command is proper executed, no error is triggered
-	db.database.Exec(command)
+
+	_, err := db.database.Exec(command)
+
+	if err != nil {
+		util.Log.Panicln(err)
+	}
 }
 
 // ExecuteQuery TODO: write about the behavior of this function
@@ -64,9 +64,15 @@ func (db *DB) executeQuery(command string) *sql.Rows {
 	rows, err := db.database.Query(command)
 
 	if err != nil {
-		fmt.Println(err)
+		util.Log.Panicln(err)
 	}
 	return rows
+}
+
+// InsertIntoWorkday returns the sql command to start/stop time on workday.
+func (db *DB) InsertIntoWorkday(deviceName, cardUID string) {
+	command := "CALL INSERT_INTO_WORKDAY(\"" + deviceName + "\", \"" + cardUID + "\");"
+	db.execute(command)
 }
 
 // RetrieveActiveWorkdays - TODO write about behavior
@@ -83,7 +89,9 @@ func (db *DB) RetrieveActiveWorkdays() map[int][]string {
 	var description string
 
 	for rows.Next() {
-		rows.Scan(&id, &worker, &roNumber, &geNumber, &description)
+		if err := rows.Scan(&id, &worker, &roNumber, &geNumber, &description); err != nil {
+			util.Log.Panicln(err)
+		}
 		table[id] = []string{worker, roNumber, geNumber, description}
 	}
 	return table
@@ -105,7 +113,9 @@ func (db *DB) RetrieveCurrentMonthTimeRaport(workerID, currentMonth int) map[int
 	var minutes string
 
 	for rows.Next() {
-		rows.Scan(&id, &geNo, &roNo, &description, &start, &stop, &minutes)
+		if err := rows.Scan(&id, &geNo, &roNo, &description, &start, &stop, &minutes); err != nil {
+			util.Log.Panicln(err)
+		}
 		table[id] = []string{geNo, roNo, description, start, stop, toHoursAndMinutes(minutes)}
 	}
 	return table
@@ -121,9 +131,13 @@ func (db *DB) RetrieveWorkerStatus(id int) (string, string) {
 	var workedMinutes int
 
 	rows.Next()
-	rows.Scan(&status)
+	if err := rows.Scan(&status); err != nil {
+		util.Log.Panicln(err)
+	}
 	rows.Next()
-	rows.Scan(&workedMinutes)
+	if err := rows.Scan(&workedMinutes); err != nil {
+		util.Log.Panicln(err)
+	}
 
 	workedTime := toHoursAndMinutes(strconv.Itoa(workedMinutes))
 	return status, workedTime
@@ -150,14 +164,16 @@ func (db *DB) RetrieveActiveProjects() []Project {
 
 	for rows.Next() {
 		var proj Project
-		rows.Scan(&proj.ID,
+		if err := rows.Scan(&proj.ID,
 			&proj.GeNumber,
 			&proj.RoNumber,
 			&proj.Description,
 			&proj.DeviceID,
 			&proj.IsActive,
 			&proj.Begin,
-			&proj.End)
+			&proj.End); err != nil {
+			util.Log.Panicln(err)
+		}
 		projects = append(projects, proj)
 	}
 	return projects
@@ -173,12 +189,14 @@ func (db *DB) RetrieveAllWorkers() []Worker {
 
 	for rows.Next() {
 		var worker Worker
-		rows.Scan(&worker.ID,
+		if err := rows.Scan(&worker.ID,
 			&worker.FirstName,
 			&worker.LastName,
 			&worker.CardNumber,
 			&worker.Position,
-			&worker.IsActive)
+			&worker.IsActive); err != nil {
+			util.Log.Panicln(err)
+		}
 		workers = append(workers, worker)
 	}
 	return workers
@@ -192,7 +210,7 @@ func (db *DB) GetUserByNameAndPassword(name, password string) Worker {
 	rows := db.executeQuery(command)
 
 	for rows.Next() {
-		rows.Scan(&worker.ID,
+		if err := rows.Scan(&worker.ID,
 			&worker.FirstName,
 			&worker.LastName,
 			&worker.CardNumber,
@@ -200,7 +218,9 @@ func (db *DB) GetUserByNameAndPassword(name, password string) Worker {
 			&worker.IsActive,
 			&worker.Nickname,
 			&worker.Password,
-			&worker.AccessLevel)
+			&worker.AccessLevel); err != nil {
+			util.Log.Panicln(err)
+		}
 	}
 	return worker
 }
@@ -215,7 +235,9 @@ func (db *DB) RetrieveWorkerName(id int) string {
 	rows := db.executeQuery(command)
 
 	for rows.Next() {
-		rows.Scan(&firstName, &lastName)
+		if err := rows.Scan(&firstName, &lastName); err != nil {
+			util.Log.Panicln(err)
+		}
 	}
 	return firstName + " " + lastName
 }

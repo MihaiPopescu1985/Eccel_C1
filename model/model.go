@@ -46,3 +46,8 @@ type Device struct {
 	IP         string
 	IsEndpoint bool
 }
+
+// ActiveWorkdays - placeholder for storing active workdays retrieved from database
+type ActiveWorkdays struct {
+	Workdays map[int][5]string
+}

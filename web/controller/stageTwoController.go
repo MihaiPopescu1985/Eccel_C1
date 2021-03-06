@@ -1,11 +1,11 @@
 package controller
 
 import (
-	"fmt"
 	"net/http"
 	"text/template"
 
 	"example.com/c1/model"
+	"example.com/c1/util"
 )
 
 const stageTwoPage string = "./web/view/stageTwoAccess.html"
@@ -25,11 +25,11 @@ func StageTwoHandler(writer http.ResponseWriter, request *http.Request) {
 
 	templ, err := template.New("stageTwo").ParseFiles(stageTwoPage)
 	if err != nil {
-		fmt.Println(err)
+		util.Log.Println(err)
 	}
 
 	err = templ.ExecuteTemplate(writer, "stageTwoAccess.html", pageContent)
 	if err != nil {
-		fmt.Println(err)
+		util.Log.Println(err)
 	}
 }

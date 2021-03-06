@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 
 	"example.com/c1/model"
+	"example.com/c1/util"
 	"golang.org/x/net/websocket"
 )
 
@@ -32,12 +33,14 @@ type CardReading struct {
 func (device *C1Device) ParseMessage(message []byte) (string, string) {
 
 	var cardReading CardReading
-	err := json.Unmarshal(message, &cardReading)
-
 	var deviceName string
 	var cardUID string
 
-	if err == nil {
+	err := json.Unmarshal(message, &cardReading)
+
+	if err != nil {
+		util.Log.Panicln(err)
+	} else {
 		deviceName = cardReading.DeviceName
 		cardUID = cardReading.UID
 	}

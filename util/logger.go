@@ -1,49 +1,39 @@
 package util
 
 import (
-	"io/ioutil"
+	"log"
 	"os"
-	"strconv"
 	"time"
 )
 
+const (
+	logDir  string = "logs"
+	logFile string = "log.txt"
+)
+
 // Log is a global variable used to log events
-var Log Logger
+var Log log.Logger
 
-// Logger ...
-type Logger struct {
-}
-
-// Init is used for initializing logger, for example
-// if a database connection is needed.
-func (log *Logger) Init() {
+// InitLogger initialize the global Log variable.
+func InitLogger() {
 
 	createLoggerDir()
-	createDayLogFile()
-}
 
-func createDayLogFile() {
-	year, month, day := time.Now().Date()
+	file, fileErr := os.OpenFile(logDir+"/"+logFile, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 
-	filename := "logs/" + strconv.Itoa(year) + "-" + month.String() + "-" + strconv.Itoa(day) + ".txt"
-	err := ioutil.WriteFile(filename, []byte(filename+"\n\n"), 0644)
-
-	if err != nil {
-		panic("Error initialising logger. Check if a logger file can be created.")
+	if fileErr != nil {
+		panic(fileErr)
 	}
+
+	Log = *log.New(file, time.Now().String(), log.Lshortfile)
 }
 
 func createLoggerDir() {
-	if _, err := os.Stat("logs"); os.IsNotExist(err) {
-		err := os.Mkdir("logs", 0777)
+	if _, err := os.Stat(logDir); os.IsNotExist(err) {
+		err := os.Mkdir(logDir, 0666)
 
 		if err != nil {
-			panic("Error creating logs directory.")
+			panic(err)
 		}
 	}
-}
-
-// LogInfo is used to log information about an event
-func (log *Logger) LogInfo(message string) {
-
 }

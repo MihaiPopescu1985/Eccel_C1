@@ -13,7 +13,7 @@ func TestLoggerShouldCreateANewFileNamedAsCurrentDate(t *testing.T) {
 	filename := "logs/"
 	filename += strconv.Itoa(year) + "-" + month.String() + "-" + strconv.Itoa(day) + ".txt"
 
-	Log.Init()
+	//	Log.Init()
 
 	_, err := ioutil.ReadFile(filename)
 	if err != nil {
