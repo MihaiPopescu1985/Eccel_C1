@@ -30,9 +30,9 @@ func AuthMiddleware(next http.Handler) http.Handler {
 			worker = model.Db.GetUserByNameAndPassword(nameCookie.Value, passCookie.Value)
 
 			if &worker != nil {
-				switch worker.AccessLevel {
+				switch worker.AccessLevel.Int32 {
 				case 1:
-					urlRedirect = "/stage-one?workerId=" + strconv.Itoa(worker.ID)
+					urlRedirect = "/stage-one?workerId=" + strconv.Itoa(int(worker.ID.Int32))
 
 				case 2:
 					urlRedirect = "/stage-two"
@@ -56,18 +56,18 @@ func AuthMiddleware(next http.Handler) http.Handler {
 			if &worker != nil {
 				http.SetCookie(w, &http.Cookie{
 					Name:   "name",
-					Value:  worker.Nickname,
+					Value:  worker.Nickname.String,
 					Secure: true,
 				})
 				http.SetCookie(w, &http.Cookie{
 					Name:   "pass",
-					Value:  worker.Password,
+					Value:  worker.Password.String,
 					Secure: true,
 				})
 
-				switch worker.AccessLevel {
+				switch worker.AccessLevel.Int32 {
 				case 1:
-					urlRedirect = "/stage-one?workerId=" + strconv.Itoa(worker.ID)
+					urlRedirect = "/stage-one?workerId=" + strconv.Itoa(int(worker.ID.Int32))
 
 				case 2:
 					urlRedirect = "/stage-two"
