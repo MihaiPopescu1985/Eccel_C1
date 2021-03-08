@@ -1,13 +1,13 @@
 package controller
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 	"strconv"
 	"time"
 
 	"example.com/c1/model"
+	"example.com/c1/util"
 )
 
 const stageOnePage string = "./web/view/stageOneAccess.html"
@@ -28,7 +28,11 @@ type workerStatus struct {
 // and current working time.
 func StageOneHandler(writer http.ResponseWriter, request *http.Request) {
 
-	workerID, _ := strconv.Atoi(request.URL.Query().Get("workerId"))
+	workerID, err := strconv.Atoi(request.URL.Query().Get("workerId"))
+	if err != nil {
+		util.Log.Println(err)
+	}
+
 	pageContent := workerStatus{
 		"",
 		workerID,
@@ -46,11 +50,11 @@ func StageOneHandler(writer http.ResponseWriter, request *http.Request) {
 
 	templ, err := template.New("stageOne").ParseFiles(stageOnePage)
 	if err != nil {
-		fmt.Println(err)
+		util.Log.Println(err)
 	}
 
 	err = templ.ExecuteTemplate(writer, "stageOneAccess.html", pageContent)
 	if err != nil {
-		fmt.Println(err)
+		util.Log.Println(err)
 	}
 }

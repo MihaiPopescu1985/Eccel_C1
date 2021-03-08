@@ -1,4 +1,4 @@
-package service
+package util
 
 /*
 func TestDbConnection(t *testing.T) {

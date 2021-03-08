@@ -1,9 +1,10 @@
 package controller
 
 import (
-	"fmt"
 	"io/ioutil"
 	"net/http"
+
+	"example.com/c1/util"
 )
 
 const logOutPage string = "./web/view/logOut.html"
@@ -26,9 +27,10 @@ func LogOutHandler(w http.ResponseWriter, r *http.Request) {
 
 	fileContent, err := ioutil.ReadFile(logOutPage)
 	if err != nil {
-		fmt.Println("Error opening logOutPage file.")
-		fmt.Println(err)
+		util.Log.Panicln(err)
 	}
 
-	w.Write(fileContent)
+	if _, err := w.Write(fileContent); err != nil {
+		util.Log.Panicln(err)
+	}
 }
