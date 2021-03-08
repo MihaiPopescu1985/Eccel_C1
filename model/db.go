@@ -10,8 +10,8 @@ import (
 
 const (
 	driver      string = "mysql"
-	credentials string = "root:R00tpassword@/testEccelC1"
-	database    string = "testEccelC1"
+	credentials string = "root:R00tpassword@/EccelC1"
+	database    string = "EccelC1"
 )
 
 // Db represent a global variable for storing a database connection.
@@ -51,7 +51,6 @@ func (db *DB) IsConnected() bool {
 
 // Execute executes a command against database with no returning result set.
 func (db *DB) execute(command string) {
-
 	_, err := db.database.Exec(command)
 
 	if err != nil {
@@ -82,17 +81,19 @@ func (db *DB) RetrieveActiveWorkdays() map[int][]string {
 	rows := db.executeQuery(command)
 
 	table := make(map[int][]string)
-	var id int
-	var worker string
-	var roNumber string
-	var geNumber string
-	var description string
+	var (
+		id          sql.NullInt32  //int
+		worker      sql.NullString //string
+		roNumber    sql.NullString //string
+		geNumber    sql.NullString //string
+		description sql.NullString //string
+	)
 
 	for rows.Next() {
 		if err := rows.Scan(&id, &worker, &roNumber, &geNumber, &description); err != nil {
 			util.Log.Panicln(err)
 		}
-		table[id] = []string{worker, roNumber, geNumber, description}
+		table[int(id.Int32)] = []string{worker.String, roNumber.String, geNumber.String, description.String}
 	}
 	return table
 }
@@ -104,19 +105,21 @@ func (db *DB) RetrieveCurrentMonthTimeRaport(workerID, currentMonth int) map[int
 	rows := db.executeQuery(command)
 
 	table := make(map[int][]string)
-	var id int
-	var geNo string
-	var roNo string
-	var description string
-	var start string
-	var stop string
-	var minutes string
+	var (
+		id          sql.NullInt32  //int
+		geNo        sql.NullString //string
+		roNo        sql.NullString //string
+		description sql.NullString //string
+		start       sql.NullString //string
+		stop        sql.NullString //string
+		minutes     sql.NullString //string
+	)
 
 	for rows.Next() {
 		if err := rows.Scan(&id, &geNo, &roNo, &description, &start, &stop, &minutes); err != nil {
 			util.Log.Panicln(err)
 		}
-		table[id] = []string{geNo, roNo, description, start, stop, toHoursAndMinutes(minutes)}
+		table[int(id.Int32)] = []string{geNo.String, roNo.String, description.String, start.String, stop.String, toHoursAndMinutes(minutes.String)}
 	}
 	return table
 }
@@ -127,8 +130,8 @@ func (db *DB) RetrieveWorkerStatus(id int) (string, string) {
 	var command string = "CALL SELECT_WORKER_STATUS(" + strconv.Itoa(id) + ");"
 	rows := db.executeQuery(command)
 
-	var status string
-	var workedMinutes int
+	var status sql.NullString       //string
+	var workedMinutes sql.NullInt32 //int
 
 	rows.Next()
 	if err := rows.Scan(&status); err != nil {
@@ -139,8 +142,8 @@ func (db *DB) RetrieveWorkerStatus(id int) (string, string) {
 		util.Log.Panicln(err)
 	}
 
-	workedTime := toHoursAndMinutes(strconv.Itoa(workedMinutes))
-	return status, workedTime
+	workedTime := toHoursAndMinutes(strconv.Itoa(int(workedMinutes.Int32)))
+	return status.String, workedTime
 }
 
 func toHoursAndMinutes(minutes string) string {
@@ -162,19 +165,33 @@ func (db *DB) RetrieveActiveProjects() []Project {
 
 	projects := make([]Project, 0)
 
+	var (
+		projID   sql.NullInt32
+		geNo     sql.NullString
+		roNo     sql.NullString
+		descript sql.NullString
+		devID    sql.NullInt32
+		isActive sql.NullBool
+		begin    sql.NullTime
+		end      sql.NullTime
+	)
+
 	for rows.Next() {
-		var proj Project
-		if err := rows.Scan(&proj.ID,
-			&proj.GeNumber,
-			&proj.RoNumber,
-			&proj.Description,
-			&proj.DeviceID,
-			&proj.IsActive,
-			&proj.Begin,
-			&proj.End); err != nil {
+		if err := rows.Scan(
+			&projID, &geNo, &roNo, &descript, &devID, &isActive, &begin, &end); err != nil {
 			util.Log.Panicln(err)
 		}
-		projects = append(projects, proj)
+
+		projects = append(projects, Project{
+			ID:          int(projID.Int32),
+			GeNumber:    geNo.String,
+			RoNumber:    roNo.String,
+			Description: descript.String,
+			DeviceID:    int(devID.Int32),
+			IsActive:    isActive.Bool,
+			Begin:       begin.Time,
+			End:         end.Time,
+		})
 	}
 	return projects
 }
@@ -185,52 +202,79 @@ func (db *DB) RetrieveAllWorkers() []Worker {
 	command := "CALL GET_ALL_WORKERS();"
 	rows := db.executeQuery(command)
 
-	workers := make([]Worker, 0)
+	var (
+		workers = make([]Worker, 0)
+
+		wID       sql.NullInt32
+		wFirstN   sql.NullString
+		wLastN    sql.NullString
+		wCardNo   sql.NullString
+		wPos      sql.NullString
+		wIsActive sql.NullBool
+	)
 
 	for rows.Next() {
-		var worker Worker
-		if err := rows.Scan(&worker.ID,
-			&worker.FirstName,
-			&worker.LastName,
-			&worker.CardNumber,
-			&worker.Position,
-			&worker.IsActive); err != nil {
+		if err := rows.Scan(
+			&wID, &wFirstN, &wLastN, &wCardNo, &wPos, &wIsActive); err != nil {
 			util.Log.Panicln(err)
 		}
-		workers = append(workers, worker)
+
+		workers = append(workers, Worker{
+			ID:         int(wID.Int32),
+			FirstName:  wFirstN.String,
+			LastName:   wLastN.String,
+			CardNumber: wCardNo.String,
+			Position:   wPos.String,
+			IsActive:   wIsActive.Bool,
+		})
 	}
 	return workers
 }
 
 // GetUserByNameAndPassword TODO: write about function
 func (db *DB) GetUserByNameAndPassword(name, password string) Worker {
-	var worker Worker
 
 	command := "SELECT * FROM WORKER WHERE NICKNAME = \"" + name + "\" AND PASSWORD = \"" + password + "\";"
 	rows := db.executeQuery(command)
 
+	var (
+		wID       sql.NullInt32
+		wFirstN   sql.NullString
+		wLastN    sql.NullString
+		wCardNo   sql.NullString
+		wPos      sql.NullString
+		wIsActive sql.NullBool
+		wNick     sql.NullString
+		wPass     sql.NullString
+		wAccess   sql.NullInt32
+	)
+
 	for rows.Next() {
-		if err := rows.Scan(&worker.ID,
-			&worker.FirstName,
-			&worker.LastName,
-			&worker.CardNumber,
-			&worker.Position,
-			&worker.IsActive,
-			&worker.Nickname,
-			&worker.Password,
-			&worker.AccessLevel); err != nil {
+		if err := rows.Scan(
+			&wID, &wFirstN, &wLastN, &wCardNo, &wPos, &wIsActive, &wNick, &wPass, &wAccess); err != nil {
 			util.Log.Panicln(err)
 		}
 	}
-	return worker
+	return Worker{
+		ID:          int(wID.Int32),
+		FirstName:   wFirstN.String,
+		LastName:    wLastN.String,
+		CardNumber:  wCardNo.String,
+		Position:    wPos.String,
+		IsActive:    wIsActive.Bool,
+		Nickname:    wNick.String,
+		Password:    wPass.String,
+		AccessLevel: int(wAccess.Int32),
+	}
 }
 
 // RetrieveWorkerName returns worker's name based on id.
 func (db *DB) RetrieveWorkerName(id int) string {
 
-	firstName := ""
-	lastName := ""
-
+	var (
+		firstName sql.NullString
+		lastName  sql.NullString
+	)
 	command := "SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = " + strconv.Itoa(id) + ";"
 	rows := db.executeQuery(command)
 
@@ -239,5 +283,5 @@ func (db *DB) RetrieveWorkerName(id int) string {
 			util.Log.Panicln(err)
 		}
 	}
-	return firstName + " " + lastName
+	return firstName.String + " " + lastName.String
 }
