@@ -18,6 +18,8 @@ type workerStatus struct {
 	TimeRaport map[int][]string
 	Status     string
 	WorkedTime string
+
+	FreeDays map[int]string
 }
 
 // StageOneHandler TODO: edit function & function description.
@@ -34,11 +36,13 @@ func StageOneHandler(writer http.ResponseWriter, request *http.Request) {
 	}
 
 	pageContent := workerStatus{
-		"",
-		workerID,
-		make(map[int][]string, 0),
-		"INACTIVE",
-		"0",
+		WorkerName: "",
+		WorkerID:   workerID,
+		TimeRaport: make(map[int][]string, 0),
+		Status:     "INACTIVE",
+		WorkedTime: "0",
+
+		FreeDays: make(map[int]string, 0),
 	}
 
 	pageContent.WorkerName = model.Db.RetrieveWorkerName(workerID)
@@ -47,8 +51,9 @@ func StageOneHandler(writer http.ResponseWriter, request *http.Request) {
 	currentMonth := int(time.Now().Month())
 
 	pageContent.TimeRaport = model.Db.RetrieveCurrentMonthTimeRaport(workerID, currentMonth)
+	pageContent.FreeDays = model.Db.RetrieveFreeDays()
 
-	templ, err := template.New("stageOne").ParseFiles(stageOnePage)
+	templ, err := template.New("stageOne").ParseFiles(stageOnePage, "./web/view/css/stage-one-style.css")
 	if err != nil {
 		util.Log.Println(err)
 	}

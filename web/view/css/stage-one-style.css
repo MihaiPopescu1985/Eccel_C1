@@ -1,0 +1,99 @@
+body {
+    background-color: #284b63;
+}
+
+#header-holder {
+    padding: 20px;
+    background-color: #d9d9d9;
+    color: #3c6e71;
+    margin: 30px;
+    max-width: max-content;
+    border-radius: 5px;
+    box-shadow: 5px 10px #353535;
+}
+
+#worker-name {
+    display: inline;
+}
+
+#log-out-link {
+    display: inline;
+    padding: 30px;
+    background-color: #3c6e71;
+    box-shadow: 5px 10px #353535;
+    max-width: max-content;
+    position: relative;
+    right: -25px;
+    bottom: -25px;
+    font-size: larger;
+}
+
+#log-out-link:link, #log-out-link:visited {
+    color: #ffffff;
+}
+
+#status {
+    margin-top: 100px;
+}
+
+#status, #today-worked {
+    text-align: center;
+    color: #d9d9d9;
+    text-shadow: 2px 2px #353535;
+}
+
+#monthly-report {
+    margin: 100px;
+    padding: 20px;
+}
+
+#monthly-report>h1 {
+    color: #d9d9d9;
+    background-color: #3c6e71;
+    padding: 10px;
+    max-width: max-content;
+    font-style: italic;
+    position: relative;
+    top: -75px;
+    text-shadow: 2px 2px #353535;
+}
+
+#monthly-report {
+    border-radius: 5px;
+    background-color: #d9d9d9;
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table {
+    margin: 5px;
+    width: 100%;
+}
+
+th {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 30px;
+    text-align: center;
+    height: 50px;
+    background-color: #3c6e71;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px #393939;
+}
+
+tr:nth-child(odd) {
+    background-color: #6caeb2;
+    color: #353535;
+}
+
+tr:nth-child(even) {
+    background-color: #d9d9d9;
+    color: #353535;
+}
+
+td {
+    text-align: center;
+    font-size: 20px;
+    height: 40px;
+}

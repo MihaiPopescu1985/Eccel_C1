@@ -270,7 +270,6 @@ func (db *DB) GetUserByNameAndPassword(name, password string) Worker {
 
 // RetrieveWorkerName returns worker's name based on id.
 func (db *DB) RetrieveWorkerName(id int) string {
-
 	var (
 		firstName sql.NullString
 		lastName  sql.NullString
@@ -284,4 +283,26 @@ func (db *DB) RetrieveWorkerName(id int) string {
 		}
 	}
 	return firstName.String + " " + lastName.String
+}
+
+// RetrieveFreeDays returns a map containing free days.
+func (db *DB) RetrieveFreeDays() map[int]string {
+
+	var (
+		command = "SELECT * FROM FREEDAYS;"
+		rows    = db.executeQuery(command)
+
+		id   sql.NullInt32
+		date sql.NullString
+
+		table = make(map[int]string, 0)
+	)
+
+	for rows.Next() {
+		if err := rows.Scan(&id, &date); err != nil {
+			util.Log.Panicln(err)
+		}
+		table[int(id.Int32)] = date.String
+	}
+	return table
 }

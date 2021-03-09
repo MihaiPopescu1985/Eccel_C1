@@ -29,6 +29,7 @@ func main() {
 		}
 		operational.UseDevice()
 	*/
+
 	router := mux.NewRouter()
 
 	router.HandleFunc("/", controller.HomePageHandler)
@@ -40,6 +41,8 @@ func main() {
 	router.NotFoundHandler = controller.PageNotFoundHandler{}
 
 	router.Use(controller.AuthMiddleware)
+
+	router.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir("./web/view/"))))
 
 	log.Fatal(http.ListenAndServe(serverPort, router))
 }
