@@ -99,9 +99,9 @@ func (db *DB) RetrieveActiveWorkdays() map[int][]string {
 }
 
 // RetrieveCurrentMonthTimeRaport - TODO write about behavior
-func (db *DB) RetrieveCurrentMonthTimeRaport(workerID, currentMonth int) map[int][]string {
+func (db *DB) RetrieveCurrentMonthTimeRaport(workerID, currentMonth, currentYear int) map[int][]string {
 
-	command := "CALL SELECT_MONTH_TIME_RAPORT(" + strconv.Itoa(workerID) + ", " + strconv.Itoa(currentMonth) + ");"
+	command := "CALL SELECT_MONTH_TIME_RAPORT(" + strconv.Itoa(workerID) + ", " + strconv.Itoa(currentMonth) + ", " + strconv.Itoa(currentYear) + ");"
 	rows := db.executeQuery(command)
 
 	table := make(map[int][]string)

@@ -46,9 +46,10 @@ func StageOneHandler(writer http.ResponseWriter, request *http.Request) {
 	pageContent.WorkerName = model.Db.RetrieveWorkerName(workerID)
 
 	pageContent.Status, pageContent.WorkedTime = model.Db.RetrieveWorkerStatus(workerID)
+	currentYear := int(time.Now().Year())
 	currentMonth := int(time.Now().Month())
 
-	pageContent.TimeRaport = model.Db.RetrieveCurrentMonthTimeRaport(workerID, currentMonth)
+	pageContent.TimeRaport = model.Db.RetrieveCurrentMonthTimeRaport(workerID, currentMonth, currentYear)
 	pageContent.Overtime = model.Db.RetrieveOvertime(workerID)
 
 	templ, err := template.New("stageOne").ParseFiles(stageOnePage, "./web/view/css/stage-one-style.css")
