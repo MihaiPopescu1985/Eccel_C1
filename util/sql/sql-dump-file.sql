@@ -24,7 +24,7 @@ USE `EccelC1`;
 DROP TABLE IF EXISTS `ACTIVEWORKDAY`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ACTIVEWORKDAY` (
+CREATE TEMPORARY TABLE `ACTIVEWORKDAY` (
   `ID` int DEFAULT NULL,
   `WORKER` varchar(36) DEFAULT NULL,
   `RO_NUMBER` varchar(15) DEFAULT NULL,
