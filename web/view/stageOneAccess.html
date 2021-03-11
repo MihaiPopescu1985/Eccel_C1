@@ -6,6 +6,7 @@
 
         <title>Pagina lucratorului</title>
         <link rel="stylesheet" type="text/css" href="./css/stage-one-style.css">
+        <script src="./js/stage-one.js"></script>
     </head>
     <body>
         <div id="header-holder">
@@ -16,11 +17,12 @@
         <div id="status-holder">
             <h1 id="status">Statusul tau: {{.Status}}</h1>
             <h1 id="today-worked">Astazi ai lucrat: {{.WorkedTime}}</h1>
+            <h1 id="overtime">Total suplimentar: {{.Overtime}}</h1>
         </div>
 
         <div id="monthly-report">
-            <h1>Raportul lunii in curs:</h1>
-            <table>
+            <h1 id="monthly-report-table-title" onclick="showMonthlyReportTable()">Raportul lunii in curs:</h1>
+            <table id="monthly-report-table">
                 <tr>
                     <th>Nr Germania</th>
                     <th>Nr Romania</th>

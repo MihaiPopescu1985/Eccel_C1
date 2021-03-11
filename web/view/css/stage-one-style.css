@@ -36,25 +36,9 @@ body {
     margin-top: 100px;
 }
 
-#status, #today-worked {
+#status, #today-worked, #overtime {
     text-align: center;
     color: #d9d9d9;
-    text-shadow: 2px 2px #353535;
-}
-
-#monthly-report {
-    margin: 100px;
-    padding: 20px;
-}
-
-#monthly-report>h1 {
-    color: #d9d9d9;
-    background-color: #3c6e71;
-    padding: 10px;
-    max-width: max-content;
-    font-style: italic;
-    position: relative;
-    top: -75px;
     text-shadow: 2px 2px #353535;
 }
 
@@ -64,11 +48,30 @@ body {
     width: 1200px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 150px;
 }
 
-table {
+#monthly-report-table-title {
+    color: #d9d9d9;
+    background-color: #3c6e71;
+    padding: 10px;
+    max-width: max-content;
+    font-style: italic;
+    position: relative;
+    top: -30px;
+    right: -10px;
+    text-shadow: 2px 2px #353535;
+    cursor: pointer;
+}
+
+monthly-report-table {
     margin: 5px;
     width: 100%;
+    padding: 10px;
+}
+
+#monthly-report-table {
+    display: block;
 }
 
 th {

@@ -306,3 +306,18 @@ func (db *DB) RetrieveFreeDays() map[int]string {
 	}
 	return table
 }
+
+// RetrieveOvertime ...
+func (db *DB) RetrieveOvertime(workerID int) string {
+	var (
+		command  = "CALL GET_OVERTIME(" + strconv.Itoa(workerID) + ");"
+		overtime sql.NullString
+		rows     = db.executeQuery(command)
+	)
+	for rows.Next() {
+		if err := rows.Scan(&overtime); err != nil {
+			util.Log.Panicln(err)
+		}
+	}
+	return overtime.String
+}
