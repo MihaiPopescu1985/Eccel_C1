@@ -2316,3 +2316,107 @@
 2021-03-12 17:58:58.987839423 +0200 EET m=+0.000320953stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
 2021-03-12 17:58:58.987839423 +0200 EET m=+0.000320953stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
 2021-03-12 17:58:58.987839423 +0200 EET m=+0.000320953stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:50:21.845909453 +0200 EET m=+0.000375352db.go:66: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-03-12 18:50:21.845909453 +0200 EET m=+0.000375352middleware.go:27: http: named cookie not present
+2021-03-12 18:50:21.845909453 +0200 EET m=+0.000375352middleware.go:27: http: named cookie not present
+2021-03-12 18:50:21.845909453 +0200 EET m=+0.000375352db.go:66: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-03-12 18:50:21.845909453 +0200 EET m=+0.000375352db.go:66: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-03-12 18:50:21.845909453 +0200 EET m=+0.000375352db.go:66: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-03-12 18:50:21.845909453 +0200 EET m=+0.000375352db.go:66: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 1; 
+2021-03-12 18:50:21.845909453 +0200 EET m=+0.000375352db.go:66: Executing: CALL GET_OVERTIME(1); 
+2021-03-12 18:50:21.845909453 +0200 EET m=+0.000375352db.go:66: Executing: CALL SELECT_WORKER_STATUS(1); 
+2021-03-12 18:50:21.845909453 +0200 EET m=+0.000375352db.go:66: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 3, 2021); 
+2021-03-12 18:50:21.845909453 +0200 EET m=+0.000375352stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:50:21.845909453 +0200 EET m=+0.000375352stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:50:21.845909453 +0200 EET m=+0.000375352stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:50:21.845909453 +0200 EET m=+0.000375352stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:50:21.845909453 +0200 EET m=+0.000375352stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:50:21.845909453 +0200 EET m=+0.000375352db.go:66: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-03-12 18:50:21.845909453 +0200 EET m=+0.000375352db.go:66: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 1; 
+2021-03-12 18:50:21.845909453 +0200 EET m=+0.000375352db.go:66: Executing: CALL GET_OVERTIME(1); 
+2021-03-12 18:50:21.845909453 +0200 EET m=+0.000375352db.go:66: Executing: CALL SELECT_WORKER_STATUS(1); 
+2021-03-12 18:50:21.845909453 +0200 EET m=+0.000375352db.go:66: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 3, 2021); 
+2021-03-12 18:50:21.845909453 +0200 EET m=+0.000375352stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:50:21.845909453 +0200 EET m=+0.000375352stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:50:21.845909453 +0200 EET m=+0.000375352stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:50:21.845909453 +0200 EET m=+0.000375352stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:50:21.845909453 +0200 EET m=+0.000375352stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:52:25.276468382 +0200 EET m=+0.000336976db.go:66: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-03-12 18:52:25.276468382 +0200 EET m=+0.000336976middleware.go:27: http: named cookie not present
+2021-03-12 18:52:25.276468382 +0200 EET m=+0.000336976middleware.go:27: http: named cookie not present
+2021-03-12 18:52:25.276468382 +0200 EET m=+0.000336976db.go:66: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-03-12 18:52:25.276468382 +0200 EET m=+0.000336976db.go:66: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-03-12 18:52:25.276468382 +0200 EET m=+0.000336976db.go:66: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-03-12 18:52:25.276468382 +0200 EET m=+0.000336976db.go:66: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 1; 
+2021-03-12 18:52:25.276468382 +0200 EET m=+0.000336976db.go:66: Executing: CALL GET_OVERTIME(1); 
+2021-03-12 18:52:25.276468382 +0200 EET m=+0.000336976db.go:66: Executing: CALL SELECT_WORKER_STATUS(1); 
+2021-03-12 18:52:25.276468382 +0200 EET m=+0.000336976db.go:66: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 3, 2021); 
+2021-03-12 18:52:25.276468382 +0200 EET m=+0.000336976stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:52:25.276468382 +0200 EET m=+0.000336976stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:52:25.276468382 +0200 EET m=+0.000336976stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:52:25.276468382 +0200 EET m=+0.000336976stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:52:25.276468382 +0200 EET m=+0.000336976stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:52:25.276468382 +0200 EET m=+0.000336976db.go:66: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-03-12 18:52:25.276468382 +0200 EET m=+0.000336976db.go:66: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 1; 
+2021-03-12 18:52:25.276468382 +0200 EET m=+0.000336976db.go:66: Executing: CALL GET_OVERTIME(1); 
+2021-03-12 18:52:25.276468382 +0200 EET m=+0.000336976db.go:66: Executing: CALL SELECT_WORKER_STATUS(1); 
+2021-03-12 18:52:25.276468382 +0200 EET m=+0.000336976db.go:66: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 3, 2021); 
+2021-03-12 18:52:25.276468382 +0200 EET m=+0.000336976stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:52:25.276468382 +0200 EET m=+0.000336976stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:52:25.276468382 +0200 EET m=+0.000336976stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:52:25.276468382 +0200 EET m=+0.000336976stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:52:25.276468382 +0200 EET m=+0.000336976stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129middleware.go:27: http: named cookie not present
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129middleware.go:27: http: named cookie not present
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129db.go:66: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129middleware.go:27: http: named cookie not present
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129middleware.go:27: http: named cookie not present
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129middleware.go:27: http: named cookie not present
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129middleware.go:27: http: named cookie not present
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129middleware.go:27: http: named cookie not present
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129middleware.go:27: http: named cookie not present
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129db.go:66: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129db.go:66: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129db.go:66: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129db.go:66: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 1; 
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129db.go:66: Executing: CALL GET_OVERTIME(1); 
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129db.go:66: Executing: CALL SELECT_WORKER_STATUS(1); 
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129db.go:66: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 3, 2021); 
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129db.go:66: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129db.go:66: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129db.go:66: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 1; 
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129db.go:66: Executing: CALL GET_OVERTIME(1); 
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129db.go:66: Executing: CALL SELECT_WORKER_STATUS(1); 
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129db.go:66: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 3, 2021); 
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 18:54:42.112349476 +0200 EET m=+0.000340129stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 19:00:34.628055612 +0200 EET m=+0.000369140db.go:66: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-03-12 19:00:34.628055612 +0200 EET m=+0.000369140db.go:66: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-03-12 19:00:34.628055612 +0200 EET m=+0.000369140db.go:66: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 1; 
+2021-03-12 19:00:34.628055612 +0200 EET m=+0.000369140db.go:66: Executing: CALL GET_OVERTIME(1); 
+2021-03-12 19:00:34.628055612 +0200 EET m=+0.000369140db.go:66: Executing: CALL SELECT_WORKER_STATUS(1); 
+2021-03-12 19:00:34.628055612 +0200 EET m=+0.000369140db.go:66: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 3, 2021); 
+2021-03-12 19:00:34.628055612 +0200 EET m=+0.000369140stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 19:00:34.628055612 +0200 EET m=+0.000369140stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 19:00:34.628055612 +0200 EET m=+0.000369140stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 19:00:34.628055612 +0200 EET m=+0.000369140stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 19:00:34.628055612 +0200 EET m=+0.000369140stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 19:00:34.628055612 +0200 EET m=+0.000369140db.go:66: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-03-12 19:00:34.628055612 +0200 EET m=+0.000369140db.go:66: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-03-12 19:00:34.628055612 +0200 EET m=+0.000369140db.go:66: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 1; 
+2021-03-12 19:00:34.628055612 +0200 EET m=+0.000369140db.go:66: Executing: CALL GET_OVERTIME(1); 
+2021-03-12 19:00:34.628055612 +0200 EET m=+0.000369140db.go:66: Executing: CALL SELECT_WORKER_STATUS(1); 
+2021-03-12 19:00:34.628055612 +0200 EET m=+0.000369140db.go:66: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 3, 2021); 
+2021-03-12 19:00:34.628055612 +0200 EET m=+0.000369140stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 19:00:34.628055612 +0200 EET m=+0.000369140stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 19:00:34.628055612 +0200 EET m=+0.000369140stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 19:00:34.628055612 +0200 EET m=+0.000369140stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax
+2021-03-12 19:00:34.628055612 +0200 EET m=+0.000369140stageOneController.go:89: strconv.Atoi: parsing "": invalid syntax

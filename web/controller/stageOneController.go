@@ -62,7 +62,7 @@ func (pageContent *workerStatus) setTimeReport() {
 	pageContent.TimeReport = model.Db.RetrieveCurrentMonthTimeRaport(pageContent.WorkerID, currentMonth, currentYear)
 
 	//TimeReport         map[int][]string
-	//StandardTimeReport map[string][31]int
+	//StandardTimeReport map[string][31]string
 
 	pageContent.StandardTimeReport = make(map[string][]string)
 
@@ -74,7 +74,8 @@ func (pageContent *workerStatus) setTimeReport() {
 			util.Log.Println(err)
 		}
 
-		day := date.Day()
+		// day must correspond with slice index wich starts at 0
+		day := date.Day() - 1
 		workedMinutes, err := strconv.Atoi(v[5])
 		if err != nil {
 			util.Log.Println(err)
