@@ -109,8 +109,9 @@ func (db *DB) RetrieveCurrentMonthTimeRaport(workerID, currentMonth, currentYear
 	rows := db.executeQuery(command)
 
 	table := make(map[int][]string)
+	id := 0
+
 	var (
-		id          sql.NullInt32  //int
 		geNo        sql.NullString //string
 		roNo        sql.NullString //string
 		description sql.NullString //string
@@ -120,10 +121,11 @@ func (db *DB) RetrieveCurrentMonthTimeRaport(workerID, currentMonth, currentYear
 	)
 
 	for rows.Next() {
-		if err := rows.Scan(&id, &geNo, &roNo, &description, &start, &stop, &minutes); err != nil {
+		if err := rows.Scan(&geNo, &roNo, &description, &start, &stop, &minutes); err != nil {
 			util.Log.Panicln(err)
 		}
-		table[int(id.Int32)] = []string{geNo.String, roNo.String, description.String, start.String, stop.String, toHoursAndMinutes(minutes.String)}
+		table[id] = []string{geNo.String, roNo.String, description.String, start.String, stop.String, minutes.String}
+		id++
 	}
 	return table
 }
@@ -146,13 +148,18 @@ func (db *DB) RetrieveWorkerStatus(id int) (string, string) {
 		util.Log.Panicln(err)
 	}
 
-	workedTime := toHoursAndMinutes(strconv.Itoa(int(workedMinutes.Int32)))
+	workedTime := ToHoursAndMinutes(strconv.Itoa(int(workedMinutes.Int32)))
 	return status.String, workedTime
 }
 
-func toHoursAndMinutes(minutes string) string {
+// ToHoursAndMinutes converts minutes to hours and minutes.
+// For example: ToHoursAndMinutes("61") returns "1h1m".
+func ToHoursAndMinutes(minutes string) string {
 
-	workedMinutes, _ := strconv.Atoi(minutes)
+	workedMinutes, err := strconv.Atoi(minutes)
+	if err != nil {
+		util.Log.Println(err)
+	}
 
 	workedHours := workedMinutes / 60
 	workedMinutes = workedMinutes - (workedHours * 60)

@@ -15,49 +15,67 @@ const stageOnePage string = "./web/view/stageOneAccess.html"
 type workerStatus struct {
 	WorkerName string
 	WorkerID   int
+	Overtime   string
 	TimeRaport map[int][]string
 	Status     string
 	WorkedTime string
-	Overtime   string
 }
 
 // StageOneHandler TODO: edit function & function description.
 // Based on worker's id got from url query,
 // retrieve current month time report by calling
 // database stored procedure: SELECT_TIME_RAPORT(WORKER_ID, CURRENT_MONTH).
-// This page must also display worker's status (inactive/active/break)
-// and current working time.
 func StageOneHandler(writer http.ResponseWriter, request *http.Request) {
 
-	workerID, err := strconv.Atoi(request.URL.Query().Get("workerId"))
-	if err != nil {
-		util.Log.Println(err)
-	}
+	var pageContent workerStatus
 
-	pageContent := workerStatus{
-		WorkerName: "",
-		WorkerID:   workerID,
-		TimeRaport: make(map[int][]string, 0),
-		Status:     "INACTIVE",
-		WorkedTime: "0",
-		Overtime:   "",
-	}
+	pageContent.setWorkerID(request)
+	pageContent.setWorkerName()
+	pageContent.setOvertime()
+	pageContent.setStatusAndWorkedTime()
+	pageContent.setDetailedTimeReport()
 
-	pageContent.WorkerName = model.Db.RetrieveWorkerName(workerID)
+	servePage(&pageContent, &writer)
+}
 
-	pageContent.Status, pageContent.WorkedTime = model.Db.RetrieveWorkerStatus(workerID)
-	currentYear := int(time.Now().Year())
-	currentMonth := int(time.Now().Month())
-
-	pageContent.TimeRaport = model.Db.RetrieveCurrentMonthTimeRaport(workerID, currentMonth, currentYear)
-	pageContent.Overtime = model.Db.RetrieveOvertime(workerID)
-
+func servePage(pageContent *workerStatus, writer *http.ResponseWriter) {
 	templ, err := template.New("stageOne").ParseFiles(stageOnePage, "./web/view/css/stage-one-style.css")
 	if err != nil {
 		util.Log.Println(err)
 	}
 
-	err = templ.ExecuteTemplate(writer, "stageOneAccess.html", pageContent)
+	err = templ.ExecuteTemplate(*writer, "stageOneAccess.html", pageContent)
+	if err != nil {
+		util.Log.Println(err)
+	}
+}
+
+func (pageContent *workerStatus) setDetailedTimeReport() {
+	currentYear := int(time.Now().Year())
+	currentMonth := int(time.Now().Month())
+
+	pageContent.TimeRaport = model.Db.RetrieveCurrentMonthTimeRaport(pageContent.WorkerID, currentMonth, currentYear)
+	for k := range pageContent.TimeRaport {
+		pageContent.TimeRaport[k][5] = model.ToHoursAndMinutes(pageContent.TimeRaport[k][5])
+	}
+}
+
+func (pageContent *workerStatus) setStatusAndWorkedTime() {
+	pageContent.Status, pageContent.WorkedTime = model.Db.RetrieveWorkerStatus(pageContent.WorkerID)
+}
+
+func (pageContent *workerStatus) setOvertime() {
+	pageContent.Overtime = model.Db.RetrieveOvertime(pageContent.WorkerID)
+}
+
+func (pageContent *workerStatus) setWorkerName() {
+	pageContent.WorkerName = model.Db.RetrieveWorkerName(pageContent.WorkerID)
+}
+
+func (pageContent *workerStatus) setWorkerID(r *http.Request) {
+	var err error
+	pageContent.WorkerID, err = strconv.Atoi(r.URL.Query().Get("workerId"))
+
 	if err != nil {
 		util.Log.Println(err)
 	}
