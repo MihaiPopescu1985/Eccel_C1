@@ -51,6 +51,8 @@ func (db *DB) IsConnected() bool {
 
 // Execute executes a command against database with no returning result set.
 func (db *DB) execute(command string) {
+
+	util.Log.Printf("Executing: %v \n", command)
 	_, err := db.database.Exec(command)
 
 	if err != nil {
@@ -60,6 +62,8 @@ func (db *DB) execute(command string) {
 
 // ExecuteQuery TODO: write about the behavior of this function
 func (db *DB) executeQuery(command string) *sql.Rows {
+
+	util.Log.Printf("Executing: %v \n", command)
 	rows, err := db.database.Query(command)
 
 	if err != nil {

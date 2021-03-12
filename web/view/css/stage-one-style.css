@@ -42,36 +42,22 @@ body {
     text-shadow: 2px 2px #353535;
 }
 
-#monthly-report {
-    border-radius: 5px;
+.table-title {
+    display: inline-block;
     background-color: #d9d9d9;
-    width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 150px;
-}
-
-#monthly-report-table-title {
-    color: #d9d9d9;
-    background-color: #3c6e71;
-    padding: 10px;
+    padding: 15px;
     max-width: max-content;
-    font-style: italic;
-    position: relative;
-    top: -30px;
-    right: -10px;
-    text-shadow: 2px 2px #353535;
-    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 5px 10px #353535;
+    color: #3c6e71;
+    margin-left: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
-monthly-report-table {
-    margin: 5px;
+table {
     width: 100%;
-    padding: 10px;
-}
-
-#monthly-report-table {
-    display: block;
+    overflow: scroll;
 }
 
 th {
@@ -99,4 +85,4 @@ td {
     text-align: center;
     font-size: 20px;
     height: 40px;
-}
+}                        

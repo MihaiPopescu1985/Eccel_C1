@@ -20,29 +20,26 @@
             <h1 id="overtime">Total suplimentar: {{.Overtime}}</h1>
         </div>
 
-        <div id="monthly-report">
-            <h1 id="monthly-report-table-title" onclick="showMonthlyReportTable()">Raportul lunii in curs:</h1>
-            <table id="monthly-report-table">
+        <h1 class="table-title">Raportul lunii in curs:</h1>
+        <h1 class="table-title" id="table-view-type">Vizualizare detaliata/standard</h1>
+        <h1 class="table-title" id="add-workday">Adauga zi</h1>
+
+        <table id="monthly-report-table">
+            <tr>
+                <th>Nr Germania</th>
+                <th>Nr Romania</th>
+                <th>Descriere</th>
+                <th>Inceput</th>
+                <th>Sfarsit</th>
+                <th>Timp lucrat</th>
+            </tr>
+            {{range $k, $v := .TimeRaport}}
                 <tr>
-                    <th>Nr Germania</th>
-                    <th>Nr Romania</th>
-                    <th>Descriere</th>
-                    <th>Inceput</th>
-                    <th>Sfarsit</th>
-                    <th>Timp lucrat</th>
+                    {{range $vValue := $v}}
+                        <td>{{$vValue}}</td>
+                    {{end}}
                 </tr>
-                {{range $k, $v := .TimeRaport}}
-                    <tr>
-                        {{range $vValue := $v}}
-                            <td>{{$vValue}}</td>
-                        {{end}}
-                    </tr>
-                {{end}}
-            </table>
-        </div>
-
-        <div id="free-days">
-
-        </div>
+            {{end}}
+        </table>
     </body>
 </html>
