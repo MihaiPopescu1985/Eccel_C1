@@ -1,7 +1,18 @@
-function showMonthlyReportTable() {
-    let table = document.getElementById("monthly-report-table")
-    let tableStyles = window.getComputedStyle(table)
-    let tableVisibility = tableStyles.getPropertyValue('display')
+function changeTableView() {
+    let detailedTable = document.getElementById("detailed-table");
+    let standardTable = document.getElementById("standard-table");
+    let viewType = document.getElementById("table-view-type");
 
-    tableVisibility == 'block' ? table.style.display = 'none' : table.style.display = 'block'
+    let tableStyles = window.getComputedStyle(standardTable);
+    let tableVisibility = tableStyles.getPropertyValue('display');
+
+    if (tableVisibility == 'table')  {
+        standardTable.style.display = 'none';
+        detailedTable.style.display = 'table';
+        viewType.innerHTML = "Vizualizare detaliata";
+    } else {
+        standardTable.style.display = 'table';
+        detailedTable.style.display = 'none';
+        viewType.innerHTML = "Vizualizare standard";
+    }
 }

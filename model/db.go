@@ -148,24 +148,8 @@ func (db *DB) RetrieveWorkerStatus(id int) (string, string) {
 		util.Log.Panicln(err)
 	}
 
-	workedTime := ToHoursAndMinutes(strconv.Itoa(int(workedMinutes.Int32)))
+	workedTime := strconv.Itoa(int(workedMinutes.Int32))
 	return status.String, workedTime
-}
-
-// ToHoursAndMinutes converts minutes to hours and minutes.
-// For example: ToHoursAndMinutes("61") returns "1h1m".
-func ToHoursAndMinutes(minutes string) string {
-
-	workedMinutes, err := strconv.Atoi(minutes)
-	if err != nil {
-		util.Log.Println(err)
-	}
-
-	workedHours := workedMinutes / 60
-	workedMinutes = workedMinutes - (workedHours * 60)
-
-	workedTime := strconv.Itoa(workedHours) + "h" + strconv.Itoa(workedMinutes) + "m"
-	return workedTime
 }
 
 // RetrieveActiveProjects ...

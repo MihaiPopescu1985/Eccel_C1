@@ -21,7 +21,7 @@
         </div>
 
         <h1 class="table-title">Raportul lunii in curs:</h1>
-        <a id="table-view-type">Vizualizare detaliata/standard</a>
+        <a id="table-view-type" onclick="changeTableView()">Vizualizare detaliata</a>
         <a id="add-workday">Adauga zi</a>
 
         <table id="detailed-table">
@@ -33,7 +33,7 @@
                 <th>Sfarsit</th>
                 <th>Timp lucrat</th>
             </tr>
-            {{range $k, $v := .TimeRaport}}
+            {{range $k, $v := .TimeReport}}
                 <tr>
                     {{range $vValue := $v}}
                         <td>{{$vValue}}</td>
@@ -44,6 +44,7 @@
 
         <table id="standard-table">
             <tr>
+                <th>Proiect\Data</th>
                 <th>1</th>
                 <th>2</th>
                 <th>3</th>
@@ -76,6 +77,14 @@
                 <th>30</th>
                 <th>31</th>
             </tr>
+            {{range $k, $v := .StandardTimeReport}}
+                <tr>
+                    <td>{{$k}}</td>
+                    {{range $vValue := $v}}
+                        <td>{{$vValue}}</td>
+                    {{end}}
+                </tr>
+            {{end}}
         </table>
     </body>
 </html>

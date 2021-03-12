@@ -10,15 +10,19 @@ import (
 	"example.com/c1/util"
 )
 
-const stageOnePage string = "./web/view/stageOneAccess.html"
+const (
+	stageOnePage string = "./web/view/stageOneAccess.html"
+	dateLayout   string = "2006-1-2 15:04:05"
+)
 
 type workerStatus struct {
-	WorkerName string
-	WorkerID   int
-	Overtime   string
-	TimeRaport map[int][]string
-	Status     string
-	WorkedTime string
+	WorkerName         string
+	WorkerID           int
+	Overtime           string
+	TimeReport         map[int][]string
+	StandardTimeReport map[string][]string
+	Status             string
+	WorkedTime         string
 }
 
 // StageOneHandler TODO: edit function & function description.
@@ -33,7 +37,7 @@ func StageOneHandler(writer http.ResponseWriter, request *http.Request) {
 	pageContent.setWorkerName()
 	pageContent.setOvertime()
 	pageContent.setStatusAndWorkedTime()
-	pageContent.setDetailedTimeReport()
+	pageContent.setTimeReport()
 
 	servePage(&pageContent, &writer)
 }
@@ -50,14 +54,70 @@ func servePage(pageContent *workerStatus, writer *http.ResponseWriter) {
 	}
 }
 
-func (pageContent *workerStatus) setDetailedTimeReport() {
+func (pageContent *workerStatus) setTimeReport() {
+
 	currentYear := int(time.Now().Year())
 	currentMonth := int(time.Now().Month())
 
-	pageContent.TimeRaport = model.Db.RetrieveCurrentMonthTimeRaport(pageContent.WorkerID, currentMonth, currentYear)
-	for k := range pageContent.TimeRaport {
-		pageContent.TimeRaport[k][5] = model.ToHoursAndMinutes(pageContent.TimeRaport[k][5])
+	pageContent.TimeReport = model.Db.RetrieveCurrentMonthTimeRaport(pageContent.WorkerID, currentMonth, currentYear)
+
+	//TimeReport         map[int][]string
+	//StandardTimeReport map[string][31]int
+
+	pageContent.StandardTimeReport = make(map[string][]string)
+
+	for _, v := range pageContent.TimeReport {
+		key := v[0] + " (" + v[1] + ")"
+
+		date, err := time.Parse(dateLayout, v[3])
+		if err != nil {
+			util.Log.Println(err)
+		}
+
+		day := date.Day()
+		workedMinutes, err := strconv.Atoi(v[5])
+		if err != nil {
+			util.Log.Println(err)
+		}
+
+		if _, exists := pageContent.StandardTimeReport[key]; exists == false {
+			pageContent.StandardTimeReport[key] = make([]string, 31)
+		}
+
+		currentMinutes, err := strconv.Atoi(pageContent.StandardTimeReport[key][day])
+		if err != nil {
+			util.Log.Println(err)
+		}
+
+		pageContent.StandardTimeReport[key][day] = strconv.Itoa(currentMinutes + workedMinutes)
 	}
+
+	for _, v := range pageContent.TimeReport {
+		v[5] = toHoursAndMinutes(v[5])
+	}
+	for _, value := range pageContent.StandardTimeReport {
+		for i, v := range value {
+			if v != "" {
+				value[i] = toHoursAndMinutes(v)
+			}
+		}
+	}
+}
+
+// toHoursAndMinutes converts minutes to hours and minutes.
+// For example: toHoursAndMinutes("61") returns "1h1m".
+func toHoursAndMinutes(minutes string) string {
+
+	workedMinutes, err := strconv.Atoi(minutes)
+	if err != nil {
+		util.Log.Println(err)
+	}
+
+	workedHours := workedMinutes / 60
+	workedMinutes = workedMinutes - (workedHours * 60)
+
+	workedTime := strconv.Itoa(workedHours) + ":" + strconv.Itoa(workedMinutes)
+	return workedTime
 }
 
 func (pageContent *workerStatus) setStatusAndWorkedTime() {
