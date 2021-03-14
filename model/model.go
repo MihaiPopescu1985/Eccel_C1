@@ -26,8 +26,8 @@ type Project struct {
 	IPAddress   string
 	DeviceID    int
 	IsActive    bool
-	Begin       time.Time
-	End         time.Time
+	Begin       string
+	End         string
 }
 
 // Workday ...

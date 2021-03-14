@@ -181,8 +181,8 @@ func (db *DB) RetrieveActiveProjects() []Project {
 		descript sql.NullString
 		devID    sql.NullInt32
 		isActive sql.NullBool
-		begin    sql.NullTime
-		end      sql.NullTime
+		begin    sql.NullString
+		end      sql.NullString
 	)
 
 	for rows.Next() {
@@ -198,8 +198,8 @@ func (db *DB) RetrieveActiveProjects() []Project {
 			Description: descript.String,
 			DeviceID:    int(devID.Int32),
 			IsActive:    isActive.Bool,
-			Begin:       begin.Time,
-			End:         end.Time,
+			Begin:       begin.String,
+			End:         end.String,
 		})
 	}
 	return projects

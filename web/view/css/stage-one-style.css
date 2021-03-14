@@ -120,15 +120,14 @@ td {
 }
 
 #modal-content-holder {
-    width: 600px;
-    height: 400px;
+    max-width: 600px;
     margin-top: 100px;
     margin-left: auto;
     margin-right: auto;
     border: 1px solid #000000;
     box-shadow: 5px 5px #000000;
     background-color: #284b63;
-    padding: 0px;
+    padding: 1px;
 }
 
 #modal-title {
@@ -148,23 +147,27 @@ td {
     float: right;
     margin-top: 20px;
     margin-right: 20px;
-    background-color: #000000;
-    color: #ffffff;
+    background-color: #d9d9d9;
+    border-radius: 5px;
+    color: #353535;
     font-size: larger;
     cursor: pointer;
-    padding: 10px;
+    padding: 5px;
+    box-shadow: 5px 5px #353535;
 }
 
 #modal-footer {
-    margin-bottom: 0px;
+    width: 100%;
+    height: fit-content;
 }
 
 #save-workday {
-    margin-bottom: 50px;
+    margin-bottom: 10px;
     margin-left: 50px;
 }
 
 #cancel-workday {
-    margin-bottom: 50px;
+    margin-bottom: 10px;
     margin-right: 50px;
+    float: inline-end;
 }

@@ -23,22 +23,17 @@ type workerStatus struct {
 	StandardTimeReport map[string][]string
 	Status             string
 	WorkedTime         string
+	ActiveProjects     []model.Project
 }
 
 // StageOneHandler TODO: edit function & function description.
 // Based on worker's id got from url query,
 // retrieve current month time report by calling
 // database stored procedure: SELECT_TIME_RAPORT(WORKER_ID, CURRENT_MONTH).
+
 func StageOneHandler(writer http.ResponseWriter, request *http.Request) {
 
-	var pageContent workerStatus
-
-	pageContent.setWorkerID(request)
-	pageContent.setWorkerName()
-	pageContent.setOvertime()
-	pageContent.setStatusAndWorkedTime()
-	pageContent.setTimeReport()
-
+	var pageContent = newWorkerStatus(request)
 	servePage(&pageContent, &writer)
 }
 
@@ -54,16 +49,30 @@ func servePage(pageContent *workerStatus, writer *http.ResponseWriter) {
 	}
 }
 
+func newWorkerStatus(request *http.Request) workerStatus {
+
+	var pageContent workerStatus
+
+	pageContent.setWorkerID(request)
+	pageContent.setWorkerName()
+	pageContent.setOvertime()
+	pageContent.setStatusAndWorkedTime()
+	pageContent.setTimeReport()
+	pageContent.setActiveProjects()
+
+	return pageContent
+}
+
+func (pageContent *workerStatus) setActiveProjects() {
+	pageContent.ActiveProjects = model.Db.RetrieveActiveProjects()
+}
+
 func (pageContent *workerStatus) setTimeReport() {
 
 	currentYear := int(time.Now().Year())
 	currentMonth := int(time.Now().Month())
 
 	pageContent.TimeReport = model.Db.RetrieveCurrentMonthTimeRaport(pageContent.WorkerID, currentMonth, currentYear)
-
-	//TimeReport         map[int][]string
-	//StandardTimeReport map[string][31]string
-
 	pageContent.StandardTimeReport = make(map[string][]string)
 
 	for _, v := range pageContent.TimeReport {

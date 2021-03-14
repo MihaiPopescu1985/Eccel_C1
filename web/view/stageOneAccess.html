@@ -92,6 +92,18 @@
                     <h2 id="modal-title">Adauga zi lucrata:</h2>
                     <span id="close-modal" onclick="closeModal()">&times;</span>
                 </div>
+                <div id="modal-body">
+                    <form action="">
+                        <select name="projects">
+                            {{range $project := .ActiveProjects}}
+                                <option value="{{$project.ID}}">{{$project.GeNumber}} ({{$project.RoNumber}})</option>
+                            {{end}}
+                        </select>
+                        <input type="date" name="workday">
+                        <input type="time" name="starttime">
+                        <input type="time" name="stoptime">
+                    </form>
+                </div>
                 <div id="modal-footer">
                     <button id="save-workday">Salveaza</button>
                     <button id="cancel-workday">Anuleaza</button>
