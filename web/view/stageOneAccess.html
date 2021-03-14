@@ -22,7 +22,7 @@
 
         <h1 class="table-title">Raportul lunii in curs:</h1>
         <a id="table-view-type" onclick="changeTableView()">Vizualizare detaliata</a>
-        <a id="add-workday">Adauga zi</a>
+        <a id="add-workday" onclick="showModal()">Adauga zi</a>
 
         <table id="detailed-table">
             <tr>
@@ -86,5 +86,17 @@
                 </tr>
             {{end}}
         </table>
+        <div id="modal">
+            <dir id="modal-content-holder">
+                <div id="modal-header">
+                    <h2 id="modal-title">Adauga zi lucrata:</h2>
+                    <span id="close-modal" onclick="closeModal()">&times;</span>
+                </div>
+                <div id="modal-footer">
+                    <button id="save-workday">Salveaza</button>
+                    <button id="cancel-workday">Anuleaza</button>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

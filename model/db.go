@@ -3,6 +3,7 @@ package model
 import (
 	"database/sql"
 	"strconv"
+	"time"
 
 	"example.com/c1/util"
 	_ "github.com/go-sql-driver/mysql" // import mysql driver
@@ -66,10 +67,23 @@ func (db *DB) executeQuery(command string) *sql.Rows {
 	util.Log.Printf("Executing: %v \n", command)
 	rows, err := db.database.Query(command)
 
+	// Close rows after 5 seconds
+	go closeRows(rows, time.Second*5)
+
 	if err != nil {
 		util.Log.Panicln(err)
 	}
 	return rows
+}
+
+// Helper function used for closing query rows after a certain time.
+// Needed because database server will keep open a conection for every query.
+func closeRows(rows *sql.Rows, timeSpan time.Duration) {
+	time.Sleep(timeSpan)
+
+	if err := rows.Close(); err != nil {
+		util.Log.Println(err)
+	}
 }
 
 // InsertIntoWorkday returns the sql command to start/stop time on workday.

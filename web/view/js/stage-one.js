@@ -16,3 +16,16 @@ function changeTableView() {
         viewType.innerHTML = "Vizualizare standard";
     }
 }
+
+function showModal() {
+    let modal = document.getElementById("modal")
+    let view = window.getComputedStyle(modal).getPropertyValue('display')
+
+    if (view == 'none') {
+        modal.style.display = 'block'
+    }
+}
+
+function closeModal() {
+    document.getElementById('modal').style.display = 'none'
+}
