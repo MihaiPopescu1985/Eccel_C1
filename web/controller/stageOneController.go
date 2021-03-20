@@ -1,8 +1,10 @@
 package controller
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
+	"net/url"
 	"strconv"
 	"time"
 
@@ -13,6 +15,7 @@ import (
 const (
 	stageOnePage string = "./web/view/stageOneAccess.html"
 	dateLayout   string = "2006-1-2 15:04:05"
+	css          string = "./web/view/css/stage-one-style.css"
 )
 
 type workerStatus struct {
@@ -33,12 +36,14 @@ type workerStatus struct {
 
 func StageOneHandler(writer http.ResponseWriter, request *http.Request) {
 
+	saveForm(request)
+
 	var pageContent = newWorkerStatus(request)
 	servePage(&pageContent, &writer)
 }
 
 func servePage(pageContent *workerStatus, writer *http.ResponseWriter) {
-	templ, err := template.New("stageOne").ParseFiles(stageOnePage, "./web/view/css/stage-one-style.css")
+	templ, err := template.New("stageOne").ParseFiles(stageOnePage, css)
 	if err != nil {
 		util.Log.Println(err)
 	}
@@ -47,6 +52,22 @@ func servePage(pageContent *workerStatus, writer *http.ResponseWriter) {
 	if err != nil {
 		util.Log.Println(err)
 	}
+}
+
+func saveForm(r *http.Request) {
+	if err := r.ParseForm(); err != nil {
+		util.Log.Println(err)
+	}
+
+	formProject := r.FormValue("projects")
+	formWorkday := r.FormValue("workday")
+	formStartHour := r.FormValue("startHour")
+	formStartMinute := r.FormValue("startMinute")
+	formStopHour := r.FormValue("stopHour")
+	formStopMinute := r.FormValue("stopMinute")
+
+	fmt.Printf("%v %v %v %v %v %v\n", formProject, formWorkday, formStartHour, formStartMinute, formStopHour, formStopMinute)
+
 }
 
 func newWorkerStatus(request *http.Request) workerStatus {
@@ -143,10 +164,18 @@ func (pageContent *workerStatus) setWorkerName() {
 }
 
 func (pageContent *workerStatus) setWorkerID(r *http.Request) {
-	var err error
-	pageContent.WorkerID, err = strconv.Atoi(r.URL.Query().Get("workerId"))
+
+	url, err := url.Parse(r.RequestURI)
 
 	if err != nil {
 		util.Log.Println(err)
+		http.Redirect(nil, nil, "/", http.StatusBadRequest)
+	}
+
+	pageContent.WorkerID, err = strconv.Atoi(url.Query().Get("workerId"))
+
+	if err != nil {
+		util.Log.Println(err)
+		http.Redirect(nil, nil, "/", http.StatusBadRequest)
 	}
 }

@@ -27,5 +27,6 @@ function showModal() {
 }
 
 function closeModal() {
+    document.getElementById('new-workday-form').reset()
     document.getElementById('modal').style.display = 'none'
 }

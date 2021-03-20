@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"net/url"
 	"testing"
 	"time"
 )
@@ -18,5 +19,23 @@ func TestShouldGenerateProperStandardViewOfMonthTimeReport(t *testing.T) {
 			t.Fatal(err)
 			t.FailNow()
 		}
+	}
+}
+
+func TestShouldParseURL(t *testing.T) {
+
+	want := "4"
+	url, err := url.Parse("/stage-one?workerId=4")
+
+	if err != nil {
+		t.Fatal(err)
+		t.FailNow()
+	}
+
+	got := url.Query().Get("workerId")
+
+	if got != want {
+		t.Fatalf("got = %v, wanted = %v", got, want)
+		t.FailNow()
 	}
 }

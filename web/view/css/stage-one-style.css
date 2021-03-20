@@ -108,6 +108,7 @@ td {
 }
 
 #modal {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -127,47 +128,46 @@ td {
     border: 1px solid #000000;
     box-shadow: 5px 5px #000000;
     background-color: #284b63;
-    padding: 1px;
+    padding: 20px;
 }
 
 #modal-title {
-    color: #3c6e71;
-    background-color: #d9d9d9;
+    margin: 0px;
     display: inline-block;
-    margin-left: 20px;
-    margin-top: 20px;
-    text-align: center;
-    padding: 20px;
-    border-radius: 5px;
-    text-shadow: 1px 1px #353535;
-    box-shadow: 5px 5px #353535;
 }
 
 #close-modal {
     float: right;
-    margin-top: 20px;
-    margin-right: 20px;
-    background-color: #d9d9d9;
-    border-radius: 5px;
-    color: #353535;
-    font-size: larger;
     cursor: pointer;
-    padding: 5px;
-    box-shadow: 5px 5px #353535;
+}
+
+fieldset {
+    margin-top: 30px;
+    padding: 20px;
+}
+
+#projects {
+    margin-bottom: 20px;
+    height: 35px;
+}
+
+#workday {
+    margin-bottom: 20px;
+    height: 35px;
+}
+
+#start-hour, #start-minute {
+    margin-bottom: 20px;
+}
+
+#start-hour, #start-minute, #stop-hour, #stop-minute {
+    width: 50px;
 }
 
 #modal-footer {
-    width: 100%;
-    height: fit-content;
-}
-
-#save-workday {
-    margin-bottom: 10px;
-    margin-left: 50px;
+    padding-top: 20px;
 }
 
 #cancel-workday {
-    margin-bottom: 10px;
-    margin-right: 50px;
-    float: inline-end;
+    float: right;
 }

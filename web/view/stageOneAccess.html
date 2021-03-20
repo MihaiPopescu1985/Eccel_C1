@@ -93,20 +93,38 @@
                     <span id="close-modal" onclick="closeModal()">&times;</span>
                 </div>
                 <div id="modal-body">
-                    <form action="">
-                        <select name="projects">
+                    <form id="new-workday-form" method="POST">
+                        <fieldset>
+                            <legend>Toate campurile sunt obligatorii</legend>
+
+                            <label for="projects">Selecteaza proiectul:</label><br>
+                            <select id="projects" name="projects" required>
                             {{range $project := .ActiveProjects}}
                                 <option value="{{$project.ID}}">{{$project.GeNumber}} ({{$project.RoNumber}})</option>
                             {{end}}
-                        </select>
-                        <input type="date" name="workday">
-                        <input type="time" name="starttime">
-                        <input type="time" name="stoptime">
+                            </select>
+                            <br>
+                            
+                            <label for="workday">Alege data:</label>
+                            <br>
+                            <input id="workday" type="date" name="workday" required>
+                            <br>
+                            <label for="startHour">Ora inceput:</label>
+                            <br>
+                            <input id="start-hour" type="number" name="startHour" min="00" max="23" required pattern="[0-9]{2}"> : 
+                            <input id="start-minute" type="number" name="startMinute" min="00" max="59" required pattern="[0-9]{2}">
+                            <br>
+                            <label for="stop-hour">Ora sfarsit:</label>
+                            <br>
+                            <input id="stop-hour" type="number" name="stopHour" min="00" max="23" required pattern="[0-9]{2}"> : 
+                            <input id="stop-minute" type="number" name="stopMinute" min="00" max="59" required pattern="[0-9]{2}">
+                            <br>
+                        </fieldset>
+                        <div id="modal-footer">
+                            <button id="save-workday" type="submit" value="InsertWorkday">Salveaza</button>
+                            <button id="cancel-workday" type="reset" onclick="closeModal()">Anuleaza</button>
+                        </div>
                     </form>
-                </div>
-                <div id="modal-footer">
-                    <button id="save-workday">Salveaza</button>
-                    <button id="cancel-workday">Anuleaza</button>
                 </div>
             </div>
         </div>
