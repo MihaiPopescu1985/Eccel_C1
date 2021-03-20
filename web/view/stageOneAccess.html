@@ -93,7 +93,7 @@
                     <span id="close-modal" onclick="closeModal()">&times;</span>
                 </div>
                 <div id="modal-body">
-                    <form id="new-workday-form" method="POST">
+                    <form id="new-workday-form" method="GET" action="/">
                         <fieldset>
                             <legend>Toate campurile sunt obligatorii</legend>
 
@@ -105,9 +105,9 @@
                             </select>
                             <br>
                             
-                            <label for="workday">Alege data:</label>
+                            <label for="day">Alege data:</label>
                             <br>
-                            <input id="workday" type="date" name="workday" required>
+                            <input id="day" type="date" name="day" required>
                             <br>
                             <label for="startHour">Ora inceput:</label>
                             <br>
@@ -121,7 +121,7 @@
                             <br>
                         </fieldset>
                         <div id="modal-footer">
-                            <button id="save-workday" type="submit" value="InsertWorkday">Salveaza</button>
+                            <button id="save-workday" type="submit" onclick="location.reload()">Salveaza</button>
                             <button id="cancel-workday" type="reset" onclick="closeModal()">Anuleaza</button>
                         </div>
                     </form>

@@ -1,11 +1,11 @@
 package controller
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 	"net/url"
 	"strconv"
+	"strings"
 	"time"
 
 	"example.com/c1/model"
@@ -36,9 +36,9 @@ type workerStatus struct {
 
 func StageOneHandler(writer http.ResponseWriter, request *http.Request) {
 
-	saveForm(request)
-
 	var pageContent = newWorkerStatus(request)
+
+	saveForm(request, &pageContent)
 	servePage(&pageContent, &writer)
 }
 
@@ -54,20 +54,46 @@ func servePage(pageContent *workerStatus, writer *http.ResponseWriter) {
 	}
 }
 
-func saveForm(r *http.Request) {
+func saveForm(r *http.Request, status *workerStatus) {
 	if err := r.ParseForm(); err != nil {
 		util.Log.Println(err)
 	}
 
-	formProject := r.FormValue("projects")
-	formWorkday := r.FormValue("workday")
+	formProject, err := strconv.Atoi(r.FormValue("projects"))
+	if err != nil {
+		util.Log.Println(err)
+		return
+	}
+
+	formDay := r.FormValue("day")
 	formStartHour := r.FormValue("startHour")
 	formStartMinute := r.FormValue("startMinute")
 	formStopHour := r.FormValue("stopHour")
 	formStopMinute := r.FormValue("stopMinute")
 
-	fmt.Printf("%v %v %v %v %v %v\n", formProject, formWorkday, formStartHour, formStartMinute, formStopHour, formStopMinute)
+	model.Db.AddWorkday(status.WorkerID, formProject,
+		formatTime(formDay, formStartHour, formStartMinute),
+		formatTime(formDay, formStopHour, formStopMinute))
 
+	r.Form.Del("projects")
+	r.Form.Del("day")
+	r.Form.Del("startHour")
+	r.Form.Del("startMinute")
+	r.Form.Del("stopHour")
+	r.Form.Del("stopMinute")
+}
+
+func formatTime(day, hour, minute string) string {
+
+	var time strings.Builder
+	time.WriteString(day)
+	time.WriteString(" ")
+	time.WriteString(hour)
+	time.WriteString(":")
+	time.WriteString(minute)
+	time.WriteString(":00")
+
+	return time.String()
 }
 
 func newWorkerStatus(request *http.Request) workerStatus {

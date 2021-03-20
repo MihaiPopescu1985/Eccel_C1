@@ -3,6 +3,7 @@ package model
 import (
 	"database/sql"
 	"strconv"
+	"strings"
 	"time"
 
 	"example.com/c1/util"
@@ -329,4 +330,20 @@ func (db *DB) RetrieveOvertime(workerID int) string {
 		}
 	}
 	return overtime.String
+}
+
+func (db *DB) AddWorkday(workerID, projectID int, startHour, stopHour string) {
+
+	var command strings.Builder
+	command.WriteString("CALL ADD_NEW_WORKDAY(")
+	command.WriteString(strconv.Itoa(workerID))
+	command.WriteString(", ")
+	command.WriteString(strconv.Itoa(projectID))
+	command.WriteString(", '")
+	command.WriteString(startHour)
+	command.WriteString("', '")
+	command.WriteString(stopHour)
+	command.WriteString("');")
+
+	db.execute(command.String())
 }
