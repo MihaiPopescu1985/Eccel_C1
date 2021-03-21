@@ -17,6 +17,7 @@ var ignoreURL []string = []string{
 	"/css/stage-two-style.css",
 	"/css/stage-three-style.css",
 	"/js/stage-one.js",
+	"/js/stage-two.js",
 }
 
 // AuthMiddleware ...

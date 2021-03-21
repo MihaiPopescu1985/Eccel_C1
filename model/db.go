@@ -347,3 +347,19 @@ func (db *DB) AddWorkday(workerID, projectID int, startHour, stopHour string) {
 
 	db.execute(command.String())
 }
+
+func (db *DB) AddProject(geNo, roNo, descr, startDate string) {
+	var command strings.Builder
+
+	command.WriteString("CALL ADD_NEW_PROJECT('")
+	command.WriteString(geNo)
+	command.WriteString("', '")
+	command.WriteString(roNo)
+	command.WriteString("', '")
+	command.WriteString(descr)
+	command.WriteString("', '")
+	command.WriteString(startDate)
+	command.WriteString("');")
+
+	db.execute(command.String())
+}

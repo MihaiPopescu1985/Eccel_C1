@@ -7,6 +7,7 @@
         <title>Gestiune proiecte si lucratori</title>
         <link rel="stylesheet" type="text/css" href="./css/common.css">
         <link rel="stylesheet" type="text/css" href="./css/stage-two-style.css">
+        <script src="./js/stage-two.js"></script>
     </head>
     <body>
         <div class="title-holder">
@@ -17,7 +18,7 @@
         <br>
         <div class="title-holder">
             <h2 class="title">Proiecte active</h2>
-            <a class="title-link" href="/?action=addProject">Adauga proiect</a>
+            <span class="title-link" onclick="showAddProjectModal()">Adauga proiect</span>
         </div>
         <br>
         <table>
@@ -45,7 +46,7 @@
         <br>
         <div class="title-holder">
             <h2 class="title">Lucratori</h2>
-            <a class="title-link" href="/?action=addWorker">Adauga lucrator</a>
+            <span class="title-link" onclick="addWorker()">Adauga lucrator</span>
         </div>
         <br>
         <table>
@@ -72,5 +73,39 @@
         </table>
         <br>
         <br>
+        <div id="addProject" class="modal">
+            <div class="modal-content-holder">
+                <div class="modal-header">
+                    <h2 class="modal-title">Adauga zi lucrata:</h2>
+                    <span class="close-modal" onclick="closeAddProjectModal()">&times;</span>
+                </div>
+                <div id="modal-body">
+                    <form id="new-project-form" method="GET" action="/">
+                        <fieldset>
+                            <legend>Toate campurile sunt obligatorii</legend>
+                            <label for="ge-no">Numar Germania:</label>
+                            <br>
+                            <input type="text" name="ge-no" maxlength="15" required>
+                            <br>
+                            <label for="ro-no">Numar Romania:</label>
+                            <br>
+                            <input type="text" name="ro-no" maxlength="20" required>
+                            <br>
+                            <label for="description">Descriere:</label>
+                            <br>
+                            <input type="text" name="description" maxlength="100">
+                            <br>
+                            <label for="start-date">Data inceput:</label>
+                            <br>
+                            <input type="date" name="start-date" required>
+                        </fieldset>
+                        <div class="modal-footer">
+                            <button type="submit">Salveaza</button>
+                            <button class="cancel-workday" type="reset" onclick="closeAddProjectModal()">Anuleaza</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

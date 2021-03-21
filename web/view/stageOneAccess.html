@@ -25,7 +25,7 @@
         <div class="title-holder">
             <h2 class="title">Raportul lunii in curs:</h2>
         </div>
-
+        
         <span id="table-view-type" onclick="changeTableView()">Vizualizare detaliata</span>
         <span id="add-workday" onclick="showModal()">Adauga zi</span>
 
@@ -94,11 +94,11 @@
         <br>
         <br>
         <br>
-        <div id="modal">
-            <dir id="modal-content-holder">
-                <div id="modal-header">
-                    <h2 id="modal-title">Adauga zi lucrata:</h2>
-                    <span id="close-modal" onclick="closeModal()">&times;</span>
+        <div id="addWorkday" class="modal">
+            <div class="modal-content-holder">
+                <div class="modal-header">
+                    <h2 class="modal-title">Adauga zi lucrata:</h2>
+                    <span class="close-modal" onclick="closeModal()">&times;</span>
                 </div>
                 <div id="modal-body">
                     <form id="new-workday-form" method="GET" action="/">
@@ -128,9 +128,9 @@
                             <input id="stop-minute" type="number" name="stopMinute" min="00" max="59" required pattern="[0-9]{2}">
                             <br>
                         </fieldset>
-                        <div id="modal-footer">
-                            <button id="save-workday" type="submit" onclick="location.reload()">Salveaza</button>
-                            <button id="cancel-workday" type="reset" onclick="closeModal()">Anuleaza</button>
+                        <div class="modal-footer">
+                            <button type="submit">Salveaza</button>
+                            <button class="cancel-workday" type="reset" onclick="closeModal()">Anuleaza</button>
                         </div>
                     </form>
                 </div>

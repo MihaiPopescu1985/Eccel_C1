@@ -18,7 +18,7 @@ function changeTableView() {
 }
 
 function showModal() {
-    let modal = document.getElementById("modal")
+    let modal = document.getElementById("addWorkday")
     let view = window.getComputedStyle(modal).getPropertyValue('display')
 
     if (view == 'none') {
@@ -28,5 +28,5 @@ function showModal() {
 
 function closeModal() {
     document.getElementById('new-workday-form').reset()
-    document.getElementById('modal').style.display = 'none'
+    document.getElementById('addWorkday').style.display = 'none'
 }

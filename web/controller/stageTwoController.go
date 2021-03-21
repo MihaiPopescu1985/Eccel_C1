@@ -20,6 +20,19 @@ func StageTwoHandler(writer http.ResponseWriter, request *http.Request) {
 
 	var pageContent hrPage
 
+	if err := request.ParseForm(); err != nil {
+		util.Log.Println(err)
+	}
+
+	geNoForm := request.FormValue("ge-no")
+	roNoForm := request.FormValue("ro-no")
+	descrForm := request.FormValue("description")
+	startDateForm := request.FormValue("start-date")
+
+	if geNoForm != "" {
+		model.Db.AddProject(geNoForm, roNoForm, descrForm, startDateForm)
+	}
+
 	pageContent.ActiveProjects = model.Db.RetrieveActiveProjects()
 	pageContent.Workers = model.Db.RetrieveAllWorkers()
 
