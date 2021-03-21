@@ -123,15 +123,14 @@ func (pageContent *workerStatus) setTimeReport() {
 	pageContent.StandardTimeReport = make(map[string][]string)
 
 	for _, v := range pageContent.TimeReport {
-		key := v[0] + " (" + v[1] + ")"
+		key := v[0] + " (" + v[1] + ")" // the key is formed by appending german project no. and romanian project no.
 
-		date, err := time.Parse(dateLayout, v[3])
+		date, err := time.Parse(dateLayout, v[3]) // parsing starttime
 		if err != nil {
 			util.Log.Println(err)
 		}
 
-		// day must correspond with slice index wich starts at 0
-		day := date.Day() - 1
+		day := date.Day() - 1 // day must correspond with slice index wich starts at 0
 		workedMinutes, err := strconv.Atoi(v[5])
 		if err != nil {
 			util.Log.Println(err)
@@ -141,9 +140,11 @@ func (pageContent *workerStatus) setTimeReport() {
 			pageContent.StandardTimeReport[key] = make([]string, 31)
 		}
 
-		currentMinutes, err := strconv.Atoi(pageContent.StandardTimeReport[key][day])
-		if err != nil {
-			util.Log.Println(err)
+		currentMinutes := 0
+		if pageContent.StandardTimeReport[key][day] != "" {
+			if currentMinutes, err = strconv.Atoi(pageContent.StandardTimeReport[key][day]); err != nil {
+				util.Log.Println(err)
+			}
 		}
 
 		pageContent.StandardTimeReport[key][day] = strconv.Itoa(currentMinutes + workedMinutes)
