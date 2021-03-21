@@ -363,3 +363,42 @@ func (db *DB) AddProject(geNo, roNo, descr, startDate string) {
 
 	db.execute(command.String())
 }
+
+func (db *DB) RetrieveAllPositions() map[int]string {
+	var (
+		command   = ("CALL GET_ALL_POSITIONS()")
+		positions = make(map[int]string, 0)
+		rows      = db.executeQuery(command)
+	)
+
+	for rows.Next() {
+		var pos sql.NullString
+		var id sql.NullInt32
+
+		if err := rows.Scan(&id, &pos); err != nil {
+			util.Log.Println(err)
+		}
+		positions[int(id.Int32)] = pos.String
+	}
+	return positions
+}
+
+func (db *DB) AddWorker(firstName, lastName, cardNumber, position, nickName, password string) {
+	var command strings.Builder
+
+	command.WriteString("CALL ADD_NEW_WORKER('")
+	command.WriteString(firstName)
+	command.WriteString("', '")
+	command.WriteString(lastName)
+	command.WriteString("', '")
+	command.WriteString(cardNumber)
+	command.WriteString("', '")
+	command.WriteString(position)
+	command.WriteString("', '")
+	command.WriteString(nickName)
+	command.WriteString("', '")
+	command.WriteString(password)
+	command.WriteString("');")
+
+	db.execute(command.String())
+}

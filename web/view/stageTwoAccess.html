@@ -18,7 +18,7 @@
         <br>
         <div class="title-holder">
             <h2 class="title">Proiecte active</h2>
-            <span class="title-link" onclick="showAddProjectModal()">Adauga proiect</span>
+            <span class="title-link" onclick="showModal('addProject')">Adauga proiect</span>
         </div>
         <br>
         <table>
@@ -46,7 +46,7 @@
         <br>
         <div class="title-holder">
             <h2 class="title">Lucratori</h2>
-            <span class="title-link" onclick="addWorker()">Adauga lucrator</span>
+            <span class="title-link" onclick="showModal('addWorker')">Adauga lucrator</span>
         </div>
         <br>
         <table>
@@ -76,10 +76,10 @@
         <div id="addProject" class="modal">
             <div class="modal-content-holder">
                 <div class="modal-header">
-                    <h2 class="modal-title">Adauga zi lucrata:</h2>
-                    <span class="close-modal" onclick="closeAddProjectModal()">&times;</span>
+                    <h2 class="modal-title">Adauga proiect:</h2>
+                    <span class="close-modal" onclick="closeModal('new-project-form', 'addProject')">&times;</span>
                 </div>
-                <div id="modal-body">
+                <div>
                     <form id="new-project-form" method="GET" action="/">
                         <fieldset>
                             <legend>Toate campurile sunt obligatorii</legend>
@@ -101,7 +101,56 @@
                         </fieldset>
                         <div class="modal-footer">
                             <button type="submit">Salveaza</button>
-                            <button class="cancel-workday" type="reset" onclick="closeAddProjectModal()">Anuleaza</button>
+                            <button class="cancel-modal" type="reset" onclick="closeModal('new-project-form', 'addProject')">Anuleaza</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="addWorker" class="modal">
+            <div class="modal-content-holder">
+                <div class="modal-header">
+                    <h2 class="modal-title">Adauga lucrator:</h2>
+                    <span class="close-modal" onclick="closeModal('new-worker-form', 'addWorker')">&times;</span>
+                </div>
+                <div>
+                    <form id="new-worker-form" method="GET" action="/">
+                        <fieldset>
+                            <legend>Toate campurile sunt obligatorii</legend>
+                            <label for="first-name">Prenume</label>
+                            <br>
+                            <input type="text" name="first-name" maxlength="15" required>
+                            <br>
+                            <label for="last-name">Nume</label>
+                            <br>
+                            <input type="text" name="last-name" maxlength="20" required>
+                            <br>
+                            <label for="card-number">Serie card</label>
+                            <br>
+                            <input type="text" name="card-number" maxlength="14" required>
+                            <br>
+                            <label for="positions">Pozitie</label>
+                            <br>
+                            <select name="positions" required>
+                                {{range $k, $v := .Positions}}
+                                    <option value="{{$k}}">{{$v}}</option>
+                                {{end}}
+                            </select>
+                            <br>
+                            <br>
+                            <label for="nickname">Nickname</label>
+                            <br>
+                            <input type="text" name="nickname" maxlength="15" required>
+                            <br>
+                            <label for="password">Parola</label>
+                            <br>
+                            <input type="password" name="password" maxlength="15" required>
+                            <br>
+                        </fieldset>
+                        <div class="modal-footer">
+                            <button type="submit">Salveaza</button>
+                            <button class="cancel-modal" type="reset" onclick="closeModal('new-worker-form', 'addWorker')">Anuleaza</button>
                         </div>
                     </form>
                 </div>

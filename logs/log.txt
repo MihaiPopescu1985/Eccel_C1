@@ -1,0 +1,93 @@
+2021-03-21 18:29:20.25920872 +0200 EET m=+0.000418683middleware.go:27: /
+2021-03-21 18:29:20.25920872 +0200 EET m=+0.000418683db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 18:29:20.25920872 +0200 EET m=+0.000418683db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 18:29:20.25920872 +0200 EET m=+0.000418683db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 18:29:20.25920872 +0200 EET m=+0.000418683middleware.go:27: /css/common.css
+2021-03-21 18:29:20.25920872 +0200 EET m=+0.000418683middleware.go:27: /css/stage-two-style.css
+2021-03-21 18:29:20.25920872 +0200 EET m=+0.000418683middleware.go:27: /js/stage-two.js
+2021-03-21 18:29:20.25920872 +0200 EET m=+0.000418683middleware.go:27: /favicon.ico
+2021-03-21 19:41:04.216421412 +0200 EET m=+0.000347531middleware.go:27: /
+2021-03-21 19:41:04.216421412 +0200 EET m=+0.000347531db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 19:41:04.216421412 +0200 EET m=+0.000347531db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 19:41:04.216421412 +0200 EET m=+0.000347531db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 19:41:04.216421412 +0200 EET m=+0.000347531db.go:68: Executing: CALL GET_ALL_POSITIONS() 
+2021-03-21 19:41:04.216421412 +0200 EET m=+0.000347531middleware.go:27: /css/common.css
+2021-03-21 19:41:04.216421412 +0200 EET m=+0.000347531middleware.go:27: /css/stage-two-style.css
+2021-03-21 19:41:04.216421412 +0200 EET m=+0.000347531middleware.go:27: /js/stage-two.js
+2021-03-21 19:41:04.216421412 +0200 EET m=+0.000347531middleware.go:27: /favicon.ico
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:68: Executing: CALL GET_ALL_POSITIONS() 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /css/common.css
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /css/stage-two-style.css
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /js/stage-two.js
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /favicon.ico
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:68: Executing: CALL GET_ALL_POSITIONS() 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /css/common.css
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /css/stage-two-style.css
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /js/stage-two.js
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /favicon.ico
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:68: Executing: CALL GET_ALL_POSITIONS() 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /css/common.css
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /css/stage-two-style.css
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /js/stage-two.js
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /favicon.ico
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /?first-name=Mihai&last-name=Popescu&card-number=12345&positions=1&nickname=Mihai&password=Popescu
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:57: Executing: CALL ADD_NEW_WORKER('Mihai', 'Popescu', '12345', '1', 'Mihai', 'Popescu'); 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:61: Error 1305: PROCEDURE EccelC1.ADD_NEW_WORKER does not exist
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /?first-name=Mihai&last-name=Popescu&card-number=12345&positions=1&nickname=Mihai&password=Popescu
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:57: Executing: CALL ADD_NEW_WORKER('Mihai', 'Popescu', '12345', '1', 'Mihai', 'Popescu'); 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:61: Error 1305: PROCEDURE EccelC1.ADD_NEW_WORKER does not exist
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /?first-name=Mihai&last-name=Popescu&card-number=12345&positions=1&nickname=Mihai&password=Popescu
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:57: Executing: CALL ADD_NEW_WORKER('Mihai', 'Popescu', '12345', '1', 'Mihai', 'Popescu'); 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:61: Error 1305: PROCEDURE EccelC1.ADD_NEW_WORKER does not exist
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /?first-name=Mihai&last-name=Popescu&card-number=12345&positions=1&nickname=Mihai&password=Popescu
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:57: Executing: CALL ADD_NEW_WORKER('Mihai', 'Popescu', '12345', '1', 'Mihai', 'Popescu'); 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:61: Error 1305: PROCEDURE EccelC1.ADD_NEW_WORKER does not exist
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /?first-name=Mihai&last-name=Popescu&card-number=12345&positions=1&nickname=Mihai&password=Popescu
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:57: Executing: CALL ADD_NEW_WORKER('Mihai', 'Popescu', '12345', '1', 'Mihai', 'Popescu'); 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:61: Error 1305: PROCEDURE EccelC1.ADD_NEW_WORKER does not exist
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /?first-name=Mihai&last-name=Popescu&card-number=12345&positions=1&nickname=Mihai&password=Popescu
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:57: Executing: CALL ADD_NEW_WORKER('Mihai', 'Popescu', '12345', '1', 'Mihai', 'Popescu'); 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:61: Error 1305: PROCEDURE EccelC1.ADD_NEW_WORKER does not exist
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /?first-name=Mihai&last-name=Popescu&card-number=12345&positions=1&nickname=Mihai&password=Popescu
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:57: Executing: CALL ADD_NEW_WORKER('Mihai', 'Popescu', '12345', '1', 'Mihai', 'Popescu'); 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:61: Error 1305: PROCEDURE EccelC1.ADD_NEW_WORKER does not exist
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /?first-name=Mihai&last-name=Popescu&card-number=12345&positions=1&nickname=Mihai&password=Popescu
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:57: Executing: CALL ADD_NEW_WORKER('Mihai', 'Popescu', '12345', '1', 'Mihai', 'Popescu'); 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:61: Error 1305: PROCEDURE EccelC1.ADD_NEW_WORKER does not exist
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /?first-name=Mihai&last-name=Popescu&card-number=12345&positions=1&nickname=Mihai&password=Popescu
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:57: Executing: CALL ADD_NEW_WORKER('Mihai', 'Popescu', '12345', '1', 'Mihai', 'Popescu'); 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:61: Error 1305: PROCEDURE EccelC1.ADD_NEW_WORKER does not exist
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /?first-name=Mihai&last-name=Popescu&card-number=12345&positions=1&nickname=Mihai&password=Popescu
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:57: Executing: CALL ADD_NEW_WORKER('Mihai', 'Popescu', '12345', '1', 'Mihai', 'Popescu'); 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:61: Error 1305: PROCEDURE EccelC1.ADD_NEW_WORKER does not exist
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848db.go:68: Executing: CALL GET_ALL_POSITIONS() 
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /css/common.css
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /js/stage-two.js
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /css/stage-two-style.css
+2021-03-21 19:43:14.339160093 +0200 EET m=+0.000366848middleware.go:27: /favicon.ico
