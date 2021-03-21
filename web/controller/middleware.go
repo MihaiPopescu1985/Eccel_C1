@@ -12,6 +12,7 @@ import (
 var ignoreURL []string = []string{
 	"/log-out",
 	"/favicon.ico",
+	"/css/common.css",
 	"/css/stage-one-style.css",
 	"/css/stage-two-style.css",
 	"/css/stage-three-style.css",

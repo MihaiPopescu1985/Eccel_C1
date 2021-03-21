@@ -5,13 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Pagina lucratorului</title>
+        <link rel="stylesheet" type="text/css" href="./css/common.css">
         <link rel="stylesheet" type="text/css" href="./css/stage-one-style.css">
         <script src="./js/stage-one.js"></script>
     </head>
     <body>
-        <div id="header-holder">
-            <h1 id="worker-name">Salut {{.WorkerName}}</h1>
-            <a id="log-out-link" href="/log-out">Log out</a>
+        <div class="title-holder">
+            <h1 class="title">Salut {{.WorkerName}}</h1>
+            <a class="title-link" href="/log-out">Log out</a>
         </div>
 
         <div id="status-holder">
@@ -19,10 +20,14 @@
             <h1 id="today-worked">Astazi ai lucrat: {{.WorkedTime}}</h1>
             <h1 id="overtime">Total suplimentar: {{.Overtime}}</h1>
         </div>
+        <br>
+        <br>
+        <div class="title-holder">
+            <h2 class="title">Raportul lunii in curs:</h2>
+        </div>
 
-        <h1 class="table-title">Raportul lunii in curs:</h1>
-        <a id="table-view-type" onclick="changeTableView()">Vizualizare detaliata</a>
-        <a id="add-workday" onclick="showModal()">Adauga zi</a>
+        <span id="table-view-type" onclick="changeTableView()">Vizualizare detaliata</span>
+        <span id="add-workday" onclick="showModal()">Adauga zi</span>
 
         <table id="detailed-table">
             <tr>
@@ -86,6 +91,9 @@
                 </tr>
             {{end}}
         </table>
+        <br>
+        <br>
+        <br>
         <div id="modal">
             <dir id="modal-content-holder">
                 <div id="modal-header">

@@ -1,360 +1,632 @@
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009middleware.go:25: /
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009middleware.go:98: http: named cookie not present
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Adrian" AND PASSWORD = "Tehanciuc"; 
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 4; 
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009db.go:68: Executing: CALL GET_OVERTIME(4); 
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009db.go:68: Executing: CALL SELECT_WORKER_STATUS(4); 
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(4, 3, 2021); 
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009stageOneController.go:137: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009stageOneController.go:170: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009stageOneController.go:64: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009middleware.go:25: /
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Adrian" AND PASSWORD = "Tehanciuc"; 
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 4; 
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009db.go:68: Executing: CALL GET_OVERTIME(4); 
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009db.go:68: Executing: CALL SELECT_WORKER_STATUS(4); 
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(4, 3, 2021); 
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009stageOneController.go:137: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009stageOneController.go:170: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009db.go:57: Executing: CALL ADD_NEW_WORKDAY(4, 6, '2021-03-08 9:0:00', '2021-03-08 17:0:00'); 
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009middleware.go:25: /
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Adrian" AND PASSWORD = "Tehanciuc"; 
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 4; 
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009db.go:68: Executing: CALL GET_OVERTIME(4); 
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009db.go:68: Executing: CALL SELECT_WORKER_STATUS(4); 
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(4, 3, 2021); 
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
-2021-03-20 19:27:38.698924338 +0200 EET m=+0.000361009db.go:57: Executing: CALL ADD_NEW_WORKDAY(4, 6, '2021-03-08 9:0:00', '2021-03-08 17:0:00'); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322middleware.go:25: /
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Adrian" AND PASSWORD = "Tehanciuc"; 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 4; 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL GET_OVERTIME(4); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL SELECT_WORKER_STATUS(4); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(4, 3, 2021); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:64: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322middleware.go:25: /log-out
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322middleware.go:25: /
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322middleware.go:98: http: named cookie not present
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322middleware.go:89: Invalid form entered.
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322middleware.go:25: /
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322middleware.go:98: http: named cookie not present
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 1; 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL GET_OVERTIME(1); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL SELECT_WORKER_STATUS(1); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 3, 2021); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:64: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322middleware.go:25: /?projects=6&day=2021-03-09&startHour=9&startMinute=00&stopHour=17&stopMinute=00
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 1; 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL GET_OVERTIME(1); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL SELECT_WORKER_STATUS(1); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 3, 2021); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:57: Executing: CALL ADD_NEW_WORKDAY(1, 6, '2021-03-09 9:00:00', '2021-03-09 17:00:00'); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322middleware.go:25: /?projects=6&day=2021-03-09&startHour=9&startMinute=00&stopHour=17&stopMinute=00
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 1; 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL GET_OVERTIME(1); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL SELECT_WORKER_STATUS(1); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 3, 2021); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:57: Executing: CALL ADD_NEW_WORKDAY(1, 6, '2021-03-09 9:00:00', '2021-03-09 17:00:00'); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322middleware.go:25: /js/stage-one.js
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322middleware.go:25: /?projects=2&day=2021-03-03&startHour=9&startMinute=0&stopHour=17&stopMinute=0
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 1; 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL GET_OVERTIME(1); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL SELECT_WORKER_STATUS(1); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 3, 2021); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:57: Executing: CALL ADD_NEW_WORKDAY(1, 2, '2021-03-03 9:0:00', '2021-03-03 17:0:00'); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322middleware.go:25: /?projects=2&day=2021-03-03&startHour=9&startMinute=0&stopHour=17&stopMinute=0
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 1; 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL GET_OVERTIME(1); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL SELECT_WORKER_STATUS(1); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 3, 2021); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:57: Executing: CALL ADD_NEW_WORKDAY(1, 2, '2021-03-03 9:0:00', '2021-03-03 17:0:00'); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322middleware.go:25: /js/stage-one.js
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322middleware.go:25: /?projects=6&day=2021-03-01&startHour=7&startMinute=0&stopHour=17&stopMinute=30
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 1; 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL GET_OVERTIME(1); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL SELECT_WORKER_STATUS(1); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 3, 2021); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:57: Executing: CALL ADD_NEW_WORKDAY(1, 6, '2021-03-01 7:0:00', '2021-03-01 17:30:00'); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322middleware.go:25: /?projects=6&day=2021-03-01&startHour=7&startMinute=0&stopHour=17&stopMinute=30
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 1; 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL GET_OVERTIME(1); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL SELECT_WORKER_STATUS(1); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 3, 2021); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322db.go:57: Executing: CALL ADD_NEW_WORKDAY(1, 6, '2021-03-01 7:0:00', '2021-03-01 17:30:00'); 
-2021-03-20 19:45:58.342570077 +0200 EET m=+0.000369322middleware.go:25: /js/stage-one.js
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688middleware.go:25: /
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 1; 
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688db.go:68: Executing: CALL GET_OVERTIME(1); 
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688db.go:68: Executing: CALL SELECT_WORKER_STATUS(1); 
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 3, 2021); 
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:64: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688middleware.go:25: /log-out
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688middleware.go:25: /
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688middleware.go:98: http: named cookie not present
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688middleware.go:89: Invalid form entered.
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688middleware.go:25: /
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688middleware.go:98: http: named cookie not present
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 1; 
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688db.go:68: Executing: CALL GET_OVERTIME(1); 
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688db.go:68: Executing: CALL SELECT_WORKER_STATUS(1); 
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 3, 2021); 
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:64: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688middleware.go:25: /?projects=6&day=2021-03-11&startHour=9&startMinute=0&stopHour=17&stopMinute=0
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 1; 
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688db.go:68: Executing: CALL GET_OVERTIME(1); 
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688db.go:68: Executing: CALL SELECT_WORKER_STATUS(1); 
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 3, 2021); 
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
-2021-03-20 19:53:53.389591806 +0200 EET m=+0.000382688db.go:57: Executing: CALL ADD_NEW_WORKDAY(1, 6, '2021-03-11 9:0:00', '2021-03-11 17:0:00'); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259middleware.go:25: /log-out
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259middleware.go:25: /
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259middleware.go:98: http: named cookie not present
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259middleware.go:89: Invalid form entered.
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259middleware.go:25: /?name=Mihai&password=Popescu
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259middleware.go:98: http: named cookie not present
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 1; 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: CALL GET_OVERTIME(1); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: CALL SELECT_WORKER_STATUS(1); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 3, 2021); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:64: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259middleware.go:25: /?projects=6&day=2021-03-12&startHour=9&startMinute=0&stopHour=17&stopMinute=0
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 1; 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: CALL GET_OVERTIME(1); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: CALL SELECT_WORKER_STATUS(1); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 3, 2021); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:57: Executing: CALL ADD_NEW_WORKDAY(1, 6, '2021-03-12 9:0:00', '2021-03-12 17:0:00'); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259middleware.go:25: /?projects=6&day=2021-03-12&startHour=9&startMinute=0&stopHour=17&stopMinute=0
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 1; 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: CALL GET_OVERTIME(1); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: CALL SELECT_WORKER_STATUS(1); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 3, 2021); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:57: Executing: CALL ADD_NEW_WORKDAY(1, 6, '2021-03-12 9:0:00', '2021-03-12 17:0:00'); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259middleware.go:25: /js/stage-one.js
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259middleware.go:25: /log-out
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259middleware.go:25: /
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259middleware.go:98: http: named cookie not present
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259middleware.go:89: Invalid form entered.
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259middleware.go:25: /?name=Mihai&password=Popescu
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259middleware.go:98: http: named cookie not present
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 1; 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: CALL GET_OVERTIME(1); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: CALL SELECT_WORKER_STATUS(1); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 3, 2021); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:64: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259middleware.go:25: /?projects=6&day=2021-03-15&startHour=9&startMinute=0&stopHour=17&stopMinute=0
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 1; 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: CALL GET_OVERTIME(1); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: CALL SELECT_WORKER_STATUS(1); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 3, 2021); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:57: Executing: CALL ADD_NEW_WORKDAY(1, 6, '2021-03-15 9:0:00', '2021-03-15 17:0:00'); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259middleware.go:25: /?projects=6&day=2021-03-15&startHour=9&startMinute=0&stopHour=17&stopMinute=0
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 1; 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: CALL GET_OVERTIME(1); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: CALL SELECT_WORKER_STATUS(1); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 3, 2021); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259stageOneController.go:146: strconv.Atoi: parsing "": invalid syntax
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:57: Executing: CALL ADD_NEW_WORKDAY(1, 6, '2021-03-15 9:0:00', '2021-03-15 17:0:00'); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259middleware.go:25: /js/stage-one.js
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259middleware.go:25: /log-out
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259middleware.go:25: /
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259middleware.go:98: http: named cookie not present
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259middleware.go:89: Invalid form entered.
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259middleware.go:25: /?name=Alina&password=Siclovan
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259middleware.go:98: http: named cookie not present
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
-2021-03-20 19:57:58.004468979 +0200 EET m=+0.000351259db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /log-out
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:98: http: named cookie not present
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:89: Invalid form entered.
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?name=Mihai&password=Popescu
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:98: http: named cookie not present
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 1; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_OVERTIME(1); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL SELECT_WORKER_STATUS(1); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 3, 2021); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150stageOneController.go:64: strconv.Atoi: parsing "": invalid syntax
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-one-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /log-out
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:98: http: named cookie not present
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:89: Invalid form entered.
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?name=Alina&password=Siclovan
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:98: http: named cookie not present
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?name=Alina&password=Siclovan
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /log-out
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:98: http: named cookie not present
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:89: Invalid form entered.
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?name=Adrian&password=Tehanciuc
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:98: http: named cookie not present
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Adrian" AND PASSWORD = "Tehanciuc"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 4; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_OVERTIME(4); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL SELECT_WORKER_STATUS(4); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(4, 3, 2021); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150stageOneController.go:64: strconv.Atoi: parsing "": invalid syntax
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /log-out
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:98: http: named cookie not present
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:89: Invalid form entered.
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?name=Alina&password=Siclovan
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:98: http: named cookie not present
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?name=Alina&password=Siclovan
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?name=Alina&password=Siclovan
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?name=Alina&password=Siclovan
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?name=Alina&password=Siclovan
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?name=Alina&password=Siclovan
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?name=Alina&password=Siclovan
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /log-out
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:98: http: named cookie not present
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:89: Invalid form entered.
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?name=Adrian&password=Tehanciuc
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:98: http: named cookie not present
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Adrian" AND PASSWORD = "Tehanciuc"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 4; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_OVERTIME(4); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL SELECT_WORKER_STATUS(4); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(4, 3, 2021); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150stageOneController.go:64: strconv.Atoi: parsing "": invalid syntax
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-one-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /js/stage-one.js
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /log-out
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:98: http: named cookie not present
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:89: Invalid form entered.
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?name=Alina&password=Siclovan
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:98: http: named cookie not present
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?name=Alina&password=Siclovan
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?name=Alina&password=Siclovan
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=addProject
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=addProject
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=addProject
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=addProject
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=addProject
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=addProject
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=addProject
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=addProject
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=editProject&project=1
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=editProject&project=2
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=editProject&project=3
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=editProject&project=4
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=editProject&project=5
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=editProject&project=6
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=editProject&project=6
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=editProject&project=6
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=editProject&project=6
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=editProject&project=6
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=editProject&project=6
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=editProject&project=1
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=editProject&project=2
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=editProject&project=3
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=editProject&project=4
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=editProject&project=5
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=editProject&project=6
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=addProject
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=editProject&project=6
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?action=editProject&project=6
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /log-out
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:98: http: named cookie not present
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:89: Invalid form entered.
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?name=Adrian&password=Tehanciuc
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:98: http: named cookie not present
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Adrian" AND PASSWORD = "Tehanciuc"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 4; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_OVERTIME(4); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL SELECT_WORKER_STATUS(4); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(4, 3, 2021); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150stageOneController.go:64: strconv.Atoi: parsing "": invalid syntax
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/common.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Adrian" AND PASSWORD = "Tehanciuc"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 4; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_OVERTIME(4); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-one-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /js/stage-one.js
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL SELECT_WORKER_STATUS(4); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(4, 3, 2021); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150stageOneController.go:64: strconv.Atoi: parsing "": invalid syntax
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /log-out
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:98: http: named cookie not present
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:89: Invalid form entered.
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?name=Alina&password=Siclovan
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:98: http: named cookie not present
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /?name=Alina&password=Siclovan
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/common.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /css/stage-two-style.css
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 06:40:02.316579566 +0200 EET m=+0.000321150middleware.go:25: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /?name=Alina&password=Siclovan
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/common.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/stage-two-style.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /?name=Alina&password=Siclovan
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/common.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/stage-two-style.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /log-out
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:99: http: named cookie not present
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:90: Invalid form entered.
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /?name=Adrian&password=Tehanciuc
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:99: http: named cookie not present
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Adrian" AND PASSWORD = "Tehanciuc"; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 4; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_OVERTIME(4); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_WORKER_STATUS(4); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(4, 3, 2021); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833stageOneController.go:64: strconv.Atoi: parsing "": invalid syntax
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/common.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/stage-one-style.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /js/stage-one.js
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /?name=Adrian&password=Tehanciuc
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Adrian" AND PASSWORD = "Tehanciuc"; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 4; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_OVERTIME(4); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_WORKER_STATUS(4); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(4, 3, 2021); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833stageOneController.go:64: strconv.Atoi: parsing "": invalid syntax
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/common.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/stage-one-style.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /js/stage-one.js
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /?name=Adrian&password=Tehanciuc
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Adrian" AND PASSWORD = "Tehanciuc"; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 4; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_OVERTIME(4); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_WORKER_STATUS(4); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(4, 3, 2021); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833stageOneController.go:64: strconv.Atoi: parsing "": invalid syntax
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/common.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/stage-one-style.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /js/stage-one.js
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /?name=Adrian&password=Tehanciuc
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Adrian" AND PASSWORD = "Tehanciuc"; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 4; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_OVERTIME(4); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_WORKER_STATUS(4); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(4, 3, 2021); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833stageOneController.go:64: strconv.Atoi: parsing "": invalid syntax
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/common.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/stage-one-style.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /js/stage-one.js
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /?name=Adrian&password=Tehanciuc
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Adrian" AND PASSWORD = "Tehanciuc"; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 4; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_OVERTIME(4); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_WORKER_STATUS(4); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(4, 3, 2021); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833stageOneController.go:64: strconv.Atoi: parsing "": invalid syntax
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/common.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/stage-one-style.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /js/stage-one.js
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /?name=Adrian&password=Tehanciuc
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Adrian" AND PASSWORD = "Tehanciuc"; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 4; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_OVERTIME(4); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_WORKER_STATUS(4); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(4, 3, 2021); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833stageOneController.go:64: strconv.Atoi: parsing "": invalid syntax
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/common.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /js/stage-one.js
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/stage-one-style.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /?name=Adrian&password=Tehanciuc
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Adrian" AND PASSWORD = "Tehanciuc"; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 4; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_OVERTIME(4); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_WORKER_STATUS(4); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(4, 3, 2021); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833stageOneController.go:64: strconv.Atoi: parsing "": invalid syntax
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/common.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/stage-one-style.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /js/stage-one.js
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /?name=Adrian&password=Tehanciuc
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Adrian" AND PASSWORD = "Tehanciuc"; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 4; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_OVERTIME(4); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_WORKER_STATUS(4); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(4, 3, 2021); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833stageOneController.go:64: strconv.Atoi: parsing "": invalid syntax
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/common.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/stage-one-style.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /js/stage-one.js
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /?name=Adrian&password=Tehanciuc
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Adrian" AND PASSWORD = "Tehanciuc"; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 4; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_OVERTIME(4); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_WORKER_STATUS(4); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(4, 3, 2021); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833stageOneController.go:64: strconv.Atoi: parsing "": invalid syntax
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/common.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/stage-one-style.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /js/stage-one.js
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /?name=Adrian&password=Tehanciuc
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Adrian" AND PASSWORD = "Tehanciuc"; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 4; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_OVERTIME(4); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_WORKER_STATUS(4); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(4, 3, 2021); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833stageOneController.go:64: strconv.Atoi: parsing "": invalid syntax
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/common.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/stage-one-style.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /js/stage-one.js
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /log-out
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:99: http: named cookie not present
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:90: Invalid form entered.
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /?name=Bogdan&password=Zanfir
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:99: http: named cookie not present
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Bogdan" AND PASSWORD = "Zanfir"; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_ACTIVE_WORKDAY; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/stage-three-style.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /?name=Bogdan&password=Zanfir
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Bogdan" AND PASSWORD = "Zanfir"; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_ACTIVE_WORKDAY; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/common.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/stage-three-style.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /?name=Bogdan&password=Zanfir
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Bogdan" AND PASSWORD = "Zanfir"; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_ACTIVE_WORKDAY; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/common.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/stage-three-style.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /?name=Bogdan&password=Zanfir
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Bogdan" AND PASSWORD = "Zanfir"; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_ACTIVE_WORKDAY; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/common.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/stage-three-style.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /?name=Bogdan&password=Zanfir
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Bogdan" AND PASSWORD = "Zanfir"; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_ACTIVE_WORKDAY; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/common.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/stage-three-style.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /log-out
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:99: http: named cookie not present
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:90: Invalid form entered.
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /?name=Adrian&password=Tehanciuc
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:99: http: named cookie not present
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Adrian" AND PASSWORD = "Tehanciuc"; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 4; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_OVERTIME(4); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_WORKER_STATUS(4); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(4, 3, 2021); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833stageOneController.go:64: strconv.Atoi: parsing "": invalid syntax
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/common.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/stage-one-style.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /js/stage-one.js
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /log-out
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:99: http: named cookie not present
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:90: Invalid form entered.
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /?name=Alina&password=Siclovan
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:99: http: named cookie not present
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Alina" AND PASSWORD = "Siclovan"; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_ALL_WORKERS(); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/common.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/stage-two-style.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /log-out
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:99: http: named cookie not present
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:90: Invalid form entered.
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /?name=Adrian&password=Tehanciuc
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:99: http: named cookie not present
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Adrian" AND PASSWORD = "Tehanciuc"; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 4; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_OVERTIME(4); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_WORKER_STATUS(4); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(4, 3, 2021); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833stageOneController.go:64: strconv.Atoi: parsing "": invalid syntax
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/common.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/stage-one-style.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /js/stage-one.js
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /?name=Adrian&password=Tehanciuc
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Adrian" AND PASSWORD = "Tehanciuc"; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = 4; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_OVERTIME(4); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_WORKER_STATUS(4); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_MONTH_TIME_RAPORT(4, 3, 2021); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833stageOneController.go:64: strconv.Atoi: parsing "": invalid syntax
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/common.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/stage-one-style.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /js/stage-one.js
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /log-out
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:99: http: named cookie not present
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:90: Invalid form entered.
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /?name=Bogdan&password=Zanfir
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:99: http: named cookie not present
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Bogdan" AND PASSWORD = "Zanfir"; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_ACTIVE_WORKDAY; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/common.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/stage-three-style.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /?name=Bogdan&password=Zanfir
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Bogdan" AND PASSWORD = "Zanfir"; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833db.go:68: Executing: CALL SELECT_ACTIVE_WORKDAY; 
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/common.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /css/stage-three-style.css
+2021-03-21 09:09:05.681072611 +0200 EET m=+0.000336833middleware.go:26: /favicon.ico
