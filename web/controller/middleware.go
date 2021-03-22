@@ -40,6 +40,7 @@ func AuthMiddleware(next http.Handler) http.Handler {
 		} else if name, pass, err := parseForm(r); err == nil {
 			worker = model.Db.GetUserByNameAndPassword(name, pass)
 			setCookies(&w, name, pass)
+			http.Redirect(w, r, "/", 302)
 		}
 
 		if worker.ID != 0 {
@@ -64,10 +65,12 @@ func setCookies(w *http.ResponseWriter, name string, pass string) {
 	http.SetCookie(*w, &http.Cookie{
 		Name:   "name",
 		Value:  name,
+		Secure: true,
 	})
 	http.SetCookie(*w, &http.Cookie{
 		Name:   "pass",
 		Value:  pass,
+		Secure: true,
 	})
 }
 
@@ -82,6 +85,9 @@ func parseForm(r *http.Request) (string, string, error) {
 	pass := r.FormValue("password")
 
 	if name != "" && pass != "" {
+		r.Form.Del("name")
+		r.Form.Del("password")
+
 		return name, pass, nil
 	}
 

@@ -38,7 +38,7 @@ func StageOneHandler(writer http.ResponseWriter, request *http.Request) {
 
 	var pageContent = newWorkerStatus(request)
 
-	saveForm(request, &pageContent)
+	saveForm(&writer, request, &pageContent)
 	servePage(&pageContent, &writer)
 }
 
@@ -54,7 +54,7 @@ func servePage(pageContent *workerStatus, writer *http.ResponseWriter) {
 	}
 }
 
-func saveForm(r *http.Request, status *workerStatus) {
+func saveForm(w *http.ResponseWriter, r *http.Request, status *workerStatus) {
 	if err := r.ParseForm(); err != nil {
 		util.Log.Println(err)
 	}
@@ -71,16 +71,20 @@ func saveForm(r *http.Request, status *workerStatus) {
 	formStopHour := r.FormValue("stopHour")
 	formStopMinute := r.FormValue("stopMinute")
 
-	model.Db.AddWorkday(status.WorkerID, formProject,
-		formatTime(formDay, formStartHour, formStartMinute),
-		formatTime(formDay, formStopHour, formStopMinute))
+	if formDay != "" && formStartHour != "" && formStartMinute != "" && formStopHour != "" && formStopMinute != "" {
+		model.Db.AddWorkday(status.WorkerID, formProject,
+			formatTime(formDay, formStartHour, formStartMinute),
+			formatTime(formDay, formStopHour, formStopMinute))
 
-	r.Form.Del("projects")
-	r.Form.Del("day")
-	r.Form.Del("startHour")
-	r.Form.Del("startMinute")
-	r.Form.Del("stopHour")
-	r.Form.Del("stopMinute")
+		r.Form.Del("projects")
+		r.Form.Del("day")
+		r.Form.Del("startHour")
+		r.Form.Del("startMinute")
+		r.Form.Del("stopHour")
+		r.Form.Del("stopMinute")
+
+		http.Redirect(*w, r, "/", 302)
+	}
 }
 
 func formatTime(day, hour, minute string) string {

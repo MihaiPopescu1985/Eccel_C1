@@ -21,7 +21,7 @@ func StageTwoHandler(writer http.ResponseWriter, request *http.Request) {
 
 	var pageContent hrPage
 
-	parsingForms(request)
+	parsingForms(&writer, request)
 
 	pageContent.ActiveProjects = model.Db.RetrieveActiveProjects()
 	pageContent.Workers = model.Db.RetrieveAllWorkers()
@@ -38,7 +38,7 @@ func StageTwoHandler(writer http.ResponseWriter, request *http.Request) {
 	}
 }
 
-func parsingForms(r *http.Request) {
+func parsingForms(w *http.ResponseWriter, r *http.Request) {
 
 	if err := r.ParseForm(); err != nil {
 		util.Log.Println(err)
@@ -49,8 +49,15 @@ func parsingForms(r *http.Request) {
 	descrForm := r.FormValue("description")
 	startDateForm := r.FormValue("start-date")
 
-	if geNoForm != "" {
+	if geNoForm != "" && roNoForm != "" && descrForm != "" && startDateForm != "" {
 		model.Db.AddProject(geNoForm, roNoForm, descrForm, startDateForm)
+
+		r.Form.Del("ge-no")
+		r.Form.Del("ro-no")
+		r.Form.Del("description")
+		r.Form.Del("start-date")
+
+		http.Redirect(*w, r, "/", 302)
 	}
 
 	firstName := r.FormValue("first-name")
@@ -60,8 +67,16 @@ func parsingForms(r *http.Request) {
 	nickName := r.FormValue("nickname")
 	password := r.FormValue("password")
 
-	if firstName != "" {
+	if firstName != "" && lastName != "" && cardNumber != "" && position != "" && nickName != "" && password != "" {
 		model.Db.AddWorker(firstName, lastName, cardNumber, position, nickName, password)
-	}
 
+		r.Form.Del("first-name")
+		r.Form.Del("last-name")
+		r.Form.Del("card-number")
+		r.Form.Del("positions")
+		r.Form.Del("nickname")
+		r.Form.Del("password")
+
+		http.Redirect(*w, r, "/", 302)
+	}
 }
