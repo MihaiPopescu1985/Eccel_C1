@@ -172,7 +172,10 @@ func toHoursAndMinutes(minutes string) string {
 	}
 
 	workedHours := workedMinutes / 60
-	workedMinutes = workedMinutes - (workedHours * 60)
+	if workedMinutes < 0 {
+		workedMinutes *= -1
+	}
+	workedMinutes = workedMinutes % 60
 
 	workedTime := strconv.Itoa(workedHours) + ":" + strconv.Itoa(workedMinutes)
 	return workedTime
@@ -180,10 +183,12 @@ func toHoursAndMinutes(minutes string) string {
 
 func (pageContent *workerStatus) setStatusAndWorkedTime() {
 	pageContent.Status, pageContent.WorkedTime = model.Db.RetrieveWorkerStatus(pageContent.WorkerID)
+	pageContent.WorkedTime = toHoursAndMinutes(pageContent.WorkedTime)
 }
 
 func (pageContent *workerStatus) setOvertime() {
 	pageContent.Overtime = model.Db.RetrieveOvertime(pageContent.WorkerID)
+	pageContent.Overtime = toHoursAndMinutes(pageContent.Overtime)
 }
 
 func (pageContent *workerStatus) setWorkerName() {
