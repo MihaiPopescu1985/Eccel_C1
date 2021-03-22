@@ -64,12 +64,10 @@ func setCookies(w *http.ResponseWriter, name string, pass string) {
 	http.SetCookie(*w, &http.Cookie{
 		Name:   "name",
 		Value:  name,
-		Secure: true,
 	})
 	http.SetCookie(*w, &http.Cookie{
 		Name:   "pass",
 		Value:  pass,
-		Secure: true,
 	})
 }
 
