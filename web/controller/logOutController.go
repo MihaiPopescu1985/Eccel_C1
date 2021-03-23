@@ -14,14 +14,10 @@ func LogOutHandler(w http.ResponseWriter, r *http.Request) {
 
 	http.SetCookie(w, &http.Cookie{
 		Name:   "name",
-		Value:  "",
-		Secure: true,
 		MaxAge: -1,
 	})
 	http.SetCookie(w, &http.Cookie{
 		Name:   "pass",
-		Value:  "",
-		Secure: true,
 		MaxAge: -1,
 	})
 
