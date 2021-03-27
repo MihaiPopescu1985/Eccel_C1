@@ -83,6 +83,7 @@
                     <form id="new-project-form" method="GET" action="/">
                         <fieldset>
                             <legend>Toate campurile sunt obligatorii</legend>
+                            <input type="hidden" name="action" value="addProject">
                             <label for="ge-no">Numar Germania:</label>
                             <br>
                             <input type="text" name="ge-no" maxlength="15" required>
@@ -118,6 +119,7 @@
                     <form id="new-worker-form" method="GET" action="/">
                         <fieldset>
                             <legend>Toate campurile sunt obligatorii</legend>
+                            <input type="hidden" name="action" value="addWorker">
                             <label for="first-name">Prenume</label>
                             <br>
                             <input type="text" name="first-name" maxlength="15" required>

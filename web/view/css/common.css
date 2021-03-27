@@ -68,16 +68,17 @@ td {
 }   
 
 .modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    padding-top: 100px;
     width: 100%;
     height: 100%;
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    z-index: 1;
     background-color: rgba(0, 0, 0, 0.5);
     color: #ffffff;
+    overflow: auto;
 }
 
 .modal-content-holder {
@@ -85,6 +86,7 @@ td {
     margin-top: 100px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 200px;
     border: 1px solid #000000;
     box-shadow: 5px 5px #000000;
     background-color: #284b63;
@@ -108,7 +110,6 @@ fieldset {
 
 input {
     margin-bottom: 20px;
-    height: 35px;
 }
 
 .modal-footer {

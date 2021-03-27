@@ -19,12 +19,12 @@ type Worker struct {
 
 // Project ...
 type Project struct {
-	ID          int
+	ID          string
 	GeNumber    string
 	RoNumber    string
 	Description string
 	IPAddress   string
-	DeviceID    int
+	DeviceID    string
 	IsActive    bool
 	Begin       string
 	End         string

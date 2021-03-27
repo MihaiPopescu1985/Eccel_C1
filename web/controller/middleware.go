@@ -16,6 +16,7 @@ var ignoreURL []string = []string{
 	"/css/stage-one-style.css",
 	"/css/stage-two-style.css",
 	"/css/stage-three-style.css",
+	"/css/stage-two-edit-project.css",
 	"/js/stage-one.js",
 	"/js/stage-two.js",
 }
@@ -23,6 +24,8 @@ var ignoreURL []string = []string{
 // AuthMiddleware ...
 func AuthMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+
+		w.Header().Add("Cache-Control", "no-cache")
 
 		util.Log.Println(r.RequestURI)
 		for _, v := range ignoreURL {

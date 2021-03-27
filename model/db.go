@@ -176,11 +176,11 @@ func (db *DB) RetrieveActiveProjects() []Project {
 	projects := make([]Project, 0)
 
 	var (
-		projID   sql.NullInt32
+		projID   sql.NullString
 		geNo     sql.NullString
 		roNo     sql.NullString
 		descript sql.NullString
-		devID    sql.NullInt32
+		devID    sql.NullString
 		isActive sql.NullBool
 		begin    sql.NullString
 		end      sql.NullString
@@ -193,11 +193,11 @@ func (db *DB) RetrieveActiveProjects() []Project {
 		}
 
 		projects = append(projects, Project{
-			ID:          int(projID.Int32),
+			ID:          projID.String,
 			GeNumber:    geNo.String,
 			RoNumber:    roNo.String,
 			Description: descript.String,
-			DeviceID:    int(devID.Int32),
+			DeviceID:    devID.String,
 			IsActive:    isActive.Bool,
 			Begin:       begin.String,
 			End:         end.String,
@@ -348,17 +348,17 @@ func (db *DB) AddWorkday(workerID, projectID int, startHour, stopHour string) {
 	db.execute(command.String())
 }
 
-func (db *DB) AddProject(geNo, roNo, descr, startDate string) {
+func (db *DB) AddProject(project Project) {
 	var command strings.Builder
 
 	command.WriteString("CALL ADD_NEW_PROJECT('")
-	command.WriteString(geNo)
+	command.WriteString(project.GeNumber)
 	command.WriteString("', '")
-	command.WriteString(roNo)
+	command.WriteString(project.RoNumber)
 	command.WriteString("', '")
-	command.WriteString(descr)
+	command.WriteString(project.Description)
 	command.WriteString("', '")
-	command.WriteString(startDate)
+	command.WriteString(project.Begin)
 	command.WriteString("');")
 
 	db.execute(command.String())
@@ -383,22 +383,93 @@ func (db *DB) RetrieveAllPositions() map[int]string {
 	return positions
 }
 
-func (db *DB) AddWorker(firstName, lastName, cardNumber, position, nickName, password string) {
+func (db *DB) AddWorker(worker Worker) {
 	var command strings.Builder
 
 	command.WriteString("CALL ADD_NEW_WORKER('")
-	command.WriteString(firstName)
+	command.WriteString(worker.FirstName)
 	command.WriteString("', '")
-	command.WriteString(lastName)
+	command.WriteString(worker.LastName)
 	command.WriteString("', '")
-	command.WriteString(cardNumber)
+	command.WriteString(worker.CardNumber)
 	command.WriteString("', '")
-	command.WriteString(position)
+	command.WriteString(worker.Position)
 	command.WriteString("', '")
-	command.WriteString(nickName)
+	command.WriteString(worker.Nickname)
 	command.WriteString("', '")
-	command.WriteString(password)
+	command.WriteString(worker.Password)
+	command.WriteString("', '")
+	command.WriteString(strconv.Itoa(worker.AccessLevel))
 	command.WriteString("');")
+
+	db.execute(command.String())
+}
+
+func (db *DB) GetProject(projectID string) Project {
+	var (
+		command strings.Builder
+		rows    *sql.Rows
+
+		id     sql.NullString
+		geNo   sql.NullString
+		roNo   sql.NullString
+		desc   sql.NullString
+		devID  sql.NullString
+		active sql.NullBool
+		begin  sql.NullString
+		end    sql.NullString
+	)
+	command.WriteString("SELECT * FROM PROJECT WHERE ID='")
+	command.WriteString(projectID)
+	command.WriteString("';")
+
+	rows = db.executeQuery(command.String())
+	for rows.Next() {
+		if err := rows.Scan(&id, &geNo, &roNo, &desc, &devID, &active, &begin, &end); err != nil {
+			util.Log.Println(err)
+		}
+	}
+	return Project{
+		ID:          id.String,
+		GeNumber:    geNo.String,
+		RoNumber:    roNo.String,
+		Description: desc.String,
+		IPAddress:   "",
+		DeviceID:    devID.String,
+		IsActive:    active.Bool,
+		Begin:       strings.Split(begin.String, " ")[0],
+		End:         strings.Split(end.String, " ")[0],
+	}
+}
+
+func (db *DB) UpdateProject(project Project) {
+
+	var command strings.Builder
+
+	command.WriteString("UPDATE PROJECT SET ")
+	command.WriteString("GENUMBER='")
+	command.WriteString(project.GeNumber)
+	command.WriteString("', RONUMBER='")
+	command.WriteString(project.RoNumber)
+	command.WriteString("', DESCRIPTION='")
+	command.WriteString(project.Description)
+	command.WriteString("', DEVICEID='")
+	command.WriteString(project.DeviceID)
+	command.WriteString("', ACTIVE=")
+	command.WriteString(strconv.FormatBool(project.IsActive))
+	command.WriteString(", BEGIN=DATE('")
+	command.WriteString(project.Begin)
+	command.WriteString("'), END=DATE(")
+	if project.End == "" {
+		command.WriteString("NULL")
+	} else {
+		command.WriteString("'")
+		command.WriteString(project.End)
+		command.WriteString("'")
+	}
+	command.WriteString(") WHERE ID=")
+	command.WriteString(project.ID)
+	command.WriteString(";")
 
 	db.execute(command.String())
 }

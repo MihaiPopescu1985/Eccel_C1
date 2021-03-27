@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Editare proiect</title>
+        <link rel="stylesheet" type="text/css" href="./css/common.css">
+        <link rel="stylesheet" type="text/css" href="./css/stage-two-edit-project.css">
+        <script src="./js/stage-two.js"></script>
+    </head>
+    <body>
+        <div id="editProject" class="modal" style="display: block;">
+            <div class="modal-content-holder">
+                <div class="modal-header">
+                    <h2 class="modal-title">Editare proiect</h2>
+                </div>
+                <div>
+                    <form id="edit-project-form" method="GET" action="/">
+                        <fieldset>
+                            <legend>Toate campurile sunt obligatorii</legend>
+                            <input type="hidden" name="action" value="saveProject">
+                            <input type="hidden" name="id" value="{{.ID}}">
+                            <input type="hidden" name="ip" value="{{.IPAddress}}">
+                            <label for="ge-no">Nr. Germania:</label>
+                            <br>
+                            <input type="text" name="ge-no" maxlength="15" value="{{.GeNumber}}" required>
+                            <br>
+                            <label for="ro-no">Nr. Romania:</label>
+                            <br>
+                            <input type="text" name="ro-no" maxlength="15" value="{{.RoNumber}}" required>
+                            <br>
+                            <label for="descr">Descriere:</label>
+                            <br>
+                            <input type="text" name="descr" maxlength="100" value="{{.Description}}" required>
+                            <br>
+                            <label for="dev-id">Device ID:</label>
+                            <br>
+                            <input type="number" name="dev-id" value="{{.DeviceID}}" required>
+                            <br>
+                            <label for="active">Activ:</label>
+                            <input type="checkbox" name="active" {{if .IsActive}} checked {{end}} value="true">
+                            <br>
+                            <label for="begin">Inceput:</label>
+                            <br>
+                            <input type="date" name="begin" value="{{.Begin}}" required>
+                            <br>
+                            <label for="end">Incheiere:</label>
+                            <br>
+                            <input type="date" name="end" value="{{.End}}">
+                        </fieldset>
+                        <div class="modal-footer">
+                            <button type="submit">Salveaza</button>
+                            <button type="reset" class="cancel-modal" onclick="location.href='/';">Anuleaza</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
