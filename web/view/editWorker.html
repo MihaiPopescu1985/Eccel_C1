@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Editare lucrator</title>
+        <link rel="stylesheet" type="text/css" href="./css/common.css">
+        <link rel="stylesheet" type="text/css" href="./css/stage-two-edit-worker.css">
+        <script src="./js/stage-two.js"></script>
+    </head>
+    <body>
+        <div id="editWorker" class="modal" style="display: block;">
+            <div class="modal-content-holder">
+                <div class="modal-header">
+                    <h2 class="modal-title">Editare lucrator</h2>
+                </div>
+                <div>
+                    <form id="edit-worker-form" method="GET" action="/">
+                        <fieldset>
+                            <legend>Toate camputile sunt obligatorii</legend>
+                            <input type="hidden" name="action" value="saveWorker">
+                            <input type="hidden" name="id" value="{{.Worker.ID}}">
+                            <input type="hidden" name="active" value="{{.Worker.IsActive}}">
+                            <input type="hidden" name="lvl" value="{{.Worker.AccessLevel}}">
+                            <label for="f-name">Prenume:</label>
+                            <br>
+                            <input type="text" name="f-name" maxlength="15" value="{{.Worker.FirstName}}" required>
+                            <br>
+                            <label for="l-name">Nume de familie:</label>
+                            <br>
+                            <input type="text" name="l-name" maxlength="20" value="{{.Worker.LastName}}" required>
+                            <br>
+                            <label for="card-no">Serie card:</label>
+                            <br>
+                            <input type="text" name="card-no" maxlength="14" value="{{.Worker.CardNumber}}" required>
+                            <br>
+                            <label for="pos">Pozitia ocupata:</label>
+                            
+                            <select name="pos" required>
+                                <option selected="selected"></option>
+                                {{range $k, $v := .Positions}}
+                                    <option value="{{$k}}">{{$v}}</option>
+                                {{end}}
+                            </select>
+                            <br>
+                            <br>
+                            <label for="nickname">Nickname:</label>
+                            <br>
+                            <input type="text" name="nickname" maxlength="15" value="{{.Worker.Nickname}}" required>
+                            <br>
+                            <label for="pass">Parola:</label>
+                            <br>
+                            <input type="password" name="pass" maxlength="15" pattern="[A-Za-z0-9]*" title="Parola poate sa contina litere mari sau mici si cifre" value="{{.Worker.Password}}" required>
+                        </fieldset>
+                        <div class="modal-footer">
+                            <button type="submit">Salveaza</button>
+                            <button class="cancel-modal" type="reset" onclick="location.href='/';">Anuleaza</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

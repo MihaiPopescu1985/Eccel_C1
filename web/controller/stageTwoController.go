@@ -3,6 +3,7 @@ package controller
 import (
 	"html/template"
 	"net/http"
+	"strconv"
 
 	"example.com/c1/model"
 	"example.com/c1/util"
@@ -11,14 +12,20 @@ import (
 const (
 	stageTwoPage    string = "./web/view/stageTwoAccess.html"
 	editProjectPage string = "./web/view/editProject.html"
+	editWorkerPage  string = "./web/view/editWorker.html"
 )
 
 var actions []string = []string{"editProject", "editWorker", "addProject", "addWorker"}
 
-type hrPage struct {
+type defaultContent struct {
 	Workers        []model.Worker
 	ActiveProjects []model.Project
 	Positions      map[int]string
+}
+
+type editWorkerContent struct {
+	Worker    model.Worker
+	Positions map[int]string
 }
 
 // StageTwoHandler TODO: write about
@@ -45,12 +52,62 @@ func StageTwoHandler(w http.ResponseWriter, r *http.Request) {
 	case "editWorker":
 		editWorker(&w, r)
 
+	case "saveWorker":
+		saveWorker(&w, r)
+
 	default:
 		showMainWindow(&w, r)
 	}
 }
 
+func saveWorker(w *http.ResponseWriter, r *http.Request) {
+	/*	ID          string
+		FirstName   string
+		LastName    string
+		CardNumber  string
+		Position    string
+		IsActive    bool
+		Nickname    string
+		Password    string
+		AccessLevel string
+	*/
+
+	model.Db.UpdateWorker(model.Worker{
+		ID:         r.FormValue("id"),
+		FirstName:  r.FormValue("f-name"),
+		LastName:   r.FormValue("l-name"),
+		CardNumber: r.FormValue("card-no"),
+		Position:   r.FormValue("pos"),
+		IsActive: func() bool {
+			var wActive bool
+			var err error
+			if wActive, err = strconv.ParseBool(r.FormValue("active")); err != nil {
+				util.Log.Println(err)
+			}
+			return wActive
+		}(),
+		Nickname:    r.FormValue("nickname"),
+		Password:    r.FormValue("pass"),
+		AccessLevel: r.FormValue("lvl"),
+	})
+	http.Redirect(*w, r, "/", 302)
+}
+
 func editWorker(w *http.ResponseWriter, r *http.Request) {
+
+	editWContent := editWorkerContent{
+		Worker:    model.Db.GetWorker(r.FormValue("worker")),
+		Positions: model.Db.RetrieveAllPositions(),
+	}
+
+	template, err := template.New("editWorker").ParseFiles(editWorkerPage)
+	if err != nil {
+		util.Log.Panicln(err)
+	}
+	err = template.ExecuteTemplate(*w, "editWorker.html", editWContent)
+	if err != nil {
+		util.Log.Println(err)
+	}
 }
 
 func saveProject(w *http.ResponseWriter, r *http.Request) {
@@ -96,7 +153,7 @@ func addWorker(w *http.ResponseWriter, r *http.Request) {
 		Position:    r.FormValue("positions"),
 		Nickname:    r.FormValue("nickname"),
 		Password:    r.FormValue("password"),
-		AccessLevel: 1,
+		AccessLevel: "1",
 	}
 
 	if worker.FirstName != "" && worker.LastName != "" &&
@@ -126,7 +183,7 @@ func addProject(w *http.ResponseWriter, r *http.Request) {
 }
 
 func showMainWindow(w *http.ResponseWriter, r *http.Request) {
-	var pageContent hrPage
+	var pageContent defaultContent
 
 	pageContent.ActiveProjects = model.Db.RetrieveActiveProjects()
 	pageContent.Workers = model.Db.RetrieveAllWorkers()

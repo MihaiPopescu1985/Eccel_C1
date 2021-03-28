@@ -215,7 +215,7 @@ func (db *DB) RetrieveAllWorkers() []Worker {
 	var (
 		workers = make([]Worker, 0)
 
-		wID       sql.NullInt32
+		wID       sql.NullString
 		wFirstN   sql.NullString
 		wLastN    sql.NullString
 		wCardNo   sql.NullString
@@ -230,7 +230,7 @@ func (db *DB) RetrieveAllWorkers() []Worker {
 		}
 
 		workers = append(workers, Worker{
-			ID:         int(wID.Int32),
+			ID:         wID.String,
 			FirstName:  wFirstN.String,
 			LastName:   wLastN.String,
 			CardNumber: wCardNo.String,
@@ -248,7 +248,7 @@ func (db *DB) GetUserByNameAndPassword(name, password string) Worker {
 	rows := db.executeQuery(command)
 
 	var (
-		wID       sql.NullInt32
+		wID       sql.NullString
 		wFirstN   sql.NullString
 		wLastN    sql.NullString
 		wCardNo   sql.NullString
@@ -256,7 +256,7 @@ func (db *DB) GetUserByNameAndPassword(name, password string) Worker {
 		wIsActive sql.NullBool
 		wNick     sql.NullString
 		wPass     sql.NullString
-		wAccess   sql.NullInt32
+		wAccess   sql.NullString
 	)
 
 	for rows.Next() {
@@ -266,7 +266,7 @@ func (db *DB) GetUserByNameAndPassword(name, password string) Worker {
 		}
 	}
 	return Worker{
-		ID:          int(wID.Int32),
+		ID:          wID.String,
 		FirstName:   wFirstN.String,
 		LastName:    wLastN.String,
 		CardNumber:  wCardNo.String,
@@ -274,7 +274,7 @@ func (db *DB) GetUserByNameAndPassword(name, password string) Worker {
 		IsActive:    wIsActive.Bool,
 		Nickname:    wNick.String,
 		Password:    wPass.String,
-		AccessLevel: int(wAccess.Int32),
+		AccessLevel: wAccess.String,
 	}
 }
 
@@ -366,7 +366,7 @@ func (db *DB) AddProject(project Project) {
 
 func (db *DB) RetrieveAllPositions() map[int]string {
 	var (
-		command   = ("CALL GET_ALL_POSITIONS()")
+		command   = ("CALL GET_ALL_POSITIONS();")
 		positions = make(map[int]string, 0)
 		rows      = db.executeQuery(command)
 	)
@@ -399,7 +399,7 @@ func (db *DB) AddWorker(worker Worker) {
 	command.WriteString("', '")
 	command.WriteString(worker.Password)
 	command.WriteString("', '")
-	command.WriteString(strconv.Itoa(worker.AccessLevel))
+	command.WriteString(worker.AccessLevel)
 	command.WriteString("');")
 
 	db.execute(command.String())
@@ -470,6 +470,75 @@ func (db *DB) UpdateProject(project Project) {
 	command.WriteString(") WHERE ID=")
 	command.WriteString(project.ID)
 	command.WriteString(";")
+
+	db.execute(command.String())
+}
+
+func (db *DB) GetWorker(workerID string) Worker {
+	var (
+		command string = "SELECT * FROM WORKER WHERE ID = '" + workerID + "';"
+
+		id     sql.NullString
+		fName  sql.NullString
+		lName  sql.NullString
+		cardNo sql.NullString
+		posID  sql.NullString
+		active sql.NullString
+		nick   sql.NullString
+		pass   sql.NullString
+		lvl    sql.NullString
+
+		rows = db.executeQuery(command)
+	)
+
+	for rows.Next() {
+		if err := rows.Scan(&id, &fName, &lName, &cardNo, &posID, &active, &nick, &pass, &lvl); err != nil {
+			util.Log.Println(err)
+		}
+	}
+
+	return Worker{
+		ID:         id.String,
+		FirstName:  fName.String,
+		LastName:   lName.String,
+		CardNumber: cardNo.String,
+		Position:   posID.String,
+		IsActive: func() bool {
+			var IsActive bool
+			var err error
+			if IsActive, err = strconv.ParseBool(active.String); err != nil {
+				util.Log.Println(err)
+			}
+			return IsActive
+		}(),
+		Nickname:    nick.String,
+		Password:    pass.String,
+		AccessLevel: lvl.String,
+	}
+}
+
+func (db *DB) UpdateWorker(worker Worker) {
+	var command strings.Builder
+
+	command.WriteString("UPDATE WORKER SET FIRSTNAME='")
+	command.WriteString(worker.FirstName)
+	command.WriteString("', LASTNAME='")
+	command.WriteString(worker.LastName)
+	command.WriteString("', CARDNUMBER='")
+	command.WriteString(worker.CardNumber)
+	command.WriteString("', POSITIONID='")
+	command.WriteString(worker.Position)
+	command.WriteString("', ISACTIVE=")
+	command.WriteString(strconv.FormatBool(worker.IsActive))
+	command.WriteString(", NICKNAME='")
+	command.WriteString(worker.Nickname)
+	command.WriteString("', PASSWORD='")
+	command.WriteString(worker.Password)
+	command.WriteString("', ACCESSLEVEL='")
+	command.WriteString(worker.AccessLevel)
+	command.WriteString("' WHERE ID='")
+	command.WriteString(worker.ID)
+	command.WriteString("';")
 
 	db.execute(command.String())
 }

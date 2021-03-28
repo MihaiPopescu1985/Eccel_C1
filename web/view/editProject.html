@@ -40,11 +40,14 @@
                             <label for="active">Activ:</label>
                             <input type="checkbox" name="active" {{if .IsActive}} checked {{end}} value="true">
                             <br>
-                            <label for="begin">Inceput:</label>
+                            <label for="begin">Data inceput:</label>
                             <br>
                             <input type="date" name="begin" value="{{.Begin}}" required>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Campuri optionale</legend>
                             <br>
-                            <label for="end">Incheiere:</label>
+                            <label for="end">Data incheiere proiect:</label>
                             <br>
                             <input type="date" name="end" value="{{.End}}">
                         </fieldset>

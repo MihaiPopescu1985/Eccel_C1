@@ -6,7 +6,7 @@ import (
 
 // Worker ...
 type Worker struct {
-	ID          int
+	ID          string
 	FirstName   string
 	LastName    string
 	CardNumber  string
@@ -14,7 +14,7 @@ type Worker struct {
 	IsActive    bool
 	Nickname    string
 	Password    string
-	AccessLevel int
+	AccessLevel string
 }
 
 // Project ...

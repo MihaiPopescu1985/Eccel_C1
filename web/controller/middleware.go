@@ -3,7 +3,6 @@ package controller
 import (
 	"errors"
 	"net/http"
-	"strconv"
 
 	"example.com/c1/model"
 	"example.com/c1/util"
@@ -17,6 +16,7 @@ var ignoreURL []string = []string{
 	"/css/stage-two-style.css",
 	"/css/stage-three-style.css",
 	"/css/stage-two-edit-project.css",
+	"/css/stage-two-edit-worker.css",
 	"/js/stage-one.js",
 	"/js/stage-two.js",
 }
@@ -34,7 +34,6 @@ func AuthMiddleware(next http.Handler) http.Handler {
 				return
 			}
 		}
-
 		var worker model.Worker
 
 		if name, pass, err := verifyCookie(r); err == nil {
@@ -46,15 +45,15 @@ func AuthMiddleware(next http.Handler) http.Handler {
 			http.Redirect(w, r, "/", 302)
 		}
 
-		if worker.ID != 0 {
+		if worker.ID != "0" && worker.ID != "" {
 			switch worker.AccessLevel {
-			case 1:
-				r.RequestURI = "/stage-one?workerId=" + strconv.Itoa(int(worker.ID))
+			case "1":
+				r.RequestURI = "/stage-one?workerId=" + worker.ID
 				StageOneHandler(w, r)
-			case 2:
+			case "2":
 				r.RequestURI = "/stage-two"
 				StageTwoHandler(w, r)
-			case 3:
+			case "3":
 				r.RequestURI = "/stage-three"
 				StageThreeHandler(w, r)
 			}
