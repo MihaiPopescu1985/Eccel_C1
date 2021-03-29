@@ -3,6 +3,7 @@ package controller
 import (
 	"errors"
 	"net/http"
+	"strconv"
 
 	"example.com/c1/model"
 	"example.com/c1/util"
@@ -45,7 +46,7 @@ func AuthMiddleware(next http.Handler) http.Handler {
 			http.Redirect(w, r, "/", 302)
 		}
 
-		if worker.ID != "0" && worker.ID != "" {
+		if _, err := strconv.Atoi(worker.ID); err == nil {
 			switch worker.AccessLevel {
 			case "1":
 				r.RequestURI = "/stage-one?workerId=" + worker.ID
@@ -58,6 +59,15 @@ func AuthMiddleware(next http.Handler) http.Handler {
 				StageThreeHandler(w, r)
 			}
 		} else {
+			util.Log.Println(err)
+			http.SetCookie(w, &http.Cookie{
+				Name:   "name",
+				MaxAge: -1,
+			})
+			http.SetCookie(w, &http.Cookie{
+				Name:   "pass",
+				MaxAge: -1,
+			})
 			next.ServeHTTP(w, r)
 		}
 	})
