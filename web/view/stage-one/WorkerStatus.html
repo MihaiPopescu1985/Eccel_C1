@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Pagina lucratorului</title>
+
+        <link rel="stylesheet" type="text/css" href="../css/common.css">
+        <link rel="stylesheet" type="text/css" href="../css/stage-one-style.css">
+    </head>
+
+    <body>
+        <div class="title-holder">
+            <h1 class="title">Salut {{.Worker.FirstName}} {{.Worker.LastName}}</h1>
+            <a class="title-link" href="/log-out">Log out</a>
+        </div>
+
+        <br><br>
+
+        <div class="tabs">
+            <div class="active-tab">Status</div>
+            <div class="passive-tab" onclick="location.href='/?view=detailed-view';">Vizualizare detaliata</div>
+            <div class="passive-tab" onclick="location.href='/?view=standard-view';">Vizualizare standard</div>
+            <div class="passive-tab" onclick="location.href='/?view=add-workday';">Adauga zi lucrata</div>
+            <div class="passive-tab" onclick="location.href='/?view=free-days';">Zile libere</div>
+            <div class="white-divisor"></div>
+        </div>
+
+        <div id="status-holder">
+            <h1 id="status">Statusul tau: {{.Status}}</h1>
+            <h1 id="today-worked">Astazi ai lucrat: {{.WorkedTime}}</h1>
+            <h1 id="overtime">Total suplimentar: {{.Overtime}}</h1>
+        </div>
+
+        <div class="white-divisor"></div>
+    </body>
+</html>

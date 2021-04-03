@@ -1,3 +1,4 @@
+/*
 function changeTableView() {
     let detailedTable = document.getElementById("detailed-table");
     let standardTable = document.getElementById("standard-table");
@@ -30,3 +31,4 @@ function closeModal() {
     document.getElementById('new-workday-form').reset()
     document.getElementById('addWorkday').style.display = 'none'
 }
+*/

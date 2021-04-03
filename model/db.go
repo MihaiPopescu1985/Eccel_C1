@@ -54,7 +54,6 @@ func (db *DB) IsConnected() bool {
 // Execute executes a command against database with no returning result set.
 func (db *DB) execute(command string) {
 
-	util.Log.Printf("Executing: %v \n", command)
 	_, err := db.database.Exec(command)
 
 	if err != nil {
@@ -65,7 +64,6 @@ func (db *DB) execute(command string) {
 // ExecuteQuery TODO: write about the behavior of this function
 func (db *DB) executeQuery(command string) *sql.Rows {
 
-	util.Log.Printf("Executing: %v \n", command)
 	rows, err := db.database.Query(command)
 
 	// Close rows after 5 seconds
@@ -90,6 +88,8 @@ func closeRows(rows *sql.Rows, timeSpan time.Duration) {
 // InsertIntoWorkday returns the sql command to start/stop time on workday.
 func (db *DB) InsertIntoWorkday(deviceName, cardUID string) {
 	command := "CALL INSERT_INTO_WORKDAY(\"" + deviceName + "\", \"" + cardUID + "\");"
+
+	util.Log.Printf("Executing: %v \n", command)
 	db.execute(command)
 }
 
@@ -97,6 +97,7 @@ func (db *DB) InsertIntoWorkday(deviceName, cardUID string) {
 func (db *DB) RetrieveActiveWorkdays() map[int][]string {
 
 	command := "CALL SELECT_ACTIVE_WORKDAY;"
+	util.Log.Printf("Executing: %v \n", command)
 	rows := db.executeQuery(command)
 
 	table := make(map[int][]string)
@@ -118,12 +119,13 @@ func (db *DB) RetrieveActiveWorkdays() map[int][]string {
 }
 
 // RetrieveCurrentMonthTimeRaport - TODO write about behavior
-func (db *DB) RetrieveCurrentMonthTimeRaport(workerID, currentMonth, currentYear int) map[int][]string {
+func (db *DB) RetrieveCurrentMonthTimeRaport(workerID, currentMonth, currentYear string) map[string][]string {
 
-	command := "CALL SELECT_MONTH_TIME_RAPORT(" + strconv.Itoa(workerID) + ", " + strconv.Itoa(currentMonth) + ", " + strconv.Itoa(currentYear) + ");"
+	command := "CALL SELECT_MONTH_TIME_RAPORT(" + workerID + ", " + currentMonth + ", " + currentYear + ");"
+	util.Log.Printf("Executing: %v \n", command)
 	rows := db.executeQuery(command)
 
-	table := make(map[int][]string)
+	table := make(map[string][]string)
 	id := 0
 
 	var (
@@ -139,16 +141,18 @@ func (db *DB) RetrieveCurrentMonthTimeRaport(workerID, currentMonth, currentYear
 		if err := rows.Scan(&geNo, &roNo, &description, &start, &stop, &minutes); err != nil {
 			util.Log.Panicln(err)
 		}
-		table[id] = []string{geNo.String, roNo.String, description.String, start.String, stop.String, minutes.String}
+		table[strconv.Itoa(id)] = []string{geNo.String, roNo.String, description.String, start.String, stop.String, minutes.String}
 		id++
 	}
 	return table
 }
 
 // RetrieveWorkerStatus - TODO write about behavior
-func (db *DB) RetrieveWorkerStatus(id int) (string, string) {
+func (db *DB) RetrieveWorkerStatus(id string) (string, string) {
 
-	var command string = "CALL SELECT_WORKER_STATUS(" + strconv.Itoa(id) + ");"
+	var command string = "CALL SELECT_WORKER_STATUS('" + id + "');"
+
+	util.Log.Printf("Executing: %v \n", command)
 	rows := db.executeQuery(command)
 
 	var status sql.NullString       //string
@@ -171,6 +175,8 @@ func (db *DB) RetrieveWorkerStatus(id int) (string, string) {
 func (db *DB) RetrieveActiveProjects() []Project {
 
 	var command string = "CALL GET_ACTIVE_PROJECTS();"
+
+	util.Log.Printf("Executing: %v \n", command)
 	rows := db.executeQuery(command)
 
 	projects := make([]Project, 0)
@@ -210,6 +216,8 @@ func (db *DB) RetrieveActiveProjects() []Project {
 func (db *DB) RetrieveAllWorkers() []Worker {
 
 	command := "CALL GET_ALL_WORKERS();"
+
+	util.Log.Printf("Executing: %v \n", command)
 	rows := db.executeQuery(command)
 
 	var (
@@ -245,6 +253,8 @@ func (db *DB) RetrieveAllWorkers() []Worker {
 func (db *DB) GetUserByNameAndPassword(name, password string) Worker {
 
 	command := "SELECT * FROM WORKER WHERE NICKNAME = \"" + name + "\" AND PASSWORD = \"" + password + "\";"
+
+	util.Log.Printf("Executing: %v \n", command)
 	rows := db.executeQuery(command)
 
 	var (
@@ -279,12 +289,14 @@ func (db *DB) GetUserByNameAndPassword(name, password string) Worker {
 }
 
 // RetrieveWorkerName returns worker's name based on id.
-func (db *DB) RetrieveWorkerName(id int) string {
+func (db *DB) RetrieveWorkerName(id string) string {
 	var (
 		firstName sql.NullString
 		lastName  sql.NullString
 	)
-	command := "SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = " + strconv.Itoa(id) + ";"
+	command := "SELECT FIRSTNAME, LASTNAME FROM WORKER WHERE ID = '" + id + "';"
+
+	util.Log.Printf("Executing: %v \n", command)
 	rows := db.executeQuery(command)
 
 	for rows.Next() {
@@ -298,15 +310,15 @@ func (db *DB) RetrieveWorkerName(id int) string {
 // RetrieveFreeDays returns a map containing free days.
 func (db *DB) RetrieveFreeDays() map[int]string {
 
-	var (
-		command = "SELECT * FROM FREEDAYS;"
-		rows    = db.executeQuery(command)
+	command := "SELECT * FROM FREEDAYS;"
 
-		id   sql.NullInt32
-		date sql.NullString
+	util.Log.Printf("Executing: %v \n", command)
+	rows := db.executeQuery(command)
 
-		table = make(map[int]string, 0)
-	)
+	var id sql.NullInt32
+	var date sql.NullString
+
+	table := make(map[int]string, 0)
 
 	for rows.Next() {
 		if err := rows.Scan(&id, &date); err != nil {
@@ -318,12 +330,15 @@ func (db *DB) RetrieveFreeDays() map[int]string {
 }
 
 // RetrieveOvertime ...
-func (db *DB) RetrieveOvertime(workerID int) string {
-	var (
-		command  = "CALL GET_OVERTIME(" + strconv.Itoa(workerID) + ");"
-		overtime sql.NullString
-		rows     = db.executeQuery(command)
-	)
+func (db *DB) RetrieveOvertime(workerID string) string {
+
+	command := "CALL GET_OVERTIME('" + workerID + "');"
+
+	util.Log.Printf("Executing: %v \n", command)
+	rows := db.executeQuery(command)
+
+	var overtime sql.NullString
+
 	for rows.Next() {
 		if err := rows.Scan(&overtime); err != nil {
 			util.Log.Panicln(err)
@@ -332,19 +347,20 @@ func (db *DB) RetrieveOvertime(workerID int) string {
 	return overtime.String
 }
 
-func (db *DB) AddWorkday(workerID, projectID int, startHour, stopHour string) {
+func (db *DB) AddWorkday(workerID, projectID string, startHour, stopHour string) {
 
 	var command strings.Builder
-	command.WriteString("CALL ADD_NEW_WORKDAY(")
-	command.WriteString(strconv.Itoa(workerID))
-	command.WriteString(", ")
-	command.WriteString(strconv.Itoa(projectID))
-	command.WriteString(", '")
+	command.WriteString("CALL ADD_NEW_WORKDAY('")
+	command.WriteString(workerID)
+	command.WriteString("', '")
+	command.WriteString(projectID)
+	command.WriteString("', '")
 	command.WriteString(startHour)
 	command.WriteString("', '")
 	command.WriteString(stopHour)
 	command.WriteString("');")
 
+	util.Log.Printf("Executing: %v \n", command.String())
 	db.execute(command.String())
 }
 
@@ -361,15 +377,17 @@ func (db *DB) AddProject(project Project) {
 	command.WriteString(project.Begin)
 	command.WriteString("');")
 
+	util.Log.Printf("Executing: %v \n", command.String())
 	db.execute(command.String())
 }
 
 func (db *DB) RetrieveAllPositions() map[int]string {
-	var (
-		command   = ("CALL GET_ALL_POSITIONS();")
-		positions = make(map[int]string, 0)
-		rows      = db.executeQuery(command)
-	)
+
+	command := ("CALL GET_ALL_POSITIONS();")
+	positions := make(map[int]string, 0)
+
+	util.Log.Printf("Executing: %v \n", command)
+	rows := db.executeQuery(command)
 
 	for rows.Next() {
 		var pos sql.NullString
@@ -402,6 +420,7 @@ func (db *DB) AddWorker(worker Worker) {
 	command.WriteString(worker.AccessLevel)
 	command.WriteString("');")
 
+	util.Log.Printf("Executing: %v \n", command.String())
 	db.execute(command.String())
 }
 
@@ -423,6 +442,7 @@ func (db *DB) GetProject(projectID string) Project {
 	command.WriteString(projectID)
 	command.WriteString("';")
 
+	util.Log.Printf("Executing: %v \n", command.String())
 	rows = db.executeQuery(command.String())
 	for rows.Next() {
 		if err := rows.Scan(&id, &geNo, &roNo, &desc, &devID, &active, &begin, &end); err != nil {
@@ -471,6 +491,7 @@ func (db *DB) UpdateProject(project Project) {
 	command.WriteString(project.ID)
 	command.WriteString(";")
 
+	util.Log.Printf("Executing: %v \n", command.String())
 	db.execute(command.String())
 }
 
@@ -487,9 +508,9 @@ func (db *DB) GetWorker(workerID string) Worker {
 		nick   sql.NullString
 		pass   sql.NullString
 		lvl    sql.NullString
-
-		rows = db.executeQuery(command)
 	)
+	util.Log.Printf("Executing: %v \n", command)
+	rows := db.executeQuery(command)
 
 	for rows.Next() {
 		if err := rows.Scan(&id, &fName, &lName, &cardNo, &posID, &active, &nick, &pass, &lvl); err != nil {
@@ -540,5 +561,6 @@ func (db *DB) UpdateWorker(worker Worker) {
 	command.WriteString(worker.ID)
 	command.WriteString("';")
 
+	util.Log.Printf("Executing: %v \n", command.String())
 	db.execute(command.String())
 }

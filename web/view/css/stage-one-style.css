@@ -1,5 +1,6 @@
-#status {
-    margin-top: 100px;
+#status-holder {
+    padding: 100px;
+    background-color: #284b63;
 }
 
 #status, #today-worked, #overtime {
@@ -23,10 +24,6 @@
 
 #table-view-type:hover, #add-workday:hover {
     box-shadow: none;
-}   
-
-#standard-table {
-    display: none;
 }
 
 #projects {
@@ -45,4 +42,28 @@
 
 #start-hour, #start-minute, #stop-hour, #stop-minute {
     width: 50px;
+}
+
+.add-workday-holder {
+    color: white;
+    min-width: 600px;
+    border: 1px solid #000000;
+    background-color: #284b63;
+    padding: 20px;
+}
+
+.add-workday-title {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.add-workday-footer {
+    padding: 20px;
+}
+
+#free-days-holder {
+    padding: 50px;
+    color: white;
+    background-color: #284b63;
 }

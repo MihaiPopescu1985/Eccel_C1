@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Pagina lucratorului</title>
+        <link rel="stylesheet" type="text/css" href="../css/common.css">
+        <link rel="stylesheet" type="text/css" href="../css/stage-one-style.css">
+        <script src="./js/stage-one.js"></script>
+    </head>
+
+    <body>
+        <div class="title-holder">
+            <h1 class="title">Salut {{.Worker.FirstName}} {{.Worker.LastName}}</h1>
+            <a class="title-link" href="/log-out">Log out</a>
+        </div>
+
+        <br><br>
+
+        <div class="tabs">
+            <div class="passive-tab" onclick="location.href='/';">Status</div>
+            <div class="passive-tab" onclick="location.href='/?view=detailed-view';">Vizualizare detaliata</div>
+            <div class="passive-tab" onclick="location.href='/?view=standard-view';">Vizualizare standard</div>
+            <div class="active-tab">Adauga zi lucrata</div>
+            <div class="passive-tab" onclick="location.href='/?view=free-days';">Zile libere</div>
+            <div class="white-divisor"></div>
+        </div>
+
+        <div class="add-workday-holder">
+            <h2 class="add-workday-title">Adauga zi lucrata:</h2>
+            <form id="new-workday-form" method="GET" action="/">
+                <input type="hidden" name="view" value="save-workday">
+                <fieldset>
+                    <legend>Toate campurile sunt obligatorii</legend>
+
+                    <label for="projects">Selecteaza proiectul:</label><br>
+                    <select id="projects" name="projects" required>
+                        <option selected="selected"></option>
+                        {{range $project := .ActiveProjects}}
+                            <option value="{{$project.ID}}">{{$project.GeNumber}} ({{$project.RoNumber}})</option>
+                        {{end}}
+                    </select>
+                    <br>
+                    
+                    <label for="day">Alege data:</label>
+                    <br>
+                    <input id="day" type="date" name="day" required>
+                    <br>
+                    <label for="startHour">Ora inceput:</label>
+                    <br>
+                    <input id="start-hour" type="number" name="startHour" min="00" max="23" required pattern="[0-9]{2}"> : 
+                    <input id="start-minute" type="number" name="startMinute" min="00" max="59" required pattern="[0-9]{2}">
+                    <br>
+                    <label for="stop-hour">Ora sfarsit:</label>
+                    <br>
+                    <input id="stop-hour" type="number" name="stopHour" min="00" max="23" required pattern="[0-9]{2}"> : 
+                    <input id="stop-minute" type="number" name="stopMinute" min="00" max="59" required pattern="[0-9]{2}">
+                    <br>
+                </fieldset>
+                <div class="add-workday-footer">
+                    <button type="submit">Salveaza</button>
+                    <button class="cancel" type="reset" onclick="closeModal()">Anuleaza</button>
+                </div>
+            </form>
+        </div>
+        <div class="white-divisor"></div>
+    </body>
+</html>
