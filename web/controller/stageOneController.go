@@ -132,7 +132,7 @@ func saveForm(w *http.ResponseWriter, r *http.Request, worker model.Worker) {
 			formatTime(formDay, formStartHour, formStartMinute),
 			formatTime(formDay, formStopHour, formStopMinute))
 
-		http.Redirect(*w, r, "/", 302)
+		http.Redirect(*w, r, "/", http.StatusFound)
 	}
 }
 
@@ -204,7 +204,7 @@ func getStandardReport(wID string) map[string][]string {
 			util.Log.Println(err)
 		}
 
-		if _, exists := standardReport[key]; exists == false {
+		if _, exists := standardReport[key]; !exists {
 			standardReport[key] = make([]string, 31)
 		}
 

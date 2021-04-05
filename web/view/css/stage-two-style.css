@@ -1,1 +1,49 @@
-                     
+#add-project-button {
+    cursor: pointer;
+}
+
+#addProject, .edit-project {
+    background-color: rgba(60, 110, 113, 0.6);/*#3c6e71;*/
+    color: white;
+    display: none;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    position: fixed;
+    top: 0px;
+}
+
+#new-project-form, .edit-project-form {
+    background-color: #284b63;
+    padding: 20px;
+    max-width: max-content;
+    max-height: max-content;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #d9d9d9;
+}
+
+fieldset {
+    max-width: max-content;
+    margin-top: 0px;
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-footer {
+    padding-top: 20px;
+}
+
+.cancel-form {
+    float: right;
+}
+
+#activeProjects:nth-child(even) {
+    background-color: #3c6e71;
+}
+
+.edit-project {
+    padding: 20px;
+}

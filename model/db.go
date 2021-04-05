@@ -318,7 +318,7 @@ func (db *DB) RetrieveFreeDays() map[int]string {
 	var id sql.NullInt32
 	var date sql.NullString
 
-	table := make(map[int]string, 0)
+	table := make(map[int]string)
 
 	for rows.Next() {
 		if err := rows.Scan(&id, &date); err != nil {
@@ -384,7 +384,7 @@ func (db *DB) AddProject(project Project) {
 func (db *DB) RetrieveAllPositions() map[int]string {
 
 	command := ("CALL GET_ALL_POSITIONS();")
-	positions := make(map[int]string, 0)
+	positions := make(map[int]string)
 
 	util.Log.Printf("Executing: %v \n", command)
 	rows := db.executeQuery(command)

@@ -95,7 +95,7 @@ tr:nth-child(even) {
 td {
     text-align: center;
     font-size: 20px;
-    height: 40px;
+    padding: 5px;
 }
 
 fieldset {

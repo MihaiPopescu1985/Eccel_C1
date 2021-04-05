@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Gestiune proiecte si lucratori</title>
+        <link rel="stylesheet" type="text/css" href="/css/common.css">
+        <link rel="stylesheet" type="text/css" href="/css/stage-two-style.css">
+        <script src="../js/stage-two.js"></script>
+    </head>
+    <body>
+        <div class="title-holder">
+            <h1 class="title">Gestiunea proiectelor si lucratorilor</h1>
+            <a class="title-link" href="/log-out">Log out</a>
+        </div>
+        <br>
+        <br>
+        
+        <div class="tabs">
+            <div class="active-tab">Proiecte active</div>
+            <div class="passive-tab" onclick="location.href='/?view=sent-projects';">Proiecte livrate</div>
+            <div class="passive-tab" onclick="location.href='/?view=workers';">Lucratori</div>
+            <div class="passive-tab" onclick="location.href='/?view=free-days';">Zile libere</div>
+            <div class="white-divisor"></div>
+        </div>
+
+        <h2 class="active-tab" id="add-project-button" onclick="showModal('addProject')">Adauga proiect</h2>
+
+        <div id="addProject">
+            <form id="new-project-form" method="GET" action="/">
+                <fieldset>
+                    <legend>Toate campurile sunt obligatorii</legend>
+                    <input type="hidden" name="action" value="addProject">
+                    <label for="ge-no">Numar Germania:</label>
+                    <br>
+                    <input type="text" name="ge-no" maxlength="15" required>
+                    <br>
+                    <label for="ro-no">Numar Romania:</label>
+                    <br>
+                    <input type="text" name="ro-no" maxlength="20" required>
+                    <br>
+                    <label for="description">Descriere:</label>
+                    <br>
+                    <input type="text" name="description" maxlength="100">
+                    <br>
+                    <label for="start-date">Data inceput:</label>
+                    <br>
+                    <input type="date" name="start-date" required>
+                </fieldset>
+                <div class="form-footer">
+                    <button type="submit">Salveaza</button>
+                    <button class="cancel-form" type="reset" onclick="closeModal('new-project-form', 'addProject')">Anuleaza</button>
+                </div>
+            </form>
+        </div>
+
+        <table id="activeProjects">
+            <tr>
+                <th>Id</th>
+                <th>Nr Germania</th>
+                <th>Nr Romania</th>
+                <th>Descriere</th>
+                <th>Id dispozitiv</th>
+                <th>Data inceput</th>
+                <th>Editare</th>
+            </tr>
+            {{range $project := .}}
+                <tr>
+                    <td>{{$project.ID}}</td></a>
+                    <td>{{$project.GeNumber}}</td>
+                    <td>{{$project.RoNumber}}</td>
+                    <td>{{$project.Description}}</td>
+                    <td>{{$project.DeviceID}}</td>
+                    <td>{{$project.Begin}}</td>
+                    <td style="cursor: pointer;" onclick="showModal('editProject{{$project.ID}}')"><span>Edit</span></td>
+                </tr>
+            {{end}}
+        </table>
+
+        <div class="white-divisor"></div>
+        <br><br><br><br>
+
+        {{range $project := .}}
+        <div id="editProject{{$project.ID}}" class="edit-project">
+            <form id="edit-project-form-{{$project.ID}}" class="edit-project-form" method="GET" action="/">
+                <fieldset>
+                    <legend>Toate campurile sunt obligatorii</legend>
+                    <input type="hidden" name="action" value="editProject">
+                    <input type="hidden" name="proj-id" value="{{$project.ID}}">
+                    <label for="ge-no">Numar Germania:</label>
+                    <br>
+                    <input type="text" name="ge-no" maxlength="15" value="{{$project.GeNumber}}" required>
+                    <br>
+                    <label for="ro-no">Numar Romania:</label>
+                    <br>
+                    <input type="text" name="ro-no" maxlength="20" value="{{$project.RoNumber}}" required>
+                    <br>
+                    <label for="description">Descriere:</label>
+                    <br>
+                    <input type="text" name="description" maxlength="100" value="{{$project.Description}}">
+                    <br>
+                    <label for="dev-id">ID dispozitiv:</label>
+                    <br>
+                    <input type="number" name="dev-id" value="{{$project.DeviceID}}">
+                    <br>
+                    <label for="start-date">Data inceput:</label>
+                    <br>
+                    <input type="date" name="start-date" value="{{$project.Begin}}" required>
+                    <br>
+                    <label for="stop-date">Data incheiere:</label>
+                    <br>
+                    <input type="date" name="stop-date" value="{{$project.End}}">
+                    <br>
+                </fieldset>
+                <div class="form-footer">
+                    <button type="submit">Salveaza</button>
+                    <button class="cancel-form" type="reset" onclick="closeModal('edit-project-form-{{$project.ID}}', 'editProject{{$project.ID}}')">Anuleaza</button>
+                </div>
+            </form>
+        </div>
+        {{end}}
+
+    </body>
+</html>

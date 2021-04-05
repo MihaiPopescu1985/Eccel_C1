@@ -9,5 +9,7 @@ function showModal(element) {
 
     if (view == 'none') {
         modal.style.display = 'block'
+    } else {
+        modal.style.display = 'none'
     }
 }

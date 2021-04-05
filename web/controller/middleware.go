@@ -19,6 +19,7 @@ var ignoreURL []string = []string{
 	"/css/stage-two-edit-worker.css",
 	"/js/stage-one.js",
 	"/js/stage-two.js",
+	"/view/js/stage-two.js",
 }
 
 // AuthMiddleware ...
@@ -48,10 +49,8 @@ func AuthMiddleware(next http.Handler) http.Handler {
 		case "1":
 			StageOneHandler(&worker, w, r)
 		case "2":
-			r.RequestURI = "/stage-two"
 			StageTwoHandler(w, r)
 		case "3":
-			r.RequestURI = "/stage-three"
 			StageThreeHandler(w, r)
 		default:
 			http.SetCookie(w, &http.Cookie{
@@ -97,7 +96,7 @@ func parseForm(r *http.Request) (string, string, error) {
 		return name, pass, nil
 	}
 
-	err := errors.New("Invalid form entered.")
+	err := errors.New("invalid form entered")
 	util.Log.Println(err)
 
 	return "", "", err
