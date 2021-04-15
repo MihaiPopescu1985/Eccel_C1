@@ -57,7 +57,7 @@ func (db *DB) execute(command string) {
 	_, err := db.database.Exec(command)
 
 	if err != nil {
-		util.Log.Panicln(err)
+		util.Log.Println(err)
 	}
 }
 
@@ -205,8 +205,8 @@ func (db *DB) RetrieveActiveProjects() []Project {
 			Description: descript.String,
 			DeviceID:    devID.String,
 			IsActive:    isActive.Bool,
-			Begin:       begin.String,
-			End:         end.String,
+			Begin:       strings.Split(begin.String, " ")[0],
+			End:         strings.Split(end.String, " ")[0],
 		})
 	}
 	return projects
@@ -308,23 +308,23 @@ func (db *DB) RetrieveWorkerName(id string) string {
 }
 
 // RetrieveFreeDays returns a map containing free days.
-func (db *DB) RetrieveFreeDays() map[int]string {
+func (db *DB) RetrieveFreeDays() []string {
 
-	command := "SELECT * FROM FREEDAYS;"
+	command := "SELECT * FROM FREEDAYS ORDER BY DATE ASC;"
 
 	util.Log.Printf("Executing: %v \n", command)
 	rows := db.executeQuery(command)
 
-	var id sql.NullInt32
+	var id sql.NullString
 	var date sql.NullString
 
-	table := make(map[int]string)
+	table := make([]string, 0)
 
 	for rows.Next() {
 		if err := rows.Scan(&id, &date); err != nil {
 			util.Log.Panicln(err)
 		}
-		table[int(id.Int32)] = date.String
+		table = append(table, date.String)
 	}
 	return table
 }
@@ -563,4 +563,59 @@ func (db *DB) UpdateWorker(worker Worker) {
 
 	util.Log.Printf("Executing: %v \n", command.String())
 	db.execute(command.String())
+}
+
+func (db *DB) RetrieveSentProjects() map[Project]string {
+	projects := make(map[Project]string)
+
+	var (
+		command string = "CALL GET_DELIVERED_PROJECTS;"
+		id      sql.NullString
+		geNo    sql.NullString
+		roNo    sql.NullString
+		desc    sql.NullString
+		devID   sql.NullString
+		active  sql.NullString
+		begin   sql.NullString
+		end     sql.NullString
+		wMin    sql.NullString
+	)
+	util.Log.Printf("Executing: %v \n", command)
+	rows := db.executeQuery(command)
+
+	for rows.Next() {
+		if err := rows.Scan(&id, &geNo, &roNo, &desc, &devID, &active, &begin, &end, &wMin); err != nil {
+			util.Log.Panicln(err)
+		}
+		projects[Project{
+			ID:          id.String,
+			GeNumber:    geNo.String,
+			RoNumber:    roNo.String,
+			Description: desc.String,
+			IPAddress:   "",
+			DeviceID:    devID.String,
+			IsActive: func() bool {
+				isActive, err := strconv.ParseBool(active.String)
+				if err != nil {
+					util.Log.Println(err)
+				}
+				return isActive
+			}(),
+			Begin: begin.String,
+			End:   end.String,
+		}] = wMin.String
+	}
+	return projects
+}
+
+func (db *DB) DeleteFreeDay(freeDay string) {
+	command := "DELETE FROM FREEDAYS WHERE DATE = '" + freeDay + "';"
+	util.Log.Println(command)
+	db.execute(command)
+}
+
+func (db *DB) AddFreeDay(freeDay string) {
+	command := "INSERT INTO FREEDAYS (DATE) VALUES ('" + freeDay + "');"
+	util.Log.Println(command)
+	db.execute(command)
 }

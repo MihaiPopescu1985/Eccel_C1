@@ -7,7 +7,7 @@ import (
 	"example.com/c1/util"
 )
 
-const notFoundPage string = "./web/view/notFound.html"
+const notFoundPage string = "./web/view/not-found.html"
 
 // PageNotFoundHandler ...
 type PageNotFoundHandler struct{}

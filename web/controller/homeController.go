@@ -7,7 +7,7 @@ import (
 	"example.com/c1/util"
 )
 
-const homePage string = "./web/view/home.html"
+const homePage string = "./web/view/index.html"
 
 // HomePageHandler - home page of web interface
 // Checks for name and password, redirect user to specific pages.

@@ -9,7 +9,7 @@
         <script src="./js/stage-two.js"></script>
     </head>
     <body>
-        <div id="editProject" class="modal" style="display: block;">
+        <div id="edit-project" class="modal" style="display: block;">
             <div class="modal-content-holder">
                 <div class="modal-header">
                     <h2 class="modal-title">Editare proiect</h2>
@@ -18,7 +18,7 @@
                     <form id="edit-project-form" method="GET" action="/">
                         <fieldset>
                             <legend>Toate campurile sunt obligatorii</legend>
-                            <input type="hidden" name="action" value="saveProject">
+                            <input type="hidden" name="action" value="edit-project">
                             <input type="hidden" name="id" value="{{.ID}}">
                             <input type="hidden" name="ip" value="{{.IPAddress}}">
                             <label for="ge-no">Nr. Germania:</label>

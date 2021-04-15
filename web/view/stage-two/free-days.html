@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Gestiune proiecte si lucratori</title>
+        <link rel="stylesheet" type="text/css" href="/css/common.css">
+        <link rel="stylesheet" type="text/css" href="/css/stage-two-style.css">
+        <script src="../js/stage-two.js"></script>
+    </head>
+
+    <body>
+        <div class="title-holder">
+            <h1 class="title">Gestiunea proiectelor si lucratorilor</h1>
+            <a class="title-link" href="/log-out">Log out</a>
+        </div>
+
+        <br><br>
+
+        <div class="tabs">
+            <div class="passive-tab" onclick="location.href='/';">Proiecte active</div>
+            <div class="passive-tab" onclick="location.href='/?view=sent-projects';">Proiecte livrate</div>
+            <div class="passive-tab" onclick="location.href='/?view=workers';">Lucratori</div>
+            <div class="active-tab">Zile libere</div>
+            <div class="white-divisor"></div>
+        </div>
+
+        <div class="free-days-holder">
+            <br><br>
+            <h2 class="title-link" id="add-project-button" onclick="showModal('add-free-day')">Adauga zi libera</h2>
+            <br><br><br><br><br>
+        
+            <h2 class="free-days-title">Zile libere (an-luna-zi)</h2>
+            {{range $v := .}}
+                <span>{{$v}}</span>
+                <a id="delete-free-day-link" href="/?view=delete-free-day&free-day={{$v}}">Sterge</a>
+                <br><br>
+            {{end}}
+        </div>
+
+        <div id="add-free-day">
+            <form id="new-free-day-form">
+                <h2>Adauga zi libera</h2>
+                <fieldset>
+                    <legend>Toate campurile sunt obligatorii</legend>
+                    <input type="hidden" name="view" value="add-free-day">
+                    <label for="free-day">Data:</label>
+                    <input type="date" name="free-day">
+                </fieldset>
+                <div class="form-footer">
+                    <button type="submit">Salveaza</button>
+                    <button class="cancel-form" type="reset" onclick="closeModal('new-free-day-form', 'add-free-day')">Anuleaza</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="white-divisor"></div>
+        <br><br>
+
+    </body>
+</html>

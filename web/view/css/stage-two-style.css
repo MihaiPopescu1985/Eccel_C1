@@ -2,7 +2,7 @@
     cursor: pointer;
 }
 
-#addProject, .edit-project {
+#add-project, .edit-project, #add-free-day {
     background-color: rgba(60, 110, 113, 0.6);/*#3c6e71;*/
     color: white;
     display: none;
@@ -14,7 +14,7 @@
     top: 0px;
 }
 
-#new-project-form, .edit-project-form {
+#new-project-form, .edit-project-form, #new-free-day-form {
     background-color: #284b63;
     padding: 20px;
     max-width: max-content;
@@ -40,10 +40,18 @@ fieldset {
     float: right;
 }
 
-#activeProjects:nth-child(even) {
+#active-projects:nth-child(even) {
     background-color: #3c6e71;
 }
 
 .edit-project {
     padding: 20px;
+}
+
+.optional-fieldset {
+    max-width: 100%;
+}
+
+#delete-free-day-link {
+    color: white;
 }

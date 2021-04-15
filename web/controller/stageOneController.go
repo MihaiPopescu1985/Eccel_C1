@@ -3,9 +3,7 @@ package controller
 import (
 	"html/template"
 	"net/http"
-	"net/url"
 	"strconv"
-	"strings"
 	"time"
 
 	"example.com/c1/model"
@@ -13,12 +11,12 @@ import (
 )
 
 const (
-	workerStatusPage   string = "./web/view/stage-one/WorkerStatus.html"
-	detailedReportPage string = "./web/view/stage-one/DetailedView.html"
-	standardReportPage string = "./web/view/stage-one/StandardView.html"
-	addWorkdayPage     string = "./web/view/stage-one/AddWorkday.html"
-	freeDaysPage       string = "./web/view/stage-one/FreeDays.html"
-	dateLayout         string = "2006-1-2 15:04:05"
+	workerStatusPage     string = "./web/view/stage-one/worker-status.html"
+	detailedReportPage   string = "./web/view/stage-one/detailed-view.html"
+	standardReportPage   string = "./web/view/stage-one/standard-view.html"
+	addWorkdayPage       string = "./web/view/stage-one/add-workday.html"
+	stageOneFreeDaysPage string = "./web/view/stage-one/free-days.html"
+	dateLayout           string = "2006-1-2 15:04:05"
 )
 
 type workerStatus struct {
@@ -40,7 +38,7 @@ type addWorkday struct {
 
 type freeDays struct {
 	Worker   *model.Worker
-	FreeDays map[int]string
+	FreeDays []string
 }
 
 // StageOneHandler TODO: edit function & function description.
@@ -78,7 +76,7 @@ func StageOneHandler(worker *model.Worker, writer http.ResponseWriter, request *
 		serveAddWorkdayPage(&pageContent, &writer)
 
 	case "save-workday":
-		saveForm(&writer, request, *worker)
+		saveWorkdayForm(&writer, request, *worker)
 
 	case "free-days":
 
@@ -86,7 +84,7 @@ func StageOneHandler(worker *model.Worker, writer http.ResponseWriter, request *
 			Worker:   worker,
 			FreeDays: model.Db.RetrieveFreeDays(),
 		}
-		serveFreeDaysPage(&writer, request, &pageContent)
+		pageContent.serveFreeDaysPage(&writer, request)
 
 	default:
 		var pageContent workerStatus
@@ -99,18 +97,18 @@ func StageOneHandler(worker *model.Worker, writer http.ResponseWriter, request *
 	}
 }
 
-func serveFreeDaysPage(w *http.ResponseWriter, r *http.Request, pageContent *freeDays) {
+func (pageContent *freeDays) serveFreeDaysPage(w *http.ResponseWriter, r *http.Request) {
 
-	templ, err := template.New("freeDays").ParseFiles(freeDaysPage)
+	templ, err := template.New("freeDays").ParseFiles(stageOneFreeDaysPage)
 	if err != nil {
 		util.Log.Println(err)
 	}
-	if err = templ.ExecuteTemplate(*w, "FreeDays.html", *pageContent); err != nil {
+	if err = templ.ExecuteTemplate(*w, "free-days.html", *pageContent); err != nil {
 		util.Log.Println(err)
 	}
 }
 
-func saveForm(w *http.ResponseWriter, r *http.Request, worker model.Worker) {
+func saveWorkdayForm(w *http.ResponseWriter, r *http.Request, worker model.Worker) {
 	if err := r.ParseForm(); err != nil {
 		util.Log.Println(err)
 	}
@@ -122,10 +120,10 @@ func saveForm(w *http.ResponseWriter, r *http.Request, worker model.Worker) {
 	}
 
 	formDay := r.FormValue("day")
-	formStartHour := r.FormValue("startHour")
-	formStartMinute := r.FormValue("startMinute")
-	formStopHour := r.FormValue("stopHour")
-	formStopMinute := r.FormValue("stopMinute")
+	formStartHour := r.FormValue("start-hour")
+	formStartMinute := r.FormValue("start-minute")
+	formStopHour := r.FormValue("stop-hour")
+	formStopMinute := r.FormValue("stop-minute")
 
 	if formDay != "" && formStartHour != "" && formStartMinute != "" && formStopHour != "" && formStopMinute != "" {
 		model.Db.AddWorkday(worker.ID, formProject,
@@ -136,19 +134,6 @@ func saveForm(w *http.ResponseWriter, r *http.Request, worker model.Worker) {
 	}
 }
 
-func formatTime(day, hour, minute string) string {
-
-	var time strings.Builder
-	time.WriteString(day)
-	time.WriteString(" ")
-	time.WriteString(hour)
-	time.WriteString(":")
-	time.WriteString(minute)
-	time.WriteString(":00")
-
-	return time.String()
-}
-
 func serveAddWorkdayPage(workday *addWorkday, writer *http.ResponseWriter) {
 
 	templ, err := template.New("addWorkday").ParseFiles(addWorkdayPage)
@@ -156,7 +141,7 @@ func serveAddWorkdayPage(workday *addWorkday, writer *http.ResponseWriter) {
 		util.Log.Println(err)
 	}
 
-	err = templ.ExecuteTemplate(*writer, "AddWorkday.html", *workday)
+	err = templ.ExecuteTemplate(*writer, "add-workday.html", *workday)
 	if err != nil {
 		util.Log.Println(err)
 	}
@@ -169,7 +154,7 @@ func serveStandardPage(report *timeReport, writer *http.ResponseWriter) {
 		util.Log.Println(err)
 	}
 
-	err = templ.ExecuteTemplate(*writer, "StandardView.html", *report)
+	err = templ.ExecuteTemplate(*writer, "standard-view.html", *report)
 	if err != nil {
 		util.Log.Println(err)
 	}
@@ -225,7 +210,7 @@ func serveDetailedPage(report *timeReport, writer *http.ResponseWriter) {
 		util.Log.Println(err)
 	}
 
-	err = templ.ExecuteTemplate(*writer, "DetailedView.html", *report)
+	err = templ.ExecuteTemplate(*writer, "detailed-view.html", *report)
 	if err != nil {
 		util.Log.Println(err)
 	}
@@ -249,22 +234,13 @@ func getDetailedReport(wID string) map[string][]string {
 	return report
 }
 
-func parseURI(r *http.Request, URI string) string {
-	uri, err := url.Parse(r.RequestURI)
-
-	if err != nil {
-		util.Log.Panic(err)
-	}
-	return uri.Query().Get(URI)
-}
-
 func serveStatusPage(pageContent *workerStatus, writer *http.ResponseWriter) {
 	templ, err := template.New("workerStatus").ParseFiles(workerStatusPage)
 	if err != nil {
 		util.Log.Println(err)
 	}
 
-	err = templ.ExecuteTemplate(*writer, "WorkerStatus.html", *pageContent)
+	err = templ.ExecuteTemplate(*writer, "worker-status.html", *pageContent)
 	if err != nil {
 		util.Log.Println(err)
 	}
@@ -273,35 +249,6 @@ func serveStatusPage(pageContent *workerStatus, writer *http.ResponseWriter) {
 func (pageContent *workerStatus) setOvertime() {
 	pageContent.Overtime = model.Db.RetrieveOvertime(pageContent.Worker.ID)
 	pageContent.Overtime = toHoursAndMinutes(pageContent.Overtime)
-}
-
-// toHoursAndMinutes converts minutes to hours and minutes.
-// For example: toHoursAndMinutes("61") returns "1:01m".
-func toHoursAndMinutes(minutes string) string {
-
-	workedMinutes, err := strconv.Atoi(minutes)
-	if err != nil {
-		util.Log.Panicln(err)
-	}
-
-	workedHours := workedMinutes / 60
-	if workedMinutes < 0 {
-		workedMinutes *= -1
-	}
-	workedMinutes = workedMinutes % 60
-
-	var workedTime strings.Builder
-
-	workedTime.WriteString(strconv.Itoa(workedHours))
-	workedTime.WriteString(":")
-
-	if workedMinutes < 10 {
-		workedTime.WriteString("0")
-	}
-
-	workedTime.WriteString(strconv.Itoa(workedMinutes))
-
-	return workedTime.String()
 }
 
 func (pageContent *workerStatus) setStatusAndWorkedTime() {

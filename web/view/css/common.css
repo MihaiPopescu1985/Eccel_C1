@@ -22,7 +22,7 @@ body {
     cursor: pointer;
     text-decoration: underline;
     display: inline;
-    padding: 30px;
+    padding: 20px;
     background-color: #3c6e71;
     box-shadow: 5px 10px #353535;
     max-width: max-content;
@@ -30,6 +30,12 @@ body {
     right: -25px;
     bottom: -25px;
     font-size: larger;
+}
+
+.title-link:hover {
+    box-shadow: none;
+    text-decoration: none;
+    bottom: -24px;
 }
 
 .title-link:link, .title-link:visited {
@@ -109,4 +115,9 @@ input {
 
 .cancel {
     float: right;
+}
+
+.free-days-holder {
+    color: white;
+    background-color: #284b63;
 }

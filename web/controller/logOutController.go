@@ -7,7 +7,7 @@ import (
 	"example.com/c1/util"
 )
 
-const logOutPage string = "./web/view/logOut.html"
+const logOutPage string = "./web/view/log-out.html"
 
 // LogOutHandler ...
 func LogOutHandler(w http.ResponseWriter, r *http.Request) {

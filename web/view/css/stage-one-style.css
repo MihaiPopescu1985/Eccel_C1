@@ -50,6 +50,9 @@
     border: 1px solid #000000;
     background-color: #284b63;
     padding: 20px;
+    max-width: max-content;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .add-workday-title {
@@ -60,10 +63,4 @@
 
 .add-workday-footer {
     padding: 20px;
-}
-
-#free-days-holder {
-    padding: 50px;
-    color: white;
-    background-color: #284b63;
 }

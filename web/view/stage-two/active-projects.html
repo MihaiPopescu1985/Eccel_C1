@@ -24,14 +24,16 @@
             <div class="passive-tab" onclick="location.href='/?view=free-days';">Zile libere</div>
             <div class="white-divisor"></div>
         </div>
+        
+        <br><br>
+        <h2 class="title-link" id="add-project-button" onclick="showModal('add-project')">Adauga proiect</h2>
+        <br><br><br><br><br><br>
 
-        <h2 class="active-tab" id="add-project-button" onclick="showModal('addProject')">Adauga proiect</h2>
-
-        <div id="addProject">
+        <div id="add-project">
             <form id="new-project-form" method="GET" action="/">
                 <fieldset>
                     <legend>Toate campurile sunt obligatorii</legend>
-                    <input type="hidden" name="action" value="addProject">
+                    <input type="hidden" name="action" value="add-project">
                     <label for="ge-no">Numar Germania:</label>
                     <br>
                     <input type="text" name="ge-no" maxlength="15" required>
@@ -50,12 +52,12 @@
                 </fieldset>
                 <div class="form-footer">
                     <button type="submit">Salveaza</button>
-                    <button class="cancel-form" type="reset" onclick="closeModal('new-project-form', 'addProject')">Anuleaza</button>
+                    <button class="cancel-form" type="reset" onclick="closeModal('new-project-form', 'add-project')">Anuleaza</button>
                 </div>
             </form>
         </div>
 
-        <table id="activeProjects">
+        <table id="active-projects">
             <tr>
                 <th>Id</th>
                 <th>Nr Germania</th>
@@ -73,7 +75,7 @@
                     <td>{{$project.Description}}</td>
                     <td>{{$project.DeviceID}}</td>
                     <td>{{$project.Begin}}</td>
-                    <td style="cursor: pointer;" onclick="showModal('editProject{{$project.ID}}')"><span>Edit</span></td>
+                    <td style="cursor: pointer;" onclick="showModal('edit-project-{{$project.ID}}')"><span>Edit</span></td>
                 </tr>
             {{end}}
         </table>
@@ -82,11 +84,11 @@
         <br><br><br><br>
 
         {{range $project := .}}
-        <div id="editProject{{$project.ID}}" class="edit-project">
+        <div id="edit-project-{{$project.ID}}" class="edit-project">
             <form id="edit-project-form-{{$project.ID}}" class="edit-project-form" method="GET" action="/">
                 <fieldset>
                     <legend>Toate campurile sunt obligatorii</legend>
-                    <input type="hidden" name="action" value="editProject">
+                    <input type="hidden" name="action" value="edit-project">
                     <input type="hidden" name="proj-id" value="{{$project.ID}}">
                     <label for="ge-no">Numar Germania:</label>
                     <br>
@@ -107,15 +109,20 @@
                     <label for="start-date">Data inceput:</label>
                     <br>
                     <input type="date" name="start-date" value="{{$project.Begin}}" required>
+                </fieldset>
+                <br>
+                <fieldset class="optional-fieldset">
+                    <legend>Campuri optionale</legend>
+                    <label for="active">Activ:</label>
+                    <input type="checkbox" name="active" {{if .IsActive}} checked {{end}} value="true">
                     <br>
-                    <label for="stop-date">Data incheiere:</label>
+                    <label for="end">Data incheiere:</label>
                     <br>
-                    <input type="date" name="stop-date" value="{{$project.End}}">
-                    <br>
+                    <input type="date" name="end" value="{{.End}}">
                 </fieldset>
                 <div class="form-footer">
                     <button type="submit">Salveaza</button>
-                    <button class="cancel-form" type="reset" onclick="closeModal('edit-project-form-{{$project.ID}}', 'editProject{{$project.ID}}')">Anuleaza</button>
+                    <button class="cancel-form" type="reset" onclick="closeModal('edit-project-form-{{$project.ID}}', 'edit-project-{{$project.ID}}')">Anuleaza</button>
                 </div>
             </form>
         </div>

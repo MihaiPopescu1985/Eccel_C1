@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Gestiune proiecte si lucratori</title>
+        <link rel="stylesheet" type="text/css" href="/css/common.css">
+        <link rel="stylesheet" type="text/css" href="/css/stage-two-style.css">
+        <script src="../js/stage-two.js"></script>
+    </head>
+    <body>
+        <div class="title-holder">
+            <h1 class="title">Gestiunea proiectelor si lucratorilor</h1>
+            <a class="title-link" href="/log-out">Log out</a>
+        </div>
+        <br>
+        <br>
+        
+        <div class="tabs">
+            <div class="passive-tab" onclick="location.href='/'">Proiecte active</div>
+            <div class="active-tab">Proiecte livrate</div>
+            <div class="passive-tab" onclick="location.href='/?view=workers';">Lucratori</div>
+            <div class="passive-tab" onclick="location.href='/?view=free-days';">Zile libere</div>
+            <div class="white-divisor"></div>
+        </div>
+
+        <br>
+
+        <table id="sent-projects">
+            <tr>
+                <th>Nr. Germania</th>
+                <th>Nr. Romania</th>
+                <th>Descriere</th>
+                <th>Data inceput</th>
+                <th>Data sfarsit</th>
+                <th>Timp lucrat</th>
+            </tr>
+            {{range $k, $v := .}}
+                <tr>
+                    <td>{{$k.GeNumber}}</td>
+                    <td>{{$k.RoNumber}}</td>
+                    <td>{{$k.Description}}</td>
+                    <td>{{$k.Begin}}</td>
+                    <td>{{$k.End}}</td>
+                    <td>{{$v}}</td>
+                </tr>
+            {{end}}
+        </table>
+    </body>
+</html>
