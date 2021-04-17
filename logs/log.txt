@@ -1,0 +1,152 @@
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /log-out
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:107: http: named cookie not present
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:98: invalid form entered
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:107: http: named cookie not present
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928db.go:255: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928db.go:153: Executing: CALL SELECT_WORKER_STATUS('1'); 
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928db.go:339: Executing: CALL GET_OVERTIME('1'); 
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /css/common.css
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /css/stage-one-style.css
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /?view=detailed-view
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928db.go:255: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928db.go:125: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 4, 2021); 
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /css/common.css
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /css/stage-one-style.css
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /js/stage-one.js
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /?view=standard-view
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928db.go:255: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928db.go:125: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 4, 2021); 
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "ZI LIBERA": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "ZI LIBERA": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "2021-04-02 12:30:00": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "2021-04-02 16:30:00": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "ZI LIBERA": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "ZI LIBERA": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "2021-04-03 09:00:00": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "2021-04-03 12:00:00": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "ZI LIBERA": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "ZI LIBERA": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "2021-04-03 12:30:00": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "2021-04-03 17:30:00": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing " ": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "OPERATIONAL": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "OPERATIONAL": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "2021-04-05 09:00:00": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "2021-04-05 17:00:00": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /css/common.css
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /css/stage-one-style.css
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /js/stage-one.js
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /?view=detailed-view
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928db.go:255: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928db.go:125: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 4, 2021); 
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /css/common.css
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /css/stage-one-style.css
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /js/stage-one.js
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /?view=standard-view
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928db.go:255: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928db.go:125: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 4, 2021); 
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "ZI LIBERA": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "ZI LIBERA": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "2021-04-02 12:30:00": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "2021-04-02 16:30:00": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "ZI LIBERA": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "ZI LIBERA": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "2021-04-03 09:00:00": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "2021-04-03 12:00:00": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "ZI LIBERA": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "ZI LIBERA": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "2021-04-03 12:30:00": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "2021-04-03 17:30:00": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing " ": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "OPERATIONAL": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "OPERATIONAL": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "2021-04-05 09:00:00": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "2021-04-05 17:00:00": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /css/common.css
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /css/stage-one-style.css
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /js/stage-one.js
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /?view=add-workday
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928db.go:255: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928db.go:177: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /css/common.css
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /css/stage-one-style.css
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /js/stage-one.js
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /?view=free-days
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928db.go:255: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928db.go:317: Executing: SELECT * FROM FREEDAYS ORDER BY DATE ASC; 
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /css/common.css
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /css/stage-one-style.css
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /js/stage-one.js
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /?view=add-workday
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928db.go:255: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928db.go:177: Executing: CALL GET_ACTIVE_PROJECTS(); 
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /css/common.css
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /css/stage-one-style.css
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /js/stage-one.js
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /?view=standard-view
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928db.go:255: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928db.go:125: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 4, 2021); 
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "ZI LIBERA": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "ZI LIBERA": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "2021-04-02 12:30:00": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "2021-04-02 16:30:00": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "ZI LIBERA": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "ZI LIBERA": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "2021-04-03 09:00:00": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "2021-04-03 12:00:00": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "ZI LIBERA": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "ZI LIBERA": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "2021-04-03 12:30:00": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "2021-04-03 17:30:00": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing " ": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "OPERATIONAL": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "OPERATIONAL": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "2021-04-05 09:00:00": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928api.go:27: strconv.Atoi: parsing "2021-04-05 17:00:00": invalid syntax
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /css/common.css
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /css/stage-one-style.css
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /js/stage-one.js
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /?view=detailed-view
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928db.go:255: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928db.go:125: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 4, 2021); 
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /css/common.css
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /js/stage-one.js
+2021-04-17 04:24:29.588448701 +0300 EEST m=+0.000325928middleware.go:31: /css/stage-one-style.css
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806middleware.go:31: /?view=detailed-view
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806db.go:255: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806db.go:125: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 4, 2021); 
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806middleware.go:31: /css/common.css
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806middleware.go:31: /js/stage-one.js
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806middleware.go:31: /css/stage-one-style.css
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806middleware.go:31: /?view=standard-view
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806db.go:255: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806db.go:125: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 4, 2021); 
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806middleware.go:31: /css/common.css
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806middleware.go:31: /css/stage-one-style.css
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806middleware.go:31: /js/stage-one.js
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806middleware.go:31: /?view=detailed-view
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806db.go:255: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806db.go:125: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 4, 2021); 
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806middleware.go:31: /css/common.css
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806middleware.go:31: /css/stage-one-style.css
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806middleware.go:31: /js/stage-one.js
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806middleware.go:31: /
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806db.go:255: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806db.go:153: Executing: CALL SELECT_WORKER_STATUS('1'); 
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806db.go:339: Executing: CALL GET_OVERTIME('1'); 
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806middleware.go:31: /css/common.css
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806middleware.go:31: /css/stage-one-style.css
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806middleware.go:31: /?view=detailed-view
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806db.go:255: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806db.go:125: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 4, 2021); 
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806middleware.go:31: /css/common.css
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806middleware.go:31: /css/stage-one-style.css
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806middleware.go:31: /js/stage-one.js
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806middleware.go:31: /?view=standard-view
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806db.go:255: Executing: SELECT * FROM WORKER WHERE NICKNAME = "Mihai" AND PASSWORD = "Popescu"; 
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806db.go:125: Executing: CALL SELECT_MONTH_TIME_RAPORT(1, 4, 2021); 
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806middleware.go:31: /css/common.css
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806middleware.go:31: /css/stage-one-style.css
+2021-04-17 04:58:33.145894229 +0300 EEST m=+0.000321806middleware.go:31: /js/stage-one.js

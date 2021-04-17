@@ -28,6 +28,11 @@ type workerStatus struct {
 
 type timeReport struct {
 	Worker     *model.Worker
+	TimeReport [][]string
+}
+
+type standardTimeReport struct {
+	Worker     *model.Worker
 	TimeReport map[string][]string
 }
 
@@ -59,7 +64,7 @@ func StageOneHandler(worker *model.Worker, writer http.ResponseWriter, request *
 
 	case "standard-view":
 
-		var pageContent timeReport
+		var pageContent standardTimeReport
 		pageContent.Worker = worker
 
 		pageContent.TimeReport = getStandardReport(worker.ID)
@@ -147,7 +152,7 @@ func serveAddWorkdayPage(workday *addWorkday, writer *http.ResponseWriter) {
 	}
 }
 
-func serveStandardPage(report *timeReport, writer *http.ResponseWriter) {
+func serveStandardPage(report *standardTimeReport, writer *http.ResponseWriter) {
 
 	templ, err := template.New("standardReport").ParseFiles(standardReportPage)
 	if err != nil {
@@ -172,6 +177,7 @@ func prepareStandardReport(report map[string][]string) {
 }
 
 func getStandardReport(wID string) map[string][]string {
+
 	report := getDetailedReport(wID)
 	var standardReport = make(map[string][]string)
 
@@ -201,6 +207,7 @@ func getStandardReport(wID string) map[string][]string {
 		}
 		standardReport[key][day] = strconv.Itoa(currentMinutes + workedMinutes)
 	}
+
 	return standardReport
 }
 
@@ -216,17 +223,17 @@ func serveDetailedPage(report *timeReport, writer *http.ResponseWriter) {
 	}
 }
 
-func prepareDetailedReport(rawReport map[string][]string) {
+func prepareDetailedReport(rawReport [][]string) {
 
 	for k, v := range rawReport {
 		v[5] = toHoursAndMinutes(v[5])
 
-		delete(rawReport, k)
+		//delete(rawReport, k)
 		rawReport[k] = v
 	}
 }
 
-func getDetailedReport(wID string) map[string][]string {
+func getDetailedReport(wID string) [][]string {
 	currentYear := strconv.Itoa(time.Now().Year())
 	currentMonth := strconv.Itoa((int(time.Now().Month())))
 

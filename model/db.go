@@ -119,14 +119,13 @@ func (db *DB) RetrieveActiveWorkdays() map[int][]string {
 }
 
 // RetrieveCurrentMonthTimeRaport - TODO write about behavior
-func (db *DB) RetrieveCurrentMonthTimeRaport(workerID, currentMonth, currentYear string) map[string][]string {
+func (db *DB) RetrieveCurrentMonthTimeRaport(workerID, currentMonth, currentYear string) [][]string {
 
 	command := "CALL SELECT_MONTH_TIME_RAPORT(" + workerID + ", " + currentMonth + ", " + currentYear + ");"
 	util.Log.Printf("Executing: %v \n", command)
 	rows := db.executeQuery(command)
 
-	table := make(map[string][]string)
-	id := 0
+	table := make([][]string, 0)
 
 	var (
 		geNo        sql.NullString //string
@@ -141,8 +140,7 @@ func (db *DB) RetrieveCurrentMonthTimeRaport(workerID, currentMonth, currentYear
 		if err := rows.Scan(&geNo, &roNo, &description, &start, &stop, &minutes); err != nil {
 			util.Log.Panicln(err)
 		}
-		table[strconv.Itoa(id)] = []string{geNo.String, roNo.String, description.String, start.String, stop.String, minutes.String}
-		id++
+		table = append(table, []string{geNo.String, roNo.String, description.String, start.String, stop.String, minutes.String})
 	}
 	return table
 }
