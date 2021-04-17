@@ -6,15 +6,17 @@ import (
 
 // Worker ...
 type Worker struct {
-	ID          string
-	FirstName   string
-	LastName    string
-	CardNumber  string
-	Position    string
-	IsActive    bool
-	Nickname    string
-	Password    string
-	AccessLevel string
+	ID                string
+	FirstName         string
+	LastName          string
+	CardNumber        string
+	Position          string
+	IsActive          bool
+	Nickname          string
+	Password          string
+	AccessLevel       string
+	HireDate          string
+	CloseContractDate string
 }
 
 // Project ...

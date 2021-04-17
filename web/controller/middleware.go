@@ -68,14 +68,12 @@ func AuthMiddleware(next http.Handler) http.Handler {
 
 func setCookies(w *http.ResponseWriter, name string, pass string) {
 	http.SetCookie(*w, &http.Cookie{
-		Name:   "name",
-		Value:  name,
-		Secure: true,
+		Name:  "name",
+		Value: name,
 	})
 	http.SetCookie(*w, &http.Cookie{
-		Name:   "pass",
-		Value:  pass,
-		Secure: true,
+		Name:  "pass",
+		Value: pass,
 	})
 }
 

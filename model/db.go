@@ -258,33 +258,37 @@ func (db *DB) GetUserByNameAndPassword(name, password string) Worker {
 	rows := db.executeQuery(command)
 
 	var (
-		wID       sql.NullString
-		wFirstN   sql.NullString
-		wLastN    sql.NullString
-		wCardNo   sql.NullString
-		wPos      sql.NullString
-		wIsActive sql.NullBool
-		wNick     sql.NullString
-		wPass     sql.NullString
-		wAccess   sql.NullString
+		wID            sql.NullString
+		wFirstN        sql.NullString
+		wLastN         sql.NullString
+		wCardNo        sql.NullString
+		wPos           sql.NullString
+		wIsActive      sql.NullBool
+		wNick          sql.NullString
+		wPass          sql.NullString
+		wAccess        sql.NullString
+		wHire          sql.NullString
+		wCloseContract sql.NullString
 	)
 
 	for rows.Next() {
 		if err := rows.Scan(
-			&wID, &wFirstN, &wLastN, &wCardNo, &wPos, &wIsActive, &wNick, &wPass, &wAccess); err != nil {
+			&wID, &wFirstN, &wLastN, &wCardNo, &wPos, &wIsActive, &wNick, &wPass, &wAccess, &wHire, &wCloseContract); err != nil {
 			util.Log.Panicln(err)
 		}
 	}
 	return Worker{
-		ID:          wID.String,
-		FirstName:   wFirstN.String,
-		LastName:    wLastN.String,
-		CardNumber:  wCardNo.String,
-		Position:    wPos.String,
-		IsActive:    wIsActive.Bool,
-		Nickname:    wNick.String,
-		Password:    wPass.String,
-		AccessLevel: wAccess.String,
+		ID:                wID.String,
+		FirstName:         wFirstN.String,
+		LastName:          wLastN.String,
+		CardNumber:        wCardNo.String,
+		Position:          wPos.String,
+		IsActive:          wIsActive.Bool,
+		Nickname:          wNick.String,
+		Password:          wPass.String,
+		AccessLevel:       wAccess.String,
+		HireDate:          wHire.String,
+		CloseContractDate: wCloseContract.String,
 	}
 }
 
@@ -508,12 +512,14 @@ func (db *DB) GetWorker(workerID string) Worker {
 		nick   sql.NullString
 		pass   sql.NullString
 		lvl    sql.NullString
+		hire   sql.NullString
+		close  sql.NullString
 	)
 	util.Log.Printf("Executing: %v \n", command)
 	rows := db.executeQuery(command)
 
 	for rows.Next() {
-		if err := rows.Scan(&id, &fName, &lName, &cardNo, &posID, &active, &nick, &pass, &lvl); err != nil {
+		if err := rows.Scan(&id, &fName, &lName, &cardNo, &posID, &active, &nick, &pass, &lvl, &hire, &close); err != nil {
 			util.Log.Println(err)
 		}
 	}
@@ -532,9 +538,11 @@ func (db *DB) GetWorker(workerID string) Worker {
 			}
 			return IsActive
 		}(),
-		Nickname:    nick.String,
-		Password:    pass.String,
-		AccessLevel: lvl.String,
+		Nickname:          nick.String,
+		Password:          pass.String,
+		AccessLevel:       lvl.String,
+		HireDate:          hire.String,
+		CloseContractDate: close.String,
 	}
 }
 
