@@ -1,7 +1,7 @@
 {
-	"driver":"",
-	"user":"",
-	"password":"",
-	"URL":"",
-	"name":""
+	"driver":"mysql",
+	"user":"root",
+	"password":"R00tpassword",
+	"URL":"/",
+	"name":"EccelC1"
 }
