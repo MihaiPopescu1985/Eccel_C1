@@ -2,6 +2,8 @@ package model
 
 import (
 	"database/sql"
+	"encoding/json"
+	"io/ioutil"
 	"strconv"
 	"strings"
 	"time"
@@ -10,11 +12,7 @@ import (
 	_ "github.com/go-sql-driver/mysql" // import mysql driver
 )
 
-const (
-	driver      string = "mysql"
-	credentials string = "root:R00tpassword@/EccelC1"
-	database    string = "EccelC1"
-)
+const settingsFile = "model/settings.json"
 
 // Db represent a global variable for storing a database connection.
 var Db DB
@@ -22,6 +20,39 @@ var Db DB
 // DB ...
 type DB struct {
 	database *sql.DB
+	settings dbSettings
+}
+
+type dbSettings struct {
+	driver   string
+	settings string
+}
+
+func (db *DB) getDBSettings() {
+	type sett struct {
+		Driver   string
+		User     string
+		Password string
+		URL      string
+		Name     string
+	}
+
+	fileSettings := readSettingsFromFile()
+	var settings sett
+
+	if err := json.Unmarshal([]byte(fileSettings), &settings); err != nil {
+		util.Log.Panicln(err)
+	}
+	db.settings.driver = settings.Driver
+	db.settings.settings = settings.User + ":" + settings.Password + "@" + settings.URL + settings.Name
+}
+
+func readSettingsFromFile() string {
+	settings, err := ioutil.ReadFile(settingsFile)
+	if err != nil {
+		util.Log.Fatalln(err)
+	}
+	return string(settings)
 }
 
 // Connect connects to database.
@@ -32,7 +63,9 @@ type DB struct {
 func (db *DB) Connect() {
 
 	var err error = nil
-	db.database, err = sql.Open(driver, credentials)
+
+	db.getDBSettings()
+	db.database, err = sql.Open(db.settings.driver, db.settings.settings)
 
 	if err != nil {
 		util.Log.Fatalln(err)
