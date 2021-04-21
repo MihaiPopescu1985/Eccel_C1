@@ -19,32 +19,28 @@ func parseURI(r *http.Request, URI string) string {
 }
 
 // toHoursAndMinutes converts minutes to hours and minutes.
-// For example: toHoursAndMinutes("61") returns "1:01m".
+// For example: toHoursAndMinutes("61") returns "1:01".
 func toHoursAndMinutes(minutes string) string {
 
 	workedMinutes, err := strconv.Atoi(minutes)
 	if err != nil {
 		util.Log.Println(err)
 	}
-
-	workedHours := workedMinutes / 60
+	sign := ""
 	if workedMinutes < 0 {
 		workedMinutes *= -1
+		sign = "-"
 	}
-	workedMinutes = workedMinutes % 60
+	workedHours := int(workedMinutes / 60)
+	workedMinutes = int(workedMinutes % 60)
 
-	var workedTime strings.Builder
-
-	workedTime.WriteString(strconv.Itoa(workedHours))
-	workedTime.WriteString(":")
-
+	workedTime := sign + strconv.Itoa(workedHours) + ":"
 	if workedMinutes < 10 {
-		workedTime.WriteString("0")
+		workedTime = workedTime + "0"
 	}
+	workedTime = workedTime + strconv.Itoa(workedMinutes)
 
-	workedTime.WriteString(strconv.Itoa(workedMinutes))
-
-	return workedTime.String()
+	return workedTime
 }
 
 func formatTime(day, hour, minute string) string {

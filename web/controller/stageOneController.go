@@ -254,7 +254,7 @@ func serveStatusPage(pageContent *workerStatus, writer *http.ResponseWriter) {
 }
 
 func (pageContent *workerStatus) setOvertime() {
-	pageContent.Overtime = model.Db.RetrieveOvertime(pageContent.Worker.ID)
+	pageContent.Overtime = model.Db.RetrieveMinutesOvertime(pageContent.Worker.ID)
 	pageContent.Overtime = toHoursAndMinutes(pageContent.Overtime)
 }
 

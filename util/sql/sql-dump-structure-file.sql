@@ -31,7 +31,7 @@ CREATE TABLE `DEVICE` (
   `ISENDPOINT` tinyint(1) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `NAME` (`NAME`,`IP`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `FREEDAYS` (
   `DATE` date NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `DATE` (`DATE`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -60,7 +60,7 @@ CREATE TABLE `POSITION` (
   `ID` int NOT NULL AUTO_INCREMENT,
   `POSITION` varchar(15) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,7 +82,7 @@ CREATE TABLE `PROJECT` (
   PRIMARY KEY (`ID`),
   KEY `DEVICEID` (`DEVICEID`),
   CONSTRAINT `PROJECT_ibfk_1` FOREIGN KEY (`DEVICEID`) REFERENCES `DEVICE` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,7 +103,7 @@ CREATE TABLE `WORKDAY` (
   KEY `PROJECT` (`PROJECTID`),
   CONSTRAINT `WORKDAY_ibfk_1` FOREIGN KEY (`WORKERID`) REFERENCES `WORKER` (`ID`),
   CONSTRAINT `WORKDAY_ibfk_2` FOREIGN KEY (`PROJECTID`) REFERENCES `PROJECT` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,7 +124,7 @@ CREATE TABLE `WORKDAY_CHANGES` (
   KEY `PROJECT` (`PROJECTID`),
   CONSTRAINT `WORKDAY_CHANGES_ibfk_1` FOREIGN KEY (`WORKERID`) REFERENCES `WORKER` (`ID`),
   CONSTRAINT `WORKDAY_CHANGES_ibfk_2` FOREIGN KEY (`PROJECTID`) REFERENCES `PROJECT` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,7 +149,7 @@ CREATE TABLE `WORKER` (
   PRIMARY KEY (`ID`),
   KEY `POSITIONID` (`POSITIONID`),
   CONSTRAINT `WORKER_ibfk_1` FOREIGN KEY (`POSITIONID`) REFERENCES `POSITION` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -313,7 +313,7 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `GET_OVERTIME` */;
+/*!50003 DROP PROCEDURE IF EXISTS `GET_MINUTES_OVERTIME` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -322,9 +322,10 @@ DELIMITER ;
 /*!50003 SET collation_connection  = latin1_swedish_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER //
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_MINUTES_OVERTIME`(IN wID INT)
 BEGIN
-	DECLARE totalOvertime INT DEFAULT 0;
+DECLARE totalOvertime INT DEFAULT 0;
     DECLARE curDay DATE;
     DECLARE curMin INT DEFAULT 0;
     
@@ -332,24 +333,24 @@ BEGIN
     DECLARE curs CURSOR FOR SELECT DATE, TOTALMINS FROM WORKED_DAYS;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done=TRUE;
     
-	DROP TABLE IF EXISTS WORKED_DAYS;
-	CREATE TEMPORARY TABLE WORKED_DAYS 
-		SELECT DATE(STARTTIME) AS DATE, SUM(TIMESTAMPDIFF(MINUTE, STARTTIME, IFNULL(STOPTIME, NOW()))) AS TOTALMINS 
-			FROM WORKDAY WHERE WORKERID=wID GROUP BY DATE(STARTTIME);
-	OPEN curs;
+DROP TABLE IF EXISTS WORKED_DAYS;
+CREATE TEMPORARY TABLE WORKED_DAYS 
+SELECT DATE(STARTTIME) AS DATE, SUM(TIMESTAMPDIFF(MINUTE, STARTTIME, IFNULL(STOPTIME, NOW()))) AS TOTALMINS 
+FROM WORKDAY WHERE WORKERID=wID GROUP BY DATE(STARTTIME);
+OPEN curs;
     read_loop: LOOP
-		FETCH curs INTO curDay, curMin;
-		IF done THEN LEAVE read_loop;
+FETCH curs INTO curDay, curMin;
+IF done THEN LEAVE read_loop;
         END IF;
         IF DAYOFWEEK(curDay)=1 OR DAYOFWEEK(curDay)=7 OR (SELECT (SELECT ID FROM FREEDAYS WHERE DATE=curDay) IS NOT NULL) THEN
-			SET totalOvertime=totalOvertime + curMin;
-		ELSE 
-			SET totalOvertime=totalOvertime + (curMin-480);
+SET totalOvertime=totalOvertime + curMin;
+ELSE 
+SET totalOvertime=totalOvertime + (curMin-480);
         END IF;
-	END LOOP;
+END LOOP;
     DROP TABLE IF EXISTS WORKED_DAYS;
     SELECT totalOvertime;
-END; //
+END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -540,4 +541,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-17  3:04:27
+-- Dump completed on 2021-04-21 19:58:49

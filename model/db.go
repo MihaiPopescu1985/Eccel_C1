@@ -376,7 +376,7 @@ func (db *DB) RetrieveFreeDays() []string {
 }
 
 // RetrieveOvertime ...
-func (db *DB) RetrieveOvertime(workerID string) string {
+func (db *DB) RetrieveMinutesOvertime(workerID string) string {
 
 	command := "CALL GET_OVERTIME('" + workerID + "');"
 
