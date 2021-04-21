@@ -19,13 +19,26 @@ var Db DB
 
 // DB ...
 type DB struct {
-	database *sql.DB
-	settings dbSettings
+	database     *sql.DB
+	settings     dbSettings
+	settingsFile string
 }
 
 type dbSettings struct {
 	driver   string
 	settings string
+}
+
+// Init is setting up the file where database connection settings are.
+// If no file is provided, the mode/settings.json file is used.
+// It is done so for testing.
+func (db *DB) Init(file string) {
+	if file == "" {
+		db.settingsFile = settingsFile
+	} else {
+		db.settingsFile = file
+	}
+	db.getDBSettings()
 }
 
 func (db *DB) getDBSettings() {
@@ -37,7 +50,7 @@ func (db *DB) getDBSettings() {
 		Name     string
 	}
 
-	fileSettings := readSettingsFromFile()
+	fileSettings := db.readSettingsFromFile()
 	var settings sett
 
 	if err := json.Unmarshal([]byte(fileSettings), &settings); err != nil {
@@ -47,8 +60,8 @@ func (db *DB) getDBSettings() {
 	db.settings.settings = settings.User + ":" + settings.Password + "@" + settings.URL + settings.Name
 }
 
-func readSettingsFromFile() string {
-	settings, err := ioutil.ReadFile(settingsFile)
+func (db *DB) readSettingsFromFile() string {
+	settings, err := ioutil.ReadFile(db.settingsFile)
 	if err != nil {
 		util.Log.Fatalln(err)
 	}
@@ -63,8 +76,6 @@ func readSettingsFromFile() string {
 func (db *DB) Connect() {
 
 	var err error = nil
-
-	db.getDBSettings()
 	db.database, err = sql.Open(db.settings.driver, db.settings.settings)
 
 	if err != nil {

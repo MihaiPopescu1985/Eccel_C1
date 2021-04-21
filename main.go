@@ -15,6 +15,8 @@ const serverPort string = ":8181"
 func main() {
 
 	util.InitLogger()
+
+	model.Db.Init("")
 	model.Db.Connect()
 	/*
 		endPoint := c1device.C1Device{

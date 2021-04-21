@@ -322,37 +322,34 @@ DELIMITER ;
 /*!50003 SET collation_connection  = latin1_swedish_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_OVERTIME`(IN workId INT)
+DELIMITER //
 BEGIN
-DECLARE overtime INT;
-    DECLARE currentDay INT;
-    DECLARE currentYear INT;
-    DECLARE selectedDay INT;
-    DECLARE workedMinutes INT;
+	DECLARE totalOvertime INT DEFAULT 0;
+    DECLARE curDay DATE;
+    DECLARE curMin INT DEFAULT 0;
     
-    SET overtime = 0;
-    SET currentDay = DAYOFYEAR(CURDATE());
-    SET currentYear = EXTRACT(YEAR FROM NOW());
+    DECLARE done BOOLEAN DEFAULT FALSE;
+    DECLARE curs CURSOR FOR SELECT DATE, TOTALMINS FROM WORKED_DAYS;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done=TRUE;
     
-    WHILE (currentDay > 0) DO
-SET selectedDay = DAYOFWEEK(MAKEDATE(currentYear, currentDay));
-       
-DROP TABLE IF EXISTS currentDayWorkedTime;
-        CREATE TEMPORARY TABLE currentDayWorkedTime SELECT WORKDAY.STARTTIME, WORKDAY.STOPTIME FROM WORKDAY 
-WHERE DATE(WORKDAY.STARTTIME) = MAKEDATE(currentYear, currentDay) AND WORKDAY.PROJECTID > 1 AND WORKDAY.WORKERID = workId;
-          
-        SELECT SUM(TIMESTAMPDIFF(MINUTE, currentDayWorkedTime.STARTTIME, (IFNULL(currentDayWorkedTime.STOPTIME, NOW())))) FROM currentDayWorkedTime INTO workedMinutes;
-        
-IF selectedDay = 1 OR selectedDay = 7 OR (SELECT ID FROM FREEDAYS WHERE FREEDAYS.DATE = MAKEDATE(currentYear, currentDay)) IS NOT NULL THEN 
-SET overtime = overtime + IFNULL(workedMinutes, 0);
-ELSE
-SET overtime = overtime + IFNULL(workedMinutes, 0) - 480;
+	DROP TABLE IF EXISTS WORKED_DAYS;
+	CREATE TEMPORARY TABLE WORKED_DAYS 
+		SELECT DATE(STARTTIME) AS DATE, SUM(TIMESTAMPDIFF(MINUTE, STARTTIME, IFNULL(STOPTIME, NOW()))) AS TOTALMINS 
+			FROM WORKDAY WHERE WORKERID=wID GROUP BY DATE(STARTTIME);
+	OPEN curs;
+    read_loop: LOOP
+		FETCH curs INTO curDay, curMin;
+		IF done THEN LEAVE read_loop;
         END IF;
-SET currentDay = currentDay - 1;
-    END WHILE;
-    SELECT overtime;
-END ;;
+        IF DAYOFWEEK(curDay)=1 OR DAYOFWEEK(curDay)=7 OR (SELECT (SELECT ID FROM FREEDAYS WHERE DATE=curDay) IS NOT NULL) THEN
+			SET totalOvertime=totalOvertime + curMin;
+		ELSE 
+			SET totalOvertime=totalOvertime + (curMin-480);
+        END IF;
+	END LOOP;
+    DROP TABLE IF EXISTS WORKED_DAYS;
+    SELECT totalOvertime;
+END; //
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
