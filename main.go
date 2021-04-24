@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"net/http"
 
 	"example.com/c1/model"
@@ -42,5 +41,5 @@ func main() {
 
 	router.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir("./web/view/"))))
 
-	log.Fatal(http.ListenAndServe(serverPort, router))
+	util.Log.Fatal(http.ListenAndServe(serverPort, router))
 }
