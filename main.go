@@ -15,8 +15,8 @@ func main() {
 
 	util.InitLogger()
 
-	model.Db.Init("")
-	model.Db.Connect()
+	util.Log.Println(model.Db.Init(""))
+	util.Log.Println(model.Db.Connect())
 	/*
 		endPoint := c1device.C1Device{
 			IP:        "192.168.0.91",
@@ -35,11 +35,11 @@ func main() {
 
 	router.HandleFunc("/", controller.HomePageHandler)
 	router.HandleFunc("/log-out", controller.LogOutHandler)
+	router.HandleFunc("/error", controller.ErrorPageHandler)
 
 	router.NotFoundHandler = controller.PageNotFoundHandler{}
 	router.Use(controller.AuthMiddleware)
 
 	router.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir("./web/view/"))))
-
-	util.Log.Fatal(http.ListenAndServe(serverPort, router))
+	util.Log.Println(http.ListenAndServe(serverPort, router))
 }

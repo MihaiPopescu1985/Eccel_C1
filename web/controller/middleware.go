@@ -10,6 +10,7 @@ import (
 
 var ignoreURL []string = []string{
 	"/log-out",
+	"/error",
 	"/favicon.ico",
 	"/css/common.css",
 	"/css/stage-one-style.css",
@@ -35,19 +36,36 @@ func AuthMiddleware(next http.Handler) http.Handler {
 				return
 			}
 		}
-		var worker model.Worker
+		var worker *model.Worker
+		var name string
+		var pass string
+		var err error
 
-		if name, pass, err := verifyCookie(r); err == nil {
-			worker = model.Db.GetUserByNameAndPassword(name, pass)
+		if name, pass, err = verifyCookie(r); err == nil {
+			worker, err = model.Db.GetUserByNameAndPassword(name, pass)
+			if err != nil {
+				util.Log.Println(err)
+				ErrorPageHandler(w, r)
+				return
+			}
 
-		} else if name, pass, err := parseForm(r); err == nil {
-			worker = model.Db.GetUserByNameAndPassword(name, pass)
+		} else if name, pass, err = parseForm(r); err == nil {
+			worker, err = model.Db.GetUserByNameAndPassword(name, pass)
+			if err != nil {
+				util.Log.Println(err)
+				ErrorPageHandler(w, r)
+				return
+			}
 			setCookies(&w, name, pass)
+		} else if err != nil {
+			util.Log.Println(err)
+			ErrorPageHandler(w, r)
+			return
 		}
 
 		switch worker.AccessLevel {
 		case "1":
-			StageOneHandler(&worker, w, r)
+			StageOneHandler(worker, w, r)
 		case "2":
 			StageTwoHandler(w, r)
 		case "3":

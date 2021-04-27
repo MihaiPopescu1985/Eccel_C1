@@ -56,48 +56,83 @@ func StageOneHandler(worker *model.Worker, writer http.ResponseWriter, request *
 	case "detailed-view":
 
 		var pageContent timeReport
-		pageContent.Worker = worker
+		var err error
 
-		pageContent.TimeReport = getDetailedReport(worker.ID)
-		prepareDetailedReport(pageContent.TimeReport)
-		serveDetailedPage(&pageContent, &writer)
+		pageContent.Worker = worker
+		pageContent.TimeReport, err = getDetailedReport(worker.ID)
+		if err != nil {
+			util.Log.Println(err)
+			ErrorPageHandler(writer, request)
+		} else {
+			prepareDetailedReport(pageContent.TimeReport)
+			serveDetailedPage(&pageContent, &writer)
+		}
 
 	case "standard-view":
 
 		var pageContent standardTimeReport
+		var err error
+
 		pageContent.Worker = worker
-
-		pageContent.TimeReport = getStandardReport(worker.ID)
-		prepareStandardReport(pageContent.TimeReport)
-
-		serveStandardPage(&pageContent, &writer)
+		pageContent.TimeReport, err = getStandardReport(worker.ID)
+		if err != nil {
+			util.Log.Println(err)
+			ErrorPageHandler(writer, request)
+		} else {
+			prepareStandardReport(pageContent.TimeReport)
+			serveStandardPage(&pageContent, &writer)
+		}
 
 	case "add-workday":
 
-		pageContent := addWorkday{
-			Worker:         worker,
-			ActiveProjects: model.Db.RetrieveActiveProjects(),
+		var pageContent addWorkday
+		var err error
+
+		pageContent.Worker = worker
+		pageContent.ActiveProjects, err = model.Db.RetrieveActiveProjects()
+
+		if err != nil {
+			util.Log.Println(err)
+			ErrorPageHandler(writer, request)
+		} else {
+			serveAddWorkdayPage(&pageContent, &writer)
 		}
-		serveAddWorkdayPage(&pageContent, &writer)
 
 	case "save-workday":
 		saveWorkdayForm(&writer, request, *worker)
 
 	case "free-days":
 
-		pageContent := freeDays{
-			Worker:   worker,
-			FreeDays: model.Db.RetrieveFreeDays(),
+		var pageContent freeDays
+		var err error
+
+		pageContent.Worker = worker
+		pageContent.FreeDays, err = model.Db.RetrieveFreeDays()
+
+		if err != nil {
+			util.Log.Println(err)
+			ErrorPageHandler(writer, request)
+		} else {
+			pageContent.serveFreeDaysPage(&writer, request)
 		}
-		pageContent.serveFreeDaysPage(&writer, request)
 
 	default:
 		var pageContent workerStatus
+		var err error
 
 		pageContent.Worker = worker
-		pageContent.setStatusAndWorkedTime()
-		pageContent.setOvertime()
-
+		err = pageContent.setStatusAndWorkedTime()
+		if err != nil {
+			util.Log.Println(err)
+			ErrorPageHandler(writer, request)
+			break
+		}
+		err = pageContent.setOvertime()
+		if err != nil {
+			util.Log.Println(err)
+			ErrorPageHandler(writer, request)
+			break
+		}
 		serveStatusPage(&pageContent, &writer)
 	}
 }
@@ -176,9 +211,12 @@ func prepareStandardReport(report map[string][]string) {
 	}
 }
 
-func getStandardReport(wID string) map[string][]string {
+func getStandardReport(wID string) (map[string][]string, error) {
 
-	report := getDetailedReport(wID)
+	report, err := getDetailedReport(wID)
+	if err != nil {
+		return nil, err
+	}
 	var standardReport = make(map[string][]string)
 
 	for _, v := range report {
@@ -207,8 +245,7 @@ func getStandardReport(wID string) map[string][]string {
 		}
 		standardReport[key][day] = strconv.Itoa(currentMinutes + workedMinutes)
 	}
-
-	return standardReport
+	return standardReport, err
 }
 
 func serveDetailedPage(report *timeReport, writer *http.ResponseWriter) {
@@ -233,12 +270,12 @@ func prepareDetailedReport(rawReport [][]string) {
 	}
 }
 
-func getDetailedReport(wID string) [][]string {
+func getDetailedReport(wID string) ([][]string, error) {
 	currentYear := strconv.Itoa(time.Now().Year())
 	currentMonth := strconv.Itoa((int(time.Now().Month())))
 
-	report := model.Db.RetrieveCurrentMonthTimeRaport(wID, currentMonth, currentYear)
-	return report
+	report, err := model.Db.RetrieveCurrentMonthTimeRaport(wID, currentMonth, currentYear)
+	return report, err
 }
 
 func serveStatusPage(pageContent *workerStatus, writer *http.ResponseWriter) {
@@ -253,12 +290,20 @@ func serveStatusPage(pageContent *workerStatus, writer *http.ResponseWriter) {
 	}
 }
 
-func (pageContent *workerStatus) setOvertime() {
-	pageContent.Overtime = model.Db.RetrieveMinutesOvertime(pageContent.Worker.ID)
-	pageContent.Overtime = toHoursAndMinutes(pageContent.Overtime)
+func (pageContent *workerStatus) setOvertime() error {
+	var err error
+	pageContent.Overtime, err = model.Db.RetrieveMinutesOvertime(pageContent.Worker.ID)
+	if err == nil {
+		pageContent.Overtime = toHoursAndMinutes(pageContent.Overtime)
+	}
+	return err
 }
 
-func (pageContent *workerStatus) setStatusAndWorkedTime() {
-	pageContent.Status, pageContent.WorkedTime = model.Db.RetrieveWorkerStatus(pageContent.Worker.ID)
-	pageContent.WorkedTime = toHoursAndMinutes(pageContent.WorkedTime)
+func (pageContent *workerStatus) setStatusAndWorkedTime() error {
+	var err error
+	pageContent.Status, pageContent.WorkedTime, err = model.Db.RetrieveWorkerStatus(pageContent.Worker.ID)
+	if err == nil {
+		pageContent.WorkedTime = toHoursAndMinutes(pageContent.WorkedTime)
+	}
+	return err
 }

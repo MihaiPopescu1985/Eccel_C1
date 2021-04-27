@@ -1,10 +1,29 @@
 package controller
 
 import (
+	"net/http"
+	"net/http/httptest"
 	"net/url"
 	"testing"
 	"time"
+
+	"example.com/c1/web/controller"
 )
+
+func TestErrorPage(t *testing.T) {
+	t.Run("returns error message", func(t *testing.T) {
+		request, _ := http.NewRequest(http.MethodGet, "/error", nil)
+		response := httptest.NewRecorder()
+
+		controller.ErrorPageHandler(response, request)
+		got := response.Body.String()
+		want := "There was an error processing your request"
+
+		if got != want {
+			t.Errorf("got %q, want %q", got, want)
+		}
+	})
+}
 
 func TestShouldGenerateProperStandardViewOfMonthTimeReport(t *testing.T) {
 

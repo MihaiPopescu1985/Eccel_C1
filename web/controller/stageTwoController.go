@@ -33,8 +33,12 @@ func StageTwoHandler(w http.ResponseWriter, r *http.Request) {
 		sentProjectsView(&w, r)
 
 	case "free-days":
-		pageContent := model.Db.RetrieveFreeDays()
-		serveFreeDaysPage(&w, r, pageContent)
+		pageContent, err := model.Db.RetrieveFreeDays()
+		if err != nil {
+			ErrorPageHandler(w, r)
+		} else {
+			serveFreeDaysPage(&w, r, pageContent)
+		}
 
 	case "delete-free-day":
 		freeDayID := parseURI(r, "free-day")
@@ -63,19 +67,24 @@ func serveFreeDaysPage(w *http.ResponseWriter, r *http.Request, pageContent []st
 
 func sentProjectsView(w *http.ResponseWriter, r *http.Request) {
 
-	pageContent := model.Db.RetrieveSentProjects()
-	for k, v := range pageContent {
-		pageContent[k] = toHoursAndMinutes(v)
-	}
-
-	templ, err := template.New("sentProjects").ParseFiles(sentProjectsPage)
+	pageContent, err := model.Db.RetrieveSentProjects()
 	if err != nil {
 		util.Log.Println(err)
-	}
+		ErrorPageHandler(*w, r)
+	} else {
+		for k, v := range pageContent {
+			pageContent[k] = toHoursAndMinutes(v)
+		}
 
-	err = templ.ExecuteTemplate(*w, "sent-projects.html", pageContent)
-	if err != nil {
-		util.Log.Println(err)
+		templ, err := template.New("sentProjects").ParseFiles(sentProjectsPage)
+		if err != nil {
+			util.Log.Println(err)
+		}
+
+		err = templ.ExecuteTemplate(*w, "sent-projects.html", pageContent)
+		if err != nil {
+			util.Log.Println(err)
+		}
 	}
 }
 
@@ -126,15 +135,24 @@ func addProject(w *http.ResponseWriter, r *http.Request) {
 
 func showActiveProjects(w http.ResponseWriter, r *http.Request) {
 
-	activeProjects := model.Db.RetrieveActiveProjects()
-
-	templ, err := template.New("stageTwo").ParseFiles(activeProjectsPage)
+	activeProjects, err := model.Db.RetrieveActiveProjects()
 	if err != nil {
 		util.Log.Println(err)
-	}
+		ErrorPageHandler(w, r)
+		return
+	} else {
+		templ, err := template.New("stageTwo").ParseFiles(activeProjectsPage)
+		if err != nil {
+			util.Log.Println(err)
+			ErrorPageHandler(w, r)
+			return
+		}
 
-	err = templ.ExecuteTemplate(w, "active-projects.html", activeProjects)
-	if err != nil {
-		util.Log.Println(err)
+		err = templ.ExecuteTemplate(w, "active-projects.html", activeProjects)
+		if err != nil {
+			util.Log.Println(err)
+			ErrorPageHandler(w, r)
+			return
+		}
 	}
 }

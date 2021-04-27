@@ -16,7 +16,7 @@ func TestShouldGetSettingsFromFile(t *testing.T) {
 	const file string = "settings.json"
 	Db.Init(file)
 
-	got := Db.readSettingsFromFile()
+	got, _ := Db.readSettingsFromFile()
 
 	if !reflect.DeepEqual(want, got) {
 		t.Fatalf("error reading settings")
@@ -57,7 +57,7 @@ func TestShouldConnectToDatabase(t *testing.T) {
 	Db.Init(settingsFile)
 	Db.Connect()
 
-	if !Db.IsConnected() {
+	if err := Db.IsConnected(); err != nil {
 		t.Fatalf("no database connection could be established")
 	}
 }

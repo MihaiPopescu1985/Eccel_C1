@@ -61,7 +61,10 @@ func (device *C1Device) UseDevice() {
 		for msg := range device.WsChannel {
 			deviceName, cardUID := device.ParseMessage(msg)
 
-			if model.Db.IsConnected() && deviceName != "" && cardUID != "" {
+			err := model.Db.IsConnected()
+			if err != nil {
+				util.Log.Println(err)
+			} else if deviceName != "" && cardUID != "" {
 				model.Db.InsertIntoWorkday(deviceName, cardUID)
 			}
 			device.WsRead()
