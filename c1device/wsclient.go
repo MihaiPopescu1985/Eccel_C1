@@ -1,7 +1,6 @@
 package c1device
 
 import (
-	"example.com/c1/util"
 	"golang.org/x/net/websocket"
 )
 
@@ -13,28 +12,27 @@ const origin string = "http://localhost/"
 // WsRead reads data sent by a C1 device via websocket.
 // Data is passed to device's []byte channel.
 // A connection to device must be established first.
-func (dev *C1Device) WsRead() {
+func (dev *C1Device) WsRead() error {
 
 	msg := make([]byte, 1024)
 	lenght, err := dev.WsConnection.Read(msg)
 
 	if err != nil {
-		util.Log.Panicln(err)
+		return err
 	}
 	msg = msg[:lenght]
 	go func() {
 		dev.WsChannel <- msg
 	}()
+	return nil
 }
 
 // WsConnect connects to a C1 device via websocket.
-func (dev *C1Device) WsConnect() {
+func (dev *C1Device) WsConnect() error {
 
 	url := wsPrefix + dev.IP + wsSufix
 	var err error
 
 	dev.WsConnection, err = websocket.Dial(url, "", origin)
-	if err != nil {
-		util.Log.Panicln(err)
-	}
+	return err
 }

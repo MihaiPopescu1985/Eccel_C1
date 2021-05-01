@@ -28,14 +28,13 @@ func AuthMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
 		w.Header().Add("Cache-Control", "no-cache")
-
 		util.Log.Println(r.RequestURI)
-		for _, v := range ignoreURL {
-			if v == r.RequestURI {
-				next.ServeHTTP(w, r)
-				return
-			}
+
+		if isLinkPermited(r) {
+			next.ServeHTTP(w, r)
+			return
 		}
+
 		var worker *model.Worker
 		var name string
 		var pass string
@@ -43,13 +42,19 @@ func AuthMiddleware(next http.Handler) http.Handler {
 
 		if name, pass, err = verifyCookie(r); err == nil {
 			worker, err = model.Db.GetUserByNameAndPassword(name, pass)
+		}
+		if err != nil {
+			name, pass, err = parseForm(r)
 			if err != nil {
+				if r.RequestURI == "/" {
+					next.ServeHTTP(w, r)
+					return
+				}
 				util.Log.Println(err)
 				ErrorPageHandler(w, r)
 				return
 			}
 
-		} else if name, pass, err = parseForm(r); err == nil {
 			worker, err = model.Db.GetUserByNameAndPassword(name, pass)
 			if err != nil {
 				util.Log.Println(err)
@@ -57,10 +62,6 @@ func AuthMiddleware(next http.Handler) http.Handler {
 				return
 			}
 			setCookies(&w, name, pass)
-		} else if err != nil {
-			util.Log.Println(err)
-			ErrorPageHandler(w, r)
-			return
 		}
 
 		switch worker.AccessLevel {
@@ -82,6 +83,15 @@ func AuthMiddleware(next http.Handler) http.Handler {
 			HomePageHandler(w, r)
 		}
 	})
+}
+
+func isLinkPermited(r *http.Request) bool {
+	for _, v := range ignoreURL {
+		if v == r.RequestURI {
+			return true
+		}
+	}
+	return false
 }
 
 func setCookies(w *http.ResponseWriter, name string, pass string) {
@@ -130,6 +140,5 @@ func verifyCookie(r *http.Request) (string, string, error) {
 		util.Log.Println(err)
 		return "", "", err
 	}
-
 	return nameCookie.Value, passCookie.Value, nil
 }

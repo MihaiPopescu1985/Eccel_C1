@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 
 	"example.com/c1/model"
-	"example.com/c1/util"
 	"golang.org/x/net/websocket"
 )
 
@@ -30,7 +29,7 @@ type CardReading struct {
 }
 
 // ParseMessage returns device name and rfid card's uid when reading.
-func (device *C1Device) ParseMessage(message []byte) (string, string) {
+func (device *C1Device) ParseMessage(message []byte) (string, string, error) {
 
 	var cardReading CardReading
 	var deviceName string
@@ -39,12 +38,12 @@ func (device *C1Device) ParseMessage(message []byte) (string, string) {
 	err := json.Unmarshal(message, &cardReading)
 
 	if err != nil {
-		util.Log.Panicln(err)
+		return "", "", err
 	} else {
 		deviceName = cardReading.DeviceName
 		cardUID = cardReading.UID
 	}
-	return deviceName, cardUID
+	return deviceName, cardUID, nil
 }
 
 // UseDevice put at use a C1 device.
@@ -52,22 +51,41 @@ func (device *C1Device) ParseMessage(message []byte) (string, string) {
 // - initiate a connection to device via websocket,
 // - reads cards data
 // - calls a database connection to save data into database
-func (device *C1Device) UseDevice() {
+func (device *C1Device) UseDevice() error {
+	var err error
+	err = device.WsConnect()
 
-	device.WsConnect()
-	device.WsRead()
+	if err != nil {
+		return err
+	}
 
-	go func() {
+	err = device.WsRead()
+	if err != nil {
+		return err
+	}
+
+	go func() error {
 		for msg := range device.WsChannel {
-			deviceName, cardUID := device.ParseMessage(msg)
-
-			err := model.Db.IsConnected()
+			deviceName, cardUID, err := device.ParseMessage(msg)
 			if err != nil {
-				util.Log.Println(err)
-			} else if deviceName != "" && cardUID != "" {
-				model.Db.InsertIntoWorkday(deviceName, cardUID)
+				return err
 			}
-			device.WsRead()
+
+			err = model.Db.IsConnected()
+			if err != nil {
+				return err
+			} else if deviceName != "" && cardUID != "" {
+				err = model.Db.InsertIntoWorkday(deviceName, cardUID)
+				if err != nil {
+					return err
+				}
+			}
+			err = device.WsRead()
+			if err != nil {
+				return err
+			}
 		}
+		return err
 	}()
+	return err
 }
