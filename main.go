@@ -4,7 +4,6 @@ import (
 	"net/http"
 	"time"
 
-	"example.com/c1/c1device"
 	"example.com/c1/model"
 	"example.com/c1/util"
 	"example.com/c1/web/controller"
@@ -27,63 +26,6 @@ func main() {
 				util.Log.Println(err)
 			}
 			time.Sleep(time.Minute)
-		}
-	}()
-
-	dev1 := c1device.C1Device{
-		IP:        "192.168.0.91",
-		WsChannel: make(chan []byte),
-	}
-	go func() {
-		for {
-			err := dev1.UseDevice()
-			if err != nil {
-				util.Log.Println(err)
-				time.Sleep(time.Minute)
-				err = nil
-			}
-		}
-	}()
-	dev2 := c1device.C1Device{
-		IP:        "192.168.0.92",
-		WsChannel: make(chan []byte),
-	}
-	go func() {
-		for {
-			err := dev2.UseDevice()
-			if err != nil {
-				util.Log.Println(err)
-				time.Sleep(time.Minute)
-				err = nil
-			}
-		}
-	}()
-	dev3 := c1device.C1Device{
-		IP:        "192.168.0.91",
-		WsChannel: make(chan []byte),
-	}
-	go func() {
-		for {
-			err := dev3.UseDevice()
-			if err != nil {
-				util.Log.Println(err)
-				time.Sleep(time.Minute)
-				err = nil
-			}
-		}
-	}()
-	dev4 := c1device.C1Device{
-		IP:        "192.168.0.92",
-		WsChannel: make(chan []byte),
-	}
-	go func() {
-		for {
-			err := dev4.UseDevice()
-			if err != nil {
-				util.Log.Println(err)
-				time.Sleep(time.Minute)
-				err = nil
-			}
 		}
 	}()
 
