@@ -34,6 +34,7 @@ func main() {
 	router.HandleFunc("/", controller.HomePageHandler)
 	router.HandleFunc("/log-out", controller.LogOutHandler)
 	router.HandleFunc("/error", controller.ErrorPageHandler)
+	router.HandleFunc("/save-time", controller.SaveTimeHandler)
 
 	router.NotFoundHandler = controller.PageNotFoundHandler{}
 	router.Use(controller.AuthMiddleware)

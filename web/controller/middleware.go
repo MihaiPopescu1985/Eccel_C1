@@ -9,6 +9,7 @@ import (
 )
 
 var ignoreURL []string = []string{
+	"/save-time",
 	"/log-out",
 	"/error",
 	"/favicon.ico",
