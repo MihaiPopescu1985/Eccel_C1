@@ -91,14 +91,14 @@ func editProject(w *http.ResponseWriter, r *http.Request) {
 	}
 
 	project := model.Project{
-		ID:          r.FormValue("id"),
+		ID:          r.FormValue("proj-id"),
 		IPAddress:   r.FormValue("ip"),
 		GeNumber:    r.FormValue("ge-no"),
 		RoNumber:    r.FormValue("ro-no"),
-		Description: r.FormValue("descr"),
+		Description: r.FormValue("description"),
 		DeviceID:    r.FormValue("dev-id"),
-		Begin:       r.FormValue("begin"),
-		End:         r.FormValue("end"),
+		Begin:       r.FormValue("start-date"),
+		End:         r.FormValue("end-date"),
 		IsActive: func() bool {
 			isActive, err := strconv.ParseBool(r.FormValue("active"))
 			if err != nil {
