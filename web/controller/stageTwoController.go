@@ -23,15 +23,22 @@ const (
 func StageTwoHandler(w http.ResponseWriter, r *http.Request) {
 
 	switch parseURI(r, "view") {
-	case "add-project":
-		addProject(&w, r)
-
+	case "delete-free-day":
+		freeDayID := parseURI(r, "free-day")
+		model.Db.DeleteFreeDay(freeDayID)
+		http.Redirect(w, r, "/?view=free-days", http.StatusFound)
+	case "add-free-day":
+		freeDay := parseURI(r, "free-day")
+		model.Db.AddFreeDay(freeDay)
+		http.Redirect(w, r, "/?view=free-days", http.StatusFound)
 	case "edit-project":
 		editProject(&w, r)
-
+	case "add-project":
+		addProject(&w, r)
 	case "sent-projects":
 		sentProjectsView(&w, r)
-
+	case "workers":
+		showActiveProjects(w, r)
 	case "free-days":
 		pageContent, err := model.Db.RetrieveFreeDays()
 		if err != nil {
@@ -39,16 +46,6 @@ func StageTwoHandler(w http.ResponseWriter, r *http.Request) {
 		} else {
 			serveFreeDaysPage(&w, r, pageContent)
 		}
-
-	case "delete-free-day":
-		freeDayID := parseURI(r, "free-day")
-		model.Db.DeleteFreeDay(freeDayID)
-		http.Redirect(w, r, "/?view=free-days", http.StatusFound)
-
-	case "add-free-day":
-		freeDay := parseURI(r, "free-day")
-		model.Db.AddFreeDay(freeDay)
-		http.Redirect(w, r, "/?view=free-days", http.StatusFound)
 	default:
 		showActiveProjects(w, r)
 	}

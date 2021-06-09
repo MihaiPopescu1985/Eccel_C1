@@ -30,7 +30,7 @@
         <br><br><br><br><br><br>
 
         <div id="add-project">
-            <form id="new-project-form" method="GET" action="/">
+            <form id="new-project-form" method="GET" action="/?view=add-project">
                 <fieldset>
                     <legend>Toate campurile sunt obligatorii</legend>
                     <input type="hidden" name="action" value="add-project">
@@ -85,7 +85,7 @@
 
         {{range $project := .}}
         <div id="edit-project-{{$project.ID}}" class="edit-project">
-            <form id="edit-project-form-{{$project.ID}}" class="edit-project-form" method="GET" action="/">
+            <form id="edit-project-form-{{$project.ID}}" class="edit-project-form" method="GET" action="/?view=edit-project">
                 <fieldset>
                     <legend>Toate campurile sunt obligatorii</legend>
                     <input type="hidden" name="action" value="edit-project">
