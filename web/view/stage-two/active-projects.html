@@ -85,10 +85,10 @@
 
         {{range $project := .}}
         <div id="edit-project-{{$project.ID}}" class="edit-project">
-            <form id="edit-project-form-{{$project.ID}}" class="edit-project-form" method="GET" action="/?view=edit-project">
+            <form id="edit-project-form-{{$project.ID}}" class="edit-project-form" method="GET" action="/">
                 <fieldset>
                     <legend>Toate campurile sunt obligatorii</legend>
-                    <input type="hidden" name="action" value="edit-project">
+                    <input type="hidden" name="view" value="edit-project">
                     <input type="hidden" name="proj-id" value="{{$project.ID}}">
                     <label for="ge-no">Numar Germania:</label>
                     <br>
