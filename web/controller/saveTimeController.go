@@ -2,6 +2,7 @@ package controller
 
 import (
 	"encoding/json"
+	"io"
 	"net/http"
 
 	"example.com/c1/model"
@@ -18,6 +19,8 @@ type deviceMsg struct {
 	TagKnown   bool   `json:"known_tag"`
 }
 
+// SaveTimeHandler handles requests from devices sent in json format.
+// Requests are parsed and data is saved in database.
 func SaveTimeHandler(w http.ResponseWriter, r *http.Request) {
 
 	devName, tagUid, err := parseDeviceReading(r)
@@ -31,7 +34,7 @@ func SaveTimeHandler(w http.ResponseWriter, r *http.Request) {
 func parseDeviceReading(r *http.Request) (string, string, error) {
 	body := make([]byte, 1024)
 	bytes, err := r.Body.Read(body)
-	if err != nil {
+	if err != nil && err != io.EOF {
 		return "", "", err
 	}
 	body = body[:bytes]
