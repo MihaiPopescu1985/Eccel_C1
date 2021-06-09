@@ -87,7 +87,7 @@ func sentProjectsView(w *http.ResponseWriter, r *http.Request) {
 
 func editProject(w *http.ResponseWriter, r *http.Request) {
 	if err := r.ParseForm(); err != nil {
-		util.Log.Panicln(err)
+		util.Log.Println(err)
 	}
 
 	project := model.Project{
@@ -102,7 +102,7 @@ func editProject(w *http.ResponseWriter, r *http.Request) {
 		IsActive: func() bool {
 			isActive, err := strconv.ParseBool(r.FormValue("active"))
 			if err != nil {
-				util.Log.Panicln(err)
+				util.Log.Println(err)
 			}
 			return isActive
 		}(),
@@ -113,7 +113,7 @@ func editProject(w *http.ResponseWriter, r *http.Request) {
 
 func addProject(w *http.ResponseWriter, r *http.Request) {
 	if err := r.ParseForm(); err != nil {
-		util.Log.Panicln(err)
+		util.Log.Println(err)
 	}
 	project := model.Project{
 		GeNumber:    r.FormValue("ge-no"),

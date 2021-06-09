@@ -114,7 +114,7 @@
                 <fieldset class="optional-fieldset">
                     <legend>Campuri optionale</legend>
                     <label for="active">Activ:</label>
-                    <input type="checkbox" name="active" {{if .IsActive}} checked {{end}} value="true">
+                    <input type="checkbox" name="active" {{if .IsActive}} checked {{end}} value={{.IsActive}}>
                     <br>
                     <label for="end">Data incheiere:</label>
                     <br>
