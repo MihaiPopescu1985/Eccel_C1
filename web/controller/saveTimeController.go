@@ -12,21 +12,33 @@ import (
 type deviceMsg struct {
 	Model      string `json:"type"`
 	Uid        string `json:"uid"`
-	Sak        string `json:"sak"`
+	Sak        int    `json:"sak"`
 	CardType   string `json:"string"`
 	DeviceName string `json:"device_name"`
 	TagKnown   bool   `json:"known_tag"`
 }
 
 func SaveTimeHandler(w http.ResponseWriter, r *http.Request) {
-	body := make([]byte, 1)
-	r.Body.Read(body)
-	util.Log.Println(string(body))
 
+	devName, tagUid, err := parseDeviceReading(r)
+	if err != nil {
+		util.Log.Println(err)
+		return
+	}
+	model.Db.InsertIntoWorkday(devName, tagUid)
+}
+
+func parseDeviceReading(r *http.Request) (string, string, error) {
+	body := make([]byte, 1024)
+	bytes, err := r.Body.Read(body)
+	if err != nil {
+		return "", "", err
+	}
+	body = body[:bytes]
 	var message deviceMsg
 
 	if err := json.Unmarshal(body, &message); err != nil {
-		util.Log.Println(err)
+		return "", "", err
 	}
-	model.Db.InsertIntoWorkday(message.DeviceName, message.Uid)
+	return message.DeviceName, message.Uid, nil
 }
