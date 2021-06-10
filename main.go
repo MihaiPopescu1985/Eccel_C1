@@ -15,7 +15,7 @@ const serverPort string = ":8080"
 func main() {
 
 	util.InitLogger()
-
+	model.Db = &model.MysqlDB{}
 	err := model.Db.Init("")
 	if err != nil {
 		util.Log.Println(err)

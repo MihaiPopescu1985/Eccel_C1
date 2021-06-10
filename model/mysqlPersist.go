@@ -3,6 +3,7 @@ package model
 import (
 	"database/sql"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"strconv"
 	"strings"
@@ -14,11 +15,8 @@ import (
 
 const settingsFile = "model/settings.json"
 
-// Db represent a global variable for storing a database connection.
-var Db DB
-
-// DB ...
-type DB struct {
+// MysqlDB
+type MysqlDB struct {
 	database     *sql.DB
 	settings     dbSettings
 	settingsFile string
@@ -32,16 +30,16 @@ type dbSettings struct {
 // Init is setting up the file where database connection settings are.
 // If no file is provided, the mode/settings.json file is used.
 // It is done so for testing.
-func (db *DB) Init(file string) error {
+func (db *MysqlDB) Init(file interface{}) error {
 	if file == "" {
 		db.settingsFile = settingsFile
 	} else {
-		db.settingsFile = file
+		db.settingsFile = fmt.Sprint(file)
 	}
 	return db.getDBSettings()
 }
 
-func (db *DB) getDBSettings() error {
+func (db *MysqlDB) getDBSettings() error {
 	type sett struct {
 		Driver   string
 		User     string
@@ -64,7 +62,7 @@ func (db *DB) getDBSettings() error {
 	return err
 }
 
-func (db *DB) readSettingsFromFile() (string, error) {
+func (db *MysqlDB) readSettingsFromFile() (string, error) {
 	settings, err := ioutil.ReadFile(db.settingsFile)
 	if err != nil {
 		return "", err
@@ -77,7 +75,7 @@ func (db *DB) readSettingsFromFile() (string, error) {
 // database connection so a Ping method should be
 // called. The Ping method is embedded inside
 // IsConnected method.
-func (db *DB) Connect() error {
+func (db *MysqlDB) Connect() error {
 
 	var err error = nil
 	db.database, err = sql.Open(db.settings.driver, db.settings.settings)
@@ -89,19 +87,19 @@ func (db *DB) Connect() error {
 }
 
 // IsConnected verify database connection.
-func (db *DB) IsConnected() error {
+func (db *MysqlDB) IsConnected() error {
 	return db.database.Ping()
 }
 
 // Execute executes a command against database with no returning result set.
-func (db *DB) execute(command string) error {
+func (db *MysqlDB) execute(command string) error {
 
 	_, err := db.database.Exec(command)
 	return err
 }
 
 // ExecuteQuery TODO: write about the behavior of this function
-func (db *DB) executeQuery(command string) (*sql.Rows, error) {
+func (db *MysqlDB) executeQuery(command string) (*sql.Rows, error) {
 
 	rows, err := db.database.Query(command)
 
@@ -127,7 +125,7 @@ func closeRows(rows *sql.Rows, timeSpan time.Duration) {
 }
 
 // InsertIntoWorkday returns the sql command to start/stop time on workday.
-func (db *DB) InsertIntoWorkday(deviceName, cardUID string) error {
+func (db *MysqlDB) InsertIntoWorkday(deviceName, cardUID string) error {
 	command := "CALL INSERT_INTO_WORKDAY(\"" + deviceName + "\", \"" + cardUID + "\");"
 
 	util.Log.Printf("Executing: %v \n", command)
@@ -135,7 +133,7 @@ func (db *DB) InsertIntoWorkday(deviceName, cardUID string) error {
 }
 
 // RetrieveActiveWorkdays - TODO write about behavior
-func (db *DB) RetrieveActiveWorkdays() (map[int][]string, error) {
+func (db *MysqlDB) RetrieveActiveWorkdays() (map[int][]string, error) {
 
 	command := "CALL SELECT_ACTIVE_WORKDAY;"
 	util.Log.Printf("Executing: %v \n", command)
@@ -164,7 +162,7 @@ func (db *DB) RetrieveActiveWorkdays() (map[int][]string, error) {
 }
 
 // RetrieveCurrentMonthTimeRaport - TODO write about behavior
-func (db *DB) RetrieveCurrentMonthTimeRaport(workerID, currentMonth, currentYear string) ([][]string, error) {
+func (db *MysqlDB) RetrieveCurrentMonthTimeRaport(workerID, currentMonth, currentYear string) ([][]string, error) {
 
 	command := "CALL SELECT_MONTH_TIME_RAPORT(" + workerID + ", " + currentMonth + ", " + currentYear + ");"
 	util.Log.Printf("Executing: %v \n", command)
@@ -194,7 +192,7 @@ func (db *DB) RetrieveCurrentMonthTimeRaport(workerID, currentMonth, currentYear
 }
 
 // RetrieveWorkerStatus - TODO write about behavior
-func (db *DB) RetrieveWorkerStatus(id string) (string, string, error) {
+func (db *MysqlDB) RetrieveWorkerStatus(id string) (string, string, error) {
 
 	var command string = "CALL SELECT_WORKER_STATUS('" + id + "');"
 	util.Log.Printf("Executing: %v \n", command)
@@ -221,7 +219,7 @@ func (db *DB) RetrieveWorkerStatus(id string) (string, string, error) {
 }
 
 // RetrieveActiveProjects ...
-func (db *DB) RetrieveActiveProjects() ([]Project, error) {
+func (db *MysqlDB) RetrieveActiveProjects() ([]Project, error) {
 
 	var command string = "CALL GET_ACTIVE_PROJECTS();"
 	util.Log.Printf("Executing: %v \n", command)
@@ -265,7 +263,7 @@ func (db *DB) RetrieveActiveProjects() ([]Project, error) {
 }
 
 // RetrieveAllWorkers ...
-func (db *DB) RetrieveAllWorkers() ([]Worker, error) {
+func (db *MysqlDB) RetrieveAllWorkers() ([]Worker, error) {
 
 	command := "CALL GET_ALL_WORKERS();"
 	util.Log.Printf("Executing: %v \n", command)
@@ -305,7 +303,7 @@ func (db *DB) RetrieveAllWorkers() ([]Worker, error) {
 }
 
 // GetUserByNameAndPassword TODO: write about function
-func (db *DB) GetUserByNameAndPassword(name, password string) (*Worker, error) {
+func (db *MysqlDB) GetUserByNameAndPassword(name, password string) (*Worker, error) {
 
 	command := "SELECT * FROM WORKER WHERE NICKNAME = \"" + name + "\" AND PASSWORD = \"" + password + "\";"
 	util.Log.Printf("Executing: %v \n", command)
@@ -351,7 +349,7 @@ func (db *DB) GetUserByNameAndPassword(name, password string) (*Worker, error) {
 }
 
 // RetrieveWorkerName returns worker's name based on id.
-func (db *DB) RetrieveWorkerName(id string) (string, error) {
+func (db *MysqlDB) RetrieveWorkerName(id string) (string, error) {
 	var (
 		firstName sql.NullString
 		lastName  sql.NullString
@@ -373,7 +371,7 @@ func (db *DB) RetrieveWorkerName(id string) (string, error) {
 }
 
 // RetrieveFreeDays returns a map containing free days.
-func (db *DB) RetrieveFreeDays() ([]string, error) {
+func (db *MysqlDB) RetrieveFreeDays() ([]string, error) {
 
 	command := "SELECT * FROM FREEDAYS ORDER BY DATE ASC;"
 	util.Log.Printf("Executing: %v \n", command)
@@ -398,7 +396,7 @@ func (db *DB) RetrieveFreeDays() ([]string, error) {
 }
 
 // RetrieveOvertime ...
-func (db *DB) RetrieveMinutesOvertime(workerID string) (string, error) {
+func (db *MysqlDB) RetrieveMinutesOvertime(workerID string) (string, error) {
 
 	command := "CALL GET_OVERTIME('" + workerID + "');"
 	util.Log.Printf("Executing: %v \n", command)
@@ -418,7 +416,7 @@ func (db *DB) RetrieveMinutesOvertime(workerID string) (string, error) {
 	return overtime.String, nil
 }
 
-func (db *DB) AddWorkday(workerID, projectID string, startHour, stopHour string) error {
+func (db *MysqlDB) AddWorkday(workerID, projectID string, startHour, stopHour string) error {
 
 	var command strings.Builder
 	command.WriteString("CALL ADD_NEW_WORKDAY('")
@@ -435,7 +433,7 @@ func (db *DB) AddWorkday(workerID, projectID string, startHour, stopHour string)
 	return db.execute(command.String())
 }
 
-func (db *DB) AddProject(project Project) error {
+func (db *MysqlDB) AddProject(project Project) error {
 	var command strings.Builder
 
 	command.WriteString("CALL ADD_NEW_PROJECT('")
@@ -452,7 +450,7 @@ func (db *DB) AddProject(project Project) error {
 	return db.execute(command.String())
 }
 
-func (db *DB) RetrieveAllPositions() (map[int]string, error) {
+func (db *MysqlDB) RetrieveAllPositions() (map[int]string, error) {
 
 	command := ("CALL GET_ALL_POSITIONS();")
 	util.Log.Printf("Executing: %v \n", command)
@@ -475,7 +473,7 @@ func (db *DB) RetrieveAllPositions() (map[int]string, error) {
 	return positions, nil
 }
 
-func (db *DB) AddWorker(worker Worker) error {
+func (db *MysqlDB) AddWorker(worker Worker) error {
 	var command strings.Builder
 
 	command.WriteString("CALL ADD_NEW_WORKER('")
@@ -498,7 +496,7 @@ func (db *DB) AddWorker(worker Worker) error {
 	return db.execute(command.String())
 }
 
-func (db *DB) GetProject(projectID string) (*Project, error) {
+func (db *MysqlDB) GetProject(projectID string) (*Project, error) {
 	var (
 		command strings.Builder
 
@@ -538,7 +536,7 @@ func (db *DB) GetProject(projectID string) (*Project, error) {
 	}, nil
 }
 
-func (db *DB) UpdateProject(project Project) error {
+func (db *MysqlDB) UpdateProject(project Project) error {
 
 	var command strings.Builder
 
@@ -571,7 +569,7 @@ func (db *DB) UpdateProject(project Project) error {
 	return db.execute(command.String())
 }
 
-func (db *DB) GetWorker(workerID string) (*Worker, error) {
+func (db *MysqlDB) GetWorker(workerID string) (*Worker, error) {
 	var (
 		command string = "SELECT * FROM WORKER WHERE ID = '" + workerID + "';"
 
@@ -621,7 +619,7 @@ func (db *DB) GetWorker(workerID string) (*Worker, error) {
 	}, nil
 }
 
-func (db *DB) UpdateWorker(worker Worker) error {
+func (db *MysqlDB) UpdateWorker(worker Worker) error {
 	var command strings.Builder
 
 	command.WriteString("UPDATE WORKER SET FIRSTNAME='")
@@ -648,7 +646,7 @@ func (db *DB) UpdateWorker(worker Worker) error {
 	return db.execute(command.String())
 }
 
-func (db *DB) RetrieveSentProjects() (map[Project]string, error) {
+func (db *MysqlDB) RetrieveSentProjects() (map[Project]string, error) {
 
 	command := "CALL GET_DELIVERED_PROJECTS;"
 	util.Log.Printf("Executing: %v \n", command)
@@ -696,13 +694,13 @@ func (db *DB) RetrieveSentProjects() (map[Project]string, error) {
 	return projects, nil
 }
 
-func (db *DB) DeleteFreeDay(freeDay string) error {
+func (db *MysqlDB) DeleteFreeDay(freeDay string) error {
 	command := "DELETE FROM FREEDAYS WHERE DATE = '" + freeDay + "';"
 	util.Log.Println(command)
 	return db.execute(command)
 }
 
-func (db *DB) AddFreeDay(freeDay string) error {
+func (db *MysqlDB) AddFreeDay(freeDay string) error {
 	command := "INSERT INTO FREEDAYS (DATE) VALUES ('" + freeDay + "');"
 	util.Log.Println(command)
 	return db.execute(command)
