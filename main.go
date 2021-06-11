@@ -2,7 +2,6 @@ package main
 
 import (
 	"net/http"
-	"time"
 
 	"example.com/c1/model"
 	"example.com/c1/util"
@@ -20,14 +19,9 @@ func main() {
 	if err != nil {
 		util.Log.Println(err)
 	}
-	go func() {
-		for {
-			if err := model.Db.Connect(); err != nil {
-				util.Log.Println(err)
-			}
-			time.Sleep(time.Minute)
-		}
-	}()
+	if err := model.Db.Connect(); err != nil {
+		util.Log.Println(err)
+	}
 
 	router := mux.NewRouter()
 
