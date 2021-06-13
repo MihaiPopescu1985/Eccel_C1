@@ -19,6 +19,7 @@ func main() {
 	if err != nil {
 		util.Log.Println(err)
 	}
+
 	if err := model.Db.Connect(); err != nil {
 		util.Log.Println(err)
 	}
