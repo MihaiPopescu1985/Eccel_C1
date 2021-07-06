@@ -2,9 +2,8 @@ package controller
 
 import (
 	"io/ioutil"
+	"log"
 	"net/http"
-
-	"example.com/c1/util"
 )
 
 const notFoundPage string = "./web/view/not-found.html"
@@ -17,9 +16,9 @@ func (notFound PageNotFoundHandler) ServeHTTP(writer http.ResponseWriter, reques
 	page, err := ioutil.ReadFile(notFoundPage)
 
 	if err != nil {
-		util.Log.Println(err)
+		log.Println(err)
 	}
 	if _, err := writer.Write(page); err != nil {
-		util.Log.Println(err)
+		log.Println(err)
 	}
 }

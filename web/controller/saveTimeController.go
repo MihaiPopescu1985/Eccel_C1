@@ -3,10 +3,10 @@ package controller
 import (
 	"encoding/json"
 	"io"
+	"log"
 	"net/http"
 
 	"example.com/c1/model"
-	"example.com/c1/util"
 )
 
 // contains message in json format as the device is reading
@@ -25,7 +25,7 @@ func SaveTimeHandler(w http.ResponseWriter, r *http.Request) {
 
 	devName, tagUid, err := parseDeviceReading(r)
 	if err != nil {
-		util.Log.Println(err)
+		log.Println(err)
 		return
 	}
 	model.Db.InsertIntoWorkday(devName, tagUid)

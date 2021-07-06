@@ -1,19 +1,18 @@
 package controller
 
 import (
+	"log"
 	"net/http"
 	"net/url"
 	"strconv"
 	"strings"
-
-	"example.com/c1/util"
 )
 
 func parseURI(r *http.Request, URI string) string {
 	uri, err := url.Parse(r.RequestURI)
 
 	if err != nil {
-		util.Log.Panic(err)
+		log.Panic(err)
 	}
 	return uri.Query().Get(URI)
 }
@@ -24,7 +23,7 @@ func toHoursAndMinutes(minutes string) string {
 
 	workedMinutes, err := strconv.Atoi(minutes)
 	if err != nil {
-		util.Log.Println(err)
+		log.Println(err)
 	}
 	sign := ""
 	if workedMinutes < 0 {

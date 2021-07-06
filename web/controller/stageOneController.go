@@ -2,12 +2,12 @@ package controller
 
 import (
 	"html/template"
+	"log"
 	"net/http"
 	"strconv"
 	"time"
 
 	"example.com/c1/model"
-	"example.com/c1/util"
 )
 
 const (
@@ -61,7 +61,7 @@ func StageOneHandler(worker *model.Worker, writer http.ResponseWriter, request *
 		pageContent.Worker = worker
 		pageContent.TimeReport, err = getDetailedReport(worker.ID)
 		if err != nil {
-			util.Log.Println(err)
+			log.Println(err)
 			ErrorPageHandler(writer, request)
 		} else {
 			prepareDetailedReport(pageContent.TimeReport)
@@ -76,7 +76,7 @@ func StageOneHandler(worker *model.Worker, writer http.ResponseWriter, request *
 		pageContent.Worker = worker
 		pageContent.TimeReport, err = getStandardReport(worker.ID)
 		if err != nil {
-			util.Log.Println(err)
+			log.Println(err)
 			ErrorPageHandler(writer, request)
 		} else {
 			prepareStandardReport(pageContent.TimeReport)
@@ -92,7 +92,7 @@ func StageOneHandler(worker *model.Worker, writer http.ResponseWriter, request *
 		pageContent.ActiveProjects, err = model.Db.RetrieveActiveProjects()
 
 		if err != nil {
-			util.Log.Println(err)
+			log.Println(err)
 			ErrorPageHandler(writer, request)
 		} else {
 			serveAddWorkdayPage(&pageContent, &writer)
@@ -110,7 +110,7 @@ func StageOneHandler(worker *model.Worker, writer http.ResponseWriter, request *
 		pageContent.FreeDays, err = model.Db.RetrieveFreeDays()
 
 		if err != nil {
-			util.Log.Println(err)
+			log.Println(err)
 			ErrorPageHandler(writer, request)
 		} else {
 			pageContent.serveFreeDaysPage(&writer, request)
@@ -123,13 +123,13 @@ func StageOneHandler(worker *model.Worker, writer http.ResponseWriter, request *
 		pageContent.Worker = worker
 		err = pageContent.setStatusAndWorkedTime()
 		if err != nil {
-			util.Log.Println(err)
+			log.Println(err)
 			ErrorPageHandler(writer, request)
 			break
 		}
 		err = pageContent.setOvertime()
 		if err != nil {
-			util.Log.Println(err)
+			log.Println(err)
 			ErrorPageHandler(writer, request)
 			break
 		}
@@ -141,21 +141,21 @@ func (pageContent *freeDays) serveFreeDaysPage(w *http.ResponseWriter, r *http.R
 
 	templ, err := template.New("freeDays").ParseFiles(stageOneFreeDaysPage)
 	if err != nil {
-		util.Log.Println(err)
+		log.Println(err)
 	}
 	if err = templ.ExecuteTemplate(*w, "free-days.html", *pageContent); err != nil {
-		util.Log.Println(err)
+		log.Println(err)
 	}
 }
 
 func saveWorkdayForm(w *http.ResponseWriter, r *http.Request, worker model.Worker) {
 	if err := r.ParseForm(); err != nil {
-		util.Log.Println(err)
+		log.Println(err)
 	}
 
 	formProject := r.FormValue("projects")
 	if formProject == "" {
-		util.Log.Println("Error parsing project ID.")
+		log.Println("Error parsing project ID.")
 		return
 	}
 
@@ -178,12 +178,12 @@ func serveAddWorkdayPage(workday *addWorkday, writer *http.ResponseWriter) {
 
 	templ, err := template.New("addWorkday").ParseFiles(addWorkdayPage)
 	if err != nil {
-		util.Log.Println(err)
+		log.Println(err)
 	}
 
 	err = templ.ExecuteTemplate(*writer, "add-workday.html", *workday)
 	if err != nil {
-		util.Log.Println(err)
+		log.Println(err)
 	}
 }
 
@@ -191,12 +191,12 @@ func serveStandardPage(report *standardTimeReport, writer *http.ResponseWriter) 
 
 	templ, err := template.New("standardReport").ParseFiles(standardReportPage)
 	if err != nil {
-		util.Log.Println(err)
+		log.Println(err)
 	}
 
 	err = templ.ExecuteTemplate(*writer, "standard-view.html", *report)
 	if err != nil {
-		util.Log.Println(err)
+		log.Println(err)
 	}
 }
 
@@ -224,13 +224,13 @@ func getStandardReport(wID string) (map[string][]string, error) {
 
 		date, err := time.Parse(dateLayout, v[3]) // parsing starttime
 		if err != nil {
-			util.Log.Println(err)
+			log.Println(err)
 		}
 
 		day := date.Day() - 1 // day must correspond with slice index wich starts at 0
 		workedMinutes, err := strconv.Atoi(v[5])
 		if err != nil {
-			util.Log.Println(err)
+			log.Println(err)
 		}
 
 		if _, exists := standardReport[key]; !exists {
@@ -240,7 +240,7 @@ func getStandardReport(wID string) (map[string][]string, error) {
 		currentMinutes := 0
 		if standardReport[key][day] != "" {
 			if currentMinutes, err = strconv.Atoi(standardReport[key][day]); err != nil {
-				util.Log.Println(err)
+				log.Println(err)
 			}
 		}
 		standardReport[key][day] = strconv.Itoa(currentMinutes + workedMinutes)
@@ -251,12 +251,12 @@ func getStandardReport(wID string) (map[string][]string, error) {
 func serveDetailedPage(report *timeReport, writer *http.ResponseWriter) {
 	templ, err := template.New("detailedReport").ParseFiles(detailedReportPage)
 	if err != nil {
-		util.Log.Println(err)
+		log.Println(err)
 	}
 
 	err = templ.ExecuteTemplate(*writer, "detailed-view.html", *report)
 	if err != nil {
-		util.Log.Println(err)
+		log.Println(err)
 	}
 }
 
@@ -281,12 +281,12 @@ func getDetailedReport(wID string) ([][]string, error) {
 func serveStatusPage(pageContent *workerStatus, writer *http.ResponseWriter) {
 	templ, err := template.New("workerStatus").ParseFiles(workerStatusPage)
 	if err != nil {
-		util.Log.Println(err)
+		log.Println(err)
 	}
 
 	err = templ.ExecuteTemplate(*writer, "worker-status.html", *pageContent)
 	if err != nil {
-		util.Log.Println(err)
+		log.Println(err)
 	}
 }
 

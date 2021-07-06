@@ -2,11 +2,11 @@ package controller
 
 import (
 	"html/template"
+	"log"
 	"net/http"
 	"strconv"
 
 	"example.com/c1/model"
-	"example.com/c1/util"
 )
 
 const (
@@ -55,10 +55,10 @@ func serveFreeDaysPage(w *http.ResponseWriter, r *http.Request, pageContent []st
 
 	templ, err := template.New("freeDays").ParseFiles(stageTwofreeDaysPage)
 	if err != nil {
-		util.Log.Println(err)
+		log.Println(err)
 	}
 	if err = templ.ExecuteTemplate(*w, "free-days.html", pageContent); err != nil {
-		util.Log.Println(err)
+		log.Println(err)
 	}
 }
 
@@ -66,7 +66,7 @@ func sentProjectsView(w *http.ResponseWriter, r *http.Request) {
 
 	pageContent, err := model.Db.RetrieveSentProjects()
 	if err != nil {
-		util.Log.Println(err)
+		log.Println(err)
 		ErrorPageHandler(*w, r)
 	} else {
 		for k, v := range pageContent {
@@ -75,19 +75,19 @@ func sentProjectsView(w *http.ResponseWriter, r *http.Request) {
 
 		templ, err := template.New("sentProjects").ParseFiles(sentProjectsPage)
 		if err != nil {
-			util.Log.Println(err)
+			log.Println(err)
 		}
 
 		err = templ.ExecuteTemplate(*w, "sent-projects.html", pageContent)
 		if err != nil {
-			util.Log.Println(err)
+			log.Println(err)
 		}
 	}
 }
 
 func editProject(w *http.ResponseWriter, r *http.Request) {
 	if err := r.ParseForm(); err != nil {
-		util.Log.Println(err)
+		log.Println(err)
 	}
 
 	project := model.Project{
@@ -102,7 +102,7 @@ func editProject(w *http.ResponseWriter, r *http.Request) {
 		IsActive: func() bool {
 			isActive, err := strconv.ParseBool(r.FormValue("active"))
 			if err != nil {
-				util.Log.Println(err)
+				log.Println(err)
 			}
 			return isActive
 		}(),
@@ -113,7 +113,7 @@ func editProject(w *http.ResponseWriter, r *http.Request) {
 
 func addProject(w *http.ResponseWriter, r *http.Request) {
 	if err := r.ParseForm(); err != nil {
-		util.Log.Println(err)
+		log.Println(err)
 	}
 	project := model.Project{
 		GeNumber:    r.FormValue("ge-no"),
@@ -134,20 +134,20 @@ func showActiveProjects(w http.ResponseWriter, r *http.Request) {
 
 	activeProjects, err := model.Db.RetrieveActiveProjects()
 	if err != nil {
-		util.Log.Println(err)
+		log.Println(err)
 		ErrorPageHandler(w, r)
 		return
 	} else {
 		templ, err := template.New("stageTwo").ParseFiles(activeProjectsPage)
 		if err != nil {
-			util.Log.Println(err)
+			log.Println(err)
 			ErrorPageHandler(w, r)
 			return
 		}
 
 		err = templ.ExecuteTemplate(w, "active-projects.html", activeProjects)
 		if err != nil {
-			util.Log.Println(err)
+			log.Println(err)
 			ErrorPageHandler(w, r)
 			return
 		}

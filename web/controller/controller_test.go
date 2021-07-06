@@ -14,6 +14,94 @@ import (
 
 // }
 
+func TestLoginController(t *testing.T) {
+	t.Run("Login should return OK status if a request is made with GET method", func(t *testing.T) {
+		request := httptest.NewRequest(http.MethodGet, "/login", nil)
+		response := httptest.NewRecorder()
+
+		Login(response, request)
+
+		want := http.StatusOK
+		got := response.Code
+
+		if want != got {
+			t.Fatalf("want status code %v, got %v instead", want, got)
+		}
+	})
+	t.Run("test should fail if a request is made with POST method and no form", func(t *testing.T) {
+		request := httptest.NewRequest(http.MethodPost, "/login", nil)
+		response := httptest.NewRecorder()
+
+		Login(response, request)
+
+		want := http.StatusUnprocessableEntity
+		got := response.Code
+
+		if want != got {
+			t.Fatalf("want status code %v, got %v instead", want, got)
+		}
+	})
+	t.Run("test should pass with valid form", func(t *testing.T) {
+		model.Db = &model.MockPersist{}
+		model.Db.Init("")
+
+		body := *strings.NewReader("name=Mihai&password=Popescu")
+		err := model.Db.AddWorker(model.Worker{
+			Nickname:    "Mihai",
+			FirstName:   "Mihai",
+			LastName:    "Popescu",
+			Password:    "Popescu",
+			AccessLevel: "3",
+			ID:          "1",
+		})
+
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		request := httptest.NewRequest(http.MethodPost, "/login", &body)
+		request.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+
+		response := httptest.NewRecorder()
+		Login(response, request)
+
+		want := http.StatusOK
+		got := response.Code
+
+		if want != got {
+			t.Fatalf("want status code %v, got %v instead", want, got)
+		}
+	})
+	t.Run("response must contain a jwt token", func(t *testing.T) {
+		model.Db = &model.MockPersist{}
+		model.Db.Init("")
+
+		body := *strings.NewReader("name=Mihai&password=Popescu")
+		err := model.Db.AddWorker(model.Worker{
+			Nickname:    "Mihai",
+			FirstName:   "Mihai",
+			LastName:    "Popescu",
+			Password:    "Popescu",
+			AccessLevel: "3",
+			ID:          "1",
+		})
+
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		request := httptest.NewRequest(http.MethodPost, "/login", &body)
+		request.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+
+		response := httptest.NewRecorder()
+		Login(response, request)
+
+		if response.Header().Get("Authentication") == "" {
+			t.Fatal("missing jwt token")
+		}
+	})
+}
+
 func TestMiddleware(t *testing.T) {
 	// populate database with workers
 	model.Db = &model.MockPersist{}
