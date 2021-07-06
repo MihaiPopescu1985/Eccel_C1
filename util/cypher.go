@@ -1,4 +1,4 @@
-package cypher
+package util
 
 import (
 	"crypto/aes"
