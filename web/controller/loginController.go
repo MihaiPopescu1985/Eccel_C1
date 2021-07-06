@@ -2,6 +2,7 @@ package controller
 
 import (
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 
@@ -9,11 +10,20 @@ import (
 	"example.com/c1/util"
 )
 
+const loginPage string = "./web/view/index.html"
+
 func Login(rw http.ResponseWriter, r *http.Request) {
 
 	switch r.Method {
 	case http.MethodGet:
-		rw.WriteHeader(http.StatusOK)
+		fileContent, err := ioutil.ReadFile(loginPage)
+		if err != nil {
+			log.Println(err)
+			rw.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		rw.Write(fileContent)
+
 	case http.MethodPost:
 		// parsing form
 		err := r.ParseForm()

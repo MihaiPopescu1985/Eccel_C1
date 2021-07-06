@@ -25,14 +25,13 @@ func main() {
 
 	router := mux.NewRouter()
 
-	router.HandleFunc("/", controller.HomePageHandler)
 	router.HandleFunc("/log-out", controller.LogOutHandler)
 	router.HandleFunc("/error", controller.ErrorPageHandler)
 	router.HandleFunc("/save-time", controller.SaveTimeHandler)
 	router.HandleFunc("/login", controller.Login)
 
 	router.NotFoundHandler = controller.PageNotFoundHandler{}
-	router.Use(controller.AuthMiddleware)
+	router.Use(controller.JwtMiddleware)
 
 	router.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir("./web/view/"))))
 	log.Println(http.ListenAndServe(serverPort, router))

@@ -9,10 +9,11 @@ import (
 	"example.com/c1/model"
 )
 
-// func TestParseUri(t *testing.T) {
-// 	// rawUrl := "http://192.168.0.109:8080/?action=edit-project&proj-id=16&ge-no=301104010&ro-no=451078001&description=Cabinet+S10&dev-id=4&start-date=2021-04-28&active=true&end=2021-06-09"
+func TestJWTMiddleware(t *testing.T) {
+	t.Run("should pass if valid token", func(t *testing.T) {
 
-// }
+	})
+}
 
 func TestLoginController(t *testing.T) {
 	t.Run("Login should return OK status if a request is made with GET method", func(t *testing.T) {
