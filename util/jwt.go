@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"reflect"
 	"time"
 
 	"github.com/google/uuid"
@@ -17,9 +18,10 @@ const (
 )
 
 var (
-	jwtKey []byte  = []byte("myverrysecretkey)")
-	jwtAlg jwt.Alg = jwt.HS256
-	jwtExp         = time.Now().Add(24 * time.Hour).Unix()
+	jwtKey          []byte   = []byte("myverrysecretkey)")
+	jwtAlg          jwt.Alg  = jwt.HS256
+	jwtExp                   = time.Now().Add(24 * time.Hour).Unix()
+	jwtActiveTokens [][]byte = make([][]byte, 0)
 )
 
 // GenJWTToken generate a signed jwt token
@@ -97,5 +99,40 @@ func GetUserIDFromToken(token []byte) (string, error) {
 		return "", errors.New("missing user ID from token")
 	} else {
 		return fmt.Sprint(tkUserId), nil
+	}
+}
+
+func AddActiveToken(token []byte) {
+	// verify if token already exist
+	if !IsTokenActive(token) {
+		// than add token
+		jwtActiveTokens = append(jwtActiveTokens, token)
+	}
+}
+
+func IsTokenActive(token []byte) bool {
+	idFromToken, _ := GetUserIDFromToken(token)
+
+	for _, t := range jwtActiveTokens {
+		if reflect.DeepEqual(t, token) {
+			return true
+		}
+		idFromT, _ := GetUserIDFromToken(t)
+		if idFromToken == idFromT {
+			return true
+		}
+	}
+	return false
+}
+
+func RemoveActiveToken(token []byte) {
+	idFromToken, _ := GetUserIDFromToken(token)
+
+	for i, t := range jwtActiveTokens {
+		idFromT, _ := GetUserIDFromToken(t)
+		if idFromToken == idFromT {
+			jwtActiveTokens[i] = jwtActiveTokens[len(jwtActiveTokens)-1]
+			jwtActiveTokens = jwtActiveTokens[:len(jwtActiveTokens)-1]
+		}
 	}
 }

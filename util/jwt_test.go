@@ -15,6 +15,46 @@ var (
 	expiredToken        []byte = []byte("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwic3RhZ2UiOiIxIiwidXVpZCI6IjY0ZDM5YWIwLWRhNjUtMTFlYi04ODhmLTAyMDAxMzAyYmI0OCIsImlhdCI6MTYyNTE0MTQ1MCwiZXhwIjoxNjI1MTQxNDU4fQ.Kr1aA8d5_dUJ-nSve5f-oZVkT490CqON4xl9I5bQbTM")
 )
 
+func TestActiveTokens(t *testing.T) {
+	t.Run("added token can be retrieved", func(t *testing.T) {
+		jwtActiveTokens = make([][]byte, 0)
+
+		t1, _ := GenJWTToken("1", "1")
+		t2, _ := GenJWTToken("2", "2")
+		t3, _ := GenJWTToken("3", "3")
+
+		AddActiveToken(t1)
+		AddActiveToken(t2)
+		AddActiveToken(t3)
+
+		if len(jwtActiveTokens) != 3 {
+			t.Fatal("tokens must be active")
+		}
+	})
+	t.Run("token cannot be added more than once", func(t *testing.T) {
+		jwtActiveTokens = make([][]byte, 0)
+		t1, _ := GenJWTToken("1", "1")
+
+		AddActiveToken(t1)
+		AddActiveToken(t1)
+
+		if len(jwtActiveTokens) != 1 {
+			t.Fatal("jwtActiveTokens must not contain duplicate tokens")
+		}
+	})
+	t.Run("tokens can be removed", func(t *testing.T) {
+		jwtActiveTokens = make([][]byte, 0)
+		t1, _ := GenJWTToken("1", "1")
+
+		AddActiveToken(t1)
+		RemoveActiveToken(t1)
+
+		if len(jwtActiveTokens) != 0 {
+			t.Fatal("token must be removed from jwtActiveTokens")
+		}
+	})
+}
+
 func TestJWTToken(t *testing.T) {
 	t.Run("should return a valid token", func(t *testing.T) {
 		// jwt token must be generated correctly
