@@ -3,8 +3,10 @@ package controller
 import (
 	"net/http"
 	"net/http/httptest"
+	"net/url"
 	"strings"
 	"testing"
+	"time"
 
 	"example.com/c1/model"
 )
@@ -103,182 +105,6 @@ func TestLoginController(t *testing.T) {
 	})
 }
 
-func TestMiddleware(t *testing.T) {
-	// populate database with workers
-	model.Db = &model.MockPersist{}
-	model.Db.Init("")
-	model.Db.AddWorker(model.Worker{
-		Nickname:    "validStageOneName",
-		Password:    "validStageOnePassword",
-		AccessLevel: "1",
-	})
-	model.Db.AddWorker(model.Worker{
-		Nickname:    "validStageTwoName",
-		Password:    "validStageTwoPassword",
-		AccessLevel: "2",
-	})
-	model.Db.AddWorker(model.Worker{
-		Nickname:    "validStageThreeName",
-		Password:    "validStageThreePassword",
-		AccessLevel: "3",
-	})
-
-	t.Run("permited URLs must pass middleware", func(t *testing.T) {
-
-		for _, url := range permitedURL {
-			request := httptest.NewRequest(http.MethodGet, url, nil)
-			response := httptest.NewRecorder()
-
-			mid := AuthMiddleware(http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {}))
-			mid.ServeHTTP(response, request)
-
-			if response.Code != http.StatusOK {
-				t.Fatalf("wrong http code. got %v", response.Code)
-			}
-		}
-	})
-
-	t.Run("unlogged user must not gain access to forbidden urls", func(t *testing.T) {
-		requests := []*http.Request{
-			httptest.NewRequest(http.MethodGet, "/stage-one", nil),
-			httptest.NewRequest(http.MethodGet, "/stage-two", nil),
-			httptest.NewRequest(http.MethodGet, "/stage-three", nil),
-			httptest.NewRequest(http.MethodGet, "/test-url", nil),
-		}
-
-		for _, r := range requests {
-			response := httptest.NewRecorder()
-
-			mid := AuthMiddleware(http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {}))
-			mid.ServeHTTP(response, r)
-
-			if response.Code != http.StatusForbidden {
-				t.Fatalf("wrong code, wanted %v, got %v on url %v", http.StatusForbidden, response.Code, r.RequestURI)
-			}
-		}
-	})
-
-	t.Run("test access levels by submitting a form with credentials",
-		func(t *testing.T) {
-			// mocking a submit form containing worker's name and password and access level that we expect to be granted
-			testForms := []struct {
-				givenForm strings.Reader
-				wantMatch string
-			}{
-				{
-					*strings.NewReader("name=validStageOneName&password=validStageOnePassword"),
-					"1",
-				},
-				{
-					*strings.NewReader("name=validStageTwoName&password=validStageTwoPassword"),
-					"2",
-				},
-				{
-					*strings.NewReader("name=validStageThreeName&password=validStageThreePassword"),
-					"3",
-				},
-			}
-
-			// test
-			for key, value := range accessStages {
-				for _, v := range testForms {
-					testStage(t, key, value, v.givenForm, v.wantMatch)
-				}
-			}
-		})
-
-	t.Run("test access levels by submitting cookies", func(t *testing.T) {
-		tests := []struct {
-			request      *http.Request
-			cookies      []http.Cookie
-			expectedCode int
-		}{
-			{
-				httptest.NewRequest(http.MethodGet, accessStages["1"], nil),
-				[]http.Cookie{{Name: "name", Value: "validStageOneName"}, {Name: "pass", Value: "validStageOnePassword"}},
-				http.StatusOK,
-			},
-			{
-				httptest.NewRequest(http.MethodGet, accessStages["2"], nil),
-				[]http.Cookie{{Name: "name", Value: "validStageOneName"}, {Name: "pass", Value: "validStageOnePassword"}},
-				http.StatusForbidden,
-			},
-			{
-				httptest.NewRequest(http.MethodGet, accessStages["3"], nil),
-				[]http.Cookie{{Name: "name", Value: "validStageOneName"}, {Name: "pass", Value: "validStageOnePassword"}},
-				http.StatusForbidden,
-			},
-			{
-				httptest.NewRequest(http.MethodGet, accessStages["1"], nil),
-				[]http.Cookie{{Name: "name", Value: "validStageTwoName"}, {Name: "pass", Value: "validStageTwoPassword"}},
-				http.StatusForbidden,
-			},
-			{
-				httptest.NewRequest(http.MethodGet, accessStages["2"], nil),
-				[]http.Cookie{{Name: "name", Value: "validStageTwoName"}, {Name: "pass", Value: "validStageTwoPassword"}},
-				http.StatusOK,
-			},
-			{
-				httptest.NewRequest(http.MethodGet, accessStages["3"], nil),
-				[]http.Cookie{{Name: "name", Value: "validStageTwoName"}, {Name: "pass", Value: "validStageTwoPassword"}},
-				http.StatusForbidden,
-			},
-			{
-				httptest.NewRequest(http.MethodGet, accessStages["1"], nil),
-				[]http.Cookie{{Name: "name", Value: "validStageThreeName"}, {Name: "pass", Value: "validStageThreePassword"}},
-				http.StatusForbidden,
-			},
-			{
-				httptest.NewRequest(http.MethodGet, accessStages["2"], nil),
-				[]http.Cookie{{Name: "name", Value: "validStageThreeName"}, {Name: "pass", Value: "validStageThreePassword"}},
-				http.StatusForbidden,
-			},
-			{
-				httptest.NewRequest(http.MethodGet, accessStages["3"], nil),
-				[]http.Cookie{{Name: "name", Value: "validStageThreeName"}, {Name: "pass", Value: "validStageThreePassword"}},
-				http.StatusOK,
-			},
-		}
-
-		for _, v := range tests {
-			for _, cookie := range v.cookies {
-				v.request.AddCookie(&cookie)
-			}
-			response := httptest.NewRecorder()
-
-			mid := AuthMiddleware(http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {}))
-			mid.ServeHTTP(response, v.request)
-
-			if response.Code != v.expectedCode {
-				t.Fatalf("got code %v, expected %v", response.Code, v.expectedCode)
-			}
-		}
-	})
-}
-
-func testStage(t *testing.T, key, path string, body strings.Reader, match string) {
-	t.Helper()
-
-	request := httptest.NewRequest(http.MethodPost, path, &body)
-	request.RequestURI = path
-	request.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-	response := httptest.NewRecorder()
-
-	mid := AuthMiddleware(http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {}))
-	mid.ServeHTTP(response, request)
-
-	switch key {
-	case match:
-		if response.Code != http.StatusOK {
-			t.Fatalf("want response code %v but got %v on url: %v, given body: %v", http.StatusOK, response.Code, path, body)
-		}
-	default:
-		if response.Code != http.StatusForbidden {
-			t.Fatalf("want response code %v but got %v on url: %v, given body: %v", http.StatusForbidden, response.Code, path, body)
-		}
-	}
-}
-
 func TestSaveTimeController(t *testing.T) {
 	t.Run("should run into an error", func(t *testing.T) {
 
@@ -324,4 +150,38 @@ func TestSaveTimeController(t *testing.T) {
 		}
 	})
 
+}
+
+func TestShouldGenerateProperStandardViewOfMonthTimeReport(t *testing.T) {
+
+	layout := "2006-1-2 15:04:05"
+
+	for i := 0; i < 366; i++ {
+		str := "2021-12-31 12:33:34"
+
+		tm, err := time.Parse(layout, str)
+
+		if err != nil || tm.Day() != 31 {
+			t.Fatal(err)
+			t.FailNow()
+		}
+	}
+}
+
+func TestShouldParseURL(t *testing.T) {
+
+	want := "4"
+	url, err := url.Parse("/stage-one?workerId=4")
+
+	if err != nil {
+		t.Fatal(err)
+		t.FailNow()
+	}
+
+	got := url.Query().Get("workerId")
+
+	if got != want {
+		t.Fatalf("got = %v, wanted = %v", got, want)
+		t.FailNow()
+	}
 }
