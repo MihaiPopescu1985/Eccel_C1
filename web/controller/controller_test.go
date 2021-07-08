@@ -19,6 +19,7 @@ func TestJWTMiddleware(t *testing.T) {
 
 func TestLoginController(t *testing.T) {
 	t.Run("Login should return OK status if a request is made with GET method", func(t *testing.T) {
+		loginPage = `../view/index.html`
 		request := httptest.NewRequest(http.MethodGet, "/login", nil)
 		response := httptest.NewRecorder()
 
@@ -68,7 +69,7 @@ func TestLoginController(t *testing.T) {
 		response := httptest.NewRecorder()
 		Login(response, request)
 
-		want := http.StatusOK
+		want := http.StatusSeeOther
 		got := response.Code
 
 		if want != got {
@@ -99,8 +100,14 @@ func TestLoginController(t *testing.T) {
 		response := httptest.NewRecorder()
 		Login(response, request)
 
-		if response.Header().Get("Authentication") == "" {
-			t.Fatal("missing jwt token")
+		cookieName := ""
+		for _, c := range response.Result().Cookies() {
+			if c.Name == "token" {
+				cookieName = c.Name
+			}
+		}
+		if cookieName != "token" {
+			t.Fatal("no token found in cookie")
 		}
 	})
 }

@@ -10,10 +10,10 @@ import (
 
 func JwtMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
-		token := r.Header.Get("Authentication")
+		token := getTokenFromCookie(r)
 
 		// if Authentication header contains a valid token
-		if util.IsGoodToken([]byte(token)) {
+		if util.IsGoodToken([]byte(token)) && util.IsTokenActive([]byte(token)) {
 			// try to retrieve user id from token
 			userID, err := util.GetUserIDFromToken([]byte(token))
 			if err != nil {
@@ -28,6 +28,13 @@ func JwtMiddleware(next http.Handler) http.Handler {
 					rw.WriteHeader(http.StatusInternalServerError)
 					return
 				}
+
+				newToken := util.RefreshToken([]byte(token))
+				http.SetCookie(rw, &http.Cookie{
+					Name:     "token",
+					Value:    string(newToken),
+					HttpOnly: true,
+				})
 
 				// redirect user
 				switch user.AccessLevel {
@@ -46,6 +53,6 @@ func JwtMiddleware(next http.Handler) http.Handler {
 				}
 			}
 		}
-		http.Redirect(rw, r, "/login", http.StatusUnauthorized)
+		http.Redirect(rw, r, "/login", http.StatusFound)
 	})
 }

@@ -1,6 +1,7 @@
 package util
 
 import (
+	"log"
 	"reflect"
 	"testing"
 
@@ -42,6 +43,14 @@ func TestEncryptingAndDecryping(t *testing.T) {
 
 // TestHashing is only used to demonstrate a hashing concept
 func TestHashing(t *testing.T) {
+	t.Run("generate hash password", func(t *testing.T) {
+		passwords := []string{"Popescu", "Zbagan", "Csismar", "Bitoanca", "Zbagan", "Zanfir", "Tehanciuc", "Siclovan"}
+		for _, v := range passwords {
+			log.Println(v)
+			hashPwd, _ := bcrypt.GenerateFromPassword([]byte(v), 0)
+			log.Println(string(hashPwd))
+		}
+	})
 	t.Run("test should generate a hashed password", func(t *testing.T) {
 		password := []byte("some very secured password")
 

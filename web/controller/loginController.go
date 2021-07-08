@@ -1,18 +1,20 @@
 package controller
 
 import (
-	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
 
 	"example.com/c1/model"
 	"example.com/c1/util"
+	"golang.org/x/crypto/bcrypt"
 )
 
-const loginPage string = "./web/view/index.html"
+var loginPage string = `.\web\view\index.html`
 
 func Login(rw http.ResponseWriter, r *http.Request) {
+
+	deleteTokenCookie(&rw, r)
 
 	switch r.Method {
 	case http.MethodGet:
@@ -42,26 +44,40 @@ func Login(rw http.ResponseWriter, r *http.Request) {
 		}
 
 		// verify existing user in database
-		user, err := model.Db.GetUserByNameAndPassword(userName, password)
-		if err != nil {
+		user, err := model.Db.GetUserByNickname(userName)
+		if err != nil || user == nil {
 			log.Println(err)
 			log.Println("TODO: handle invalid credentials")
 			rw.WriteHeader(http.StatusUnauthorized)
 			return
 		}
 
+		if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password)); err != nil {
+			log.Println(err)
+			log.Println("TODO: handle invalid password")
+			rw.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+
 		// create jwt token
 		token, err := util.GenJWTToken(user.ID, user.AccessLevel)
+		util.AddActiveToken(token)
+
 		if err != nil {
 			log.Println("TODO: handle error generating jwt token")
 			rw.WriteHeader(http.StatusInternalServerError)
 			return
 		}
-		// add token to header
-		rw.Header().Add("Authentication", fmt.Sprint(token))
+		// add token to response
+		http.SetCookie(rw, &http.Cookie{
+			Name:     "token",
+			Value:    string(token),
+			HttpOnly: true,
+		})
 
 		// redirect
-		http.Redirect(rw, r, "/index", http.StatusOK)
+		http.Redirect(rw, r, "/index", http.StatusSeeOther)
+
 	default:
 		rw.WriteHeader(http.StatusUnauthorized)
 	}

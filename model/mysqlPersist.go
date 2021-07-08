@@ -3,6 +3,7 @@ package model
 import (
 	"database/sql"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -333,6 +334,60 @@ func (db *MysqlDB) GetUserByNameAndPassword(name, password string) (*Worker, err
 			return nil, err
 		}
 	}
+
+	if wID.String == "" {
+		return nil, errors.New("user not found")
+	}
+
+	return &Worker{
+		ID:                wID.String,
+		FirstName:         wFirstN.String,
+		LastName:          wLastN.String,
+		CardNumber:        wCardNo.String,
+		Position:          wPos.String,
+		IsActive:          wIsActive.Bool,
+		Nickname:          wNick.String,
+		Password:          wPass.String,
+		AccessLevel:       wAccess.String,
+		HireDate:          wHire.String,
+		CloseContractDate: wCloseContract.String,
+	}, nil
+}
+
+func (db *MysqlDB) GetUserByNickname(nickname string) (*Worker, error) {
+	command := "SELECT * FROM WORKER WHERE NICKNAME = \"" + nickname + "\";"
+	log.Printf("Executing: %v \n", command)
+
+	rows, err := db.executeQuery(command)
+	if err != nil {
+		return nil, err
+	}
+
+	var (
+		wID            sql.NullString
+		wFirstN        sql.NullString
+		wLastN         sql.NullString
+		wCardNo        sql.NullString
+		wPos           sql.NullString
+		wIsActive      sql.NullBool
+		wNick          sql.NullString
+		wPass          sql.NullString
+		wAccess        sql.NullString
+		wHire          sql.NullString
+		wCloseContract sql.NullString
+	)
+
+	for rows.Next() {
+		if err := rows.Scan(
+			&wID, &wFirstN, &wLastN, &wCardNo, &wPos, &wIsActive, &wNick, &wPass, &wAccess, &wHire, &wCloseContract); err != nil {
+			return nil, err
+		}
+	}
+
+	if wID.String == "" {
+		return nil, errors.New("user not found")
+	}
+
 	return &Worker{
 		ID:                wID.String,
 		FirstName:         wFirstN.String,
@@ -595,6 +650,10 @@ func (db *MysqlDB) GetWorker(workerID string) (*Worker, error) {
 		if err := rows.Scan(&id, &fName, &lName, &cardNo, &posID, &active, &nick, &pass, &lvl, &hire, &close); err != nil {
 			return nil, err
 		}
+	}
+
+	if id.String == "" {
+		return nil, errors.New("user not found")
 	}
 
 	return &Worker{

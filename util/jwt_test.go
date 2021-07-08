@@ -1,6 +1,7 @@
 package util
 
 import (
+	"reflect"
 	"testing"
 
 	"github.com/kataras/jwt"
@@ -14,6 +15,18 @@ var (
 	noUuidToken         []byte = []byte("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwic3RhZ2UiOiIxIiwidXVpZCI6IiIsImlhdCI6MTYyNTE0MTQ1OCwiZXhwIjoxOTQxMDgxMjYxfQ.h2KnrjQnSM41eTo-2NOG1C3XrrNKi0AIY2dZPum2Wdk")
 	expiredToken        []byte = []byte("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwic3RhZ2UiOiIxIiwidXVpZCI6IjY0ZDM5YWIwLWRhNjUtMTFlYi04ODhmLTAyMDAxMzAyYmI0OCIsImlhdCI6MTYyNTE0MTQ1MCwiZXhwIjoxNjI1MTQxNDU4fQ.Kr1aA8d5_dUJ-nSve5f-oZVkT490CqON4xl9I5bQbTM")
 )
+
+func TestRefreshToken(t *testing.T) {
+	jwtActiveTokens = make([][]byte, 0)
+
+	t1, _ := GenJWTToken("1", "1")
+	AddActiveToken(t1)
+
+	t2 := RefreshToken(t1)
+	if IsTokenActive(t1) || len(jwtActiveTokens) != 1 || reflect.DeepEqual(t1, t2) {
+		t.Fatal("token did not refreshed")
+	}
+}
 
 func TestActiveTokens(t *testing.T) {
 	t.Run("added token can be retrieved", func(t *testing.T) {
@@ -132,5 +145,17 @@ func TestShouldReturnUserIDFromToken(t *testing.T) {
 	if got != want {
 		t.Fatalf("want %v but got %v", want, got)
 	}
+}
 
+func TestShouldReturnUserStageFromToken(t *testing.T) {
+	token, err := GenJWTToken("1", "3")
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := "3"
+	got := GetStageFromToken(token)
+
+	if want != got {
+		t.Fatalf("want %v but got %v instead", want, got)
+	}
 }

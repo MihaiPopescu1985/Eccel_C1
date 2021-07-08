@@ -71,6 +71,10 @@ func (m *MockPersist) GetUserByNameAndPassword(name, password string) (*Worker, 
 	return nil, errors.New("worker not found")
 }
 
+func (m *MockPersist) GetUserByNickname(nickname string) (*Worker, error) {
+	return nil, errors.New("unimplemented function")
+}
+
 func (m *MockPersist) RetrieveWorkerName(id string) (string, error) {
 	log.Println("implement this function first")
 	return "", nil

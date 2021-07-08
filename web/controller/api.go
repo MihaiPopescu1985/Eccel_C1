@@ -8,6 +8,32 @@ import (
 	"strings"
 )
 
+func deleteTokenCookie(rw *http.ResponseWriter, r *http.Request) {
+	cookie := getCookieFromRequest(r, "token")
+	if cookie != nil {
+		cookie.MaxAge = -1
+		http.SetCookie(*rw, cookie)
+	}
+}
+
+func getTokenFromCookie(r *http.Request) string {
+	for _, c := range r.Cookies() {
+		if c.Name == "token" {
+			return c.Value
+		}
+	}
+	return ""
+}
+
+func getCookieFromRequest(r *http.Request, cookieName string) *http.Cookie {
+	for _, c := range r.Cookies() {
+		if c.Name == cookieName {
+			return c
+		}
+	}
+	return nil
+}
+
 func parseURI(r *http.Request, URI string) string {
 	uri, err := url.Parse(r.RequestURI)
 

@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"os"
 	"reflect"
 	"time"
 
@@ -18,7 +19,7 @@ const (
 )
 
 var (
-	jwtKey          []byte   = []byte("myverrysecretkey)")
+	jwtKey, _                = os.ReadFile("key")
 	jwtAlg          jwt.Alg  = jwt.HS256
 	jwtExp                   = time.Now().Add(24 * time.Hour).Unix()
 	jwtActiveTokens [][]byte = make([][]byte, 0)
@@ -48,7 +49,7 @@ func GenJWTToken(userId, stage string) ([]byte, error) {
 	return token, nil
 }
 
-// isGoodToken returns true if token was not modified and the claims exists
+// IsGoodToken returns true if token was not modified and the claims exists
 func IsGoodToken(token []byte) bool {
 
 	tk, err := jwt.Verify(jwtAlg, jwtKey, token)
@@ -84,6 +85,7 @@ func IsGoodToken(token []byte) bool {
 	return true
 }
 
+// GetUserIDFromToken returns user's id from claims from token
 func GetUserIDFromToken(token []byte) (string, error) {
 	claims := make(map[string]interface{})
 	verifiedToken, err := jwt.Verify(jwtAlg, jwtKey, token)
@@ -102,6 +104,21 @@ func GetUserIDFromToken(token []byte) (string, error) {
 	}
 }
 
+func GetStageFromToken(token []byte) string {
+	claims := make(map[string]interface{})
+	verifiedToken, err := jwt.Verify(jwtAlg, jwtKey, token)
+	if err != nil {
+		log.Println(err)
+		return ""
+	}
+	if verifiedToken.Claims(&claims) != nil {
+		log.Println(err)
+		return ""
+	}
+	return fmt.Sprint(claims[stageClaim])
+}
+
+// AddActiveToken should always be called after a token was generated
 func AddActiveToken(token []byte) {
 	// verify if token already exist
 	if !IsTokenActive(token) {
@@ -110,29 +127,47 @@ func AddActiveToken(token []byte) {
 	}
 }
 
+// IsTokenActive returns true if jwtActiveTokens contain a token that has the user's id contained in token argument
 func IsTokenActive(token []byte) bool {
-	idFromToken, _ := GetUserIDFromToken(token)
-
 	for _, t := range jwtActiveTokens {
 		if reflect.DeepEqual(t, token) {
-			return true
-		}
-		idFromT, _ := GetUserIDFromToken(t)
-		if idFromToken == idFromT {
 			return true
 		}
 	}
 	return false
 }
 
+// RemoveActiveToken removes a token from jwtActiveTokens
 func RemoveActiveToken(token []byte) {
-	idFromToken, _ := GetUserIDFromToken(token)
-
 	for i, t := range jwtActiveTokens {
-		idFromT, _ := GetUserIDFromToken(t)
-		if idFromToken == idFromT {
+		if reflect.DeepEqual(t, token) {
 			jwtActiveTokens[i] = jwtActiveTokens[len(jwtActiveTokens)-1]
 			jwtActiveTokens = jwtActiveTokens[:len(jwtActiveTokens)-1]
 		}
 	}
+	// idFromToken, _ := GetUserIDFromToken(token)
+
+	// for i, t := range jwtActiveTokens {
+	// 	idFromT, _ := GetUserIDFromToken(t)
+	// 	if idFromToken == idFromT {
+	// 		jwtActiveTokens[i] = jwtActiveTokens[len(jwtActiveTokens)-1]
+	// 		jwtActiveTokens = jwtActiveTokens[:len(jwtActiveTokens)-1]
+	// 	}
+	// }
+}
+
+// RefreshToken removes from jwtActiveTokens the token containing the user ID
+// add another token with the same user ID and stage claims
+func RefreshToken(token []byte) []byte {
+	id, _ := GetUserIDFromToken(token)
+	stage := GetStageFromToken(token)
+
+	if IsTokenActive(token) {
+		RemoveActiveToken(token)
+
+		newToken, _ := GenJWTToken(id, stage)
+		AddActiveToken(newToken)
+		return newToken
+	}
+	return nil
 }

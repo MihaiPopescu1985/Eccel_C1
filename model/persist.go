@@ -11,6 +11,7 @@ type Persist interface {
 	RetrieveActiveProjects() ([]Project, error)
 	RetrieveAllWorkers() ([]Worker, error)
 	GetUserByNameAndPassword(name, password string) (*Worker, error)
+	GetUserByNickname(nickname string) (*Worker, error)
 	RetrieveWorkerName(id string) (string, error)
 	RetrieveFreeDays() ([]string, error)
 	RetrieveMinutesOvertime(workerID string) (string, error)
