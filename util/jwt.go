@@ -104,6 +104,7 @@ func GetUserIDFromToken(token []byte) (string, error) {
 	}
 }
 
+// GetStageFromToken returns the user's stage from token
 func GetStageFromToken(token []byte) string {
 	claims := make(map[string]interface{})
 	verifiedToken, err := jwt.Verify(jwtAlg, jwtKey, token)
@@ -145,15 +146,6 @@ func RemoveActiveToken(token []byte) {
 			jwtActiveTokens = jwtActiveTokens[:len(jwtActiveTokens)-1]
 		}
 	}
-	// idFromToken, _ := GetUserIDFromToken(token)
-
-	// for i, t := range jwtActiveTokens {
-	// 	idFromT, _ := GetUserIDFromToken(t)
-	// 	if idFromToken == idFromT {
-	// 		jwtActiveTokens[i] = jwtActiveTokens[len(jwtActiveTokens)-1]
-	// 		jwtActiveTokens = jwtActiveTokens[:len(jwtActiveTokens)-1]
-	// 	}
-	// }
 }
 
 // RefreshToken removes from jwtActiveTokens the token containing the user ID
