@@ -51,6 +51,7 @@ type freeDays struct {
 // database stored procedure: SELECT_TIME_RAPORT(WORKER_ID, CURRENT_MONTH).
 
 func StageOneHandler(worker *model.Worker, writer http.ResponseWriter, request *http.Request) {
+	log.Println(parseURI(request, "view"))
 
 	switch parseURI(request, "view") {
 	case "detailed-view":
@@ -170,7 +171,7 @@ func saveWorkdayForm(w *http.ResponseWriter, r *http.Request, worker model.Worke
 			formatTime(formDay, formStartHour, formStartMinute),
 			formatTime(formDay, formStopHour, formStopMinute))
 
-		http.Redirect(*w, r, "/", http.StatusFound)
+		http.Redirect(*w, r, "/index", http.StatusFound)
 	}
 }
 
@@ -227,7 +228,7 @@ func getStandardReport(wID string) (map[string][]string, error) {
 			log.Println(err)
 		}
 
-		day := date.Day() - 1 // day must correspond with slice index wich starts at 0
+		day := date.Day() - 1 // day must correspond with slice index which starts at 0
 		workedMinutes, err := strconv.Atoi(v[5])
 		if err != nil {
 			log.Println(err)
