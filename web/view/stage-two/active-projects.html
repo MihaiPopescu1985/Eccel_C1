@@ -19,9 +19,9 @@
         
         <div class="tabs">
             <div class="active-tab">Proiecte active</div>
-            <div class="passive-tab" onclick="location.href='/?view=sent-projects';">Proiecte livrate</div>
-            <div class="passive-tab" onclick="location.href='/?view=workers';">Lucratori</div>
-            <div class="passive-tab" onclick="location.href='/?view=free-days';">Zile libere</div>
+            <div class="passive-tab" onclick="location.href='/index?view=sent-projects';">Proiecte livrate</div>
+            <div class="passive-tab" onclick="location.href='/index?view=workers';">Lucratori</div>
+            <div class="passive-tab" onclick="location.href='/index?view=free-days';">Zile libere</div>
             <div class="white-divisor"></div>
         </div>
         
@@ -30,10 +30,9 @@
         <br><br><br><br><br><br>
 
         <div id="add-project">
-            <form id="new-project-form" method="GET" action="/">
+            <form id="new-project-form" method="POST" action="/index?view=add-project">
                 <fieldset>
                     <legend>Toate campurile sunt obligatorii</legend>
-                    <input type="hidden" name="view" value="add-project">
                     <label for="ge-no">Numar Germania:</label>
                     <br>
                     <input type="text" name="ge-no" maxlength="15" required>
@@ -85,10 +84,9 @@
 
         {{range $project := .}}
         <div id="edit-project-{{$project.ID}}" class="edit-project">
-            <form id="edit-project-form-{{$project.ID}}" class="edit-project-form" method="GET" action="/">
+            <form id="edit-project-form-{{$project.ID}}" class="edit-project-form" method="POST" action="/index?view=edit-project">
                 <fieldset>
                     <legend>Toate campurile sunt obligatorii</legend>
-                    <input type="hidden" name="view" value="edit-project">
                     <input type="hidden" name="proj-id" value="{{$project.ID}}">
                     <label for="ge-no">Numar Germania:</label>
                     <br>

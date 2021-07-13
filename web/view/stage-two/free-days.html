@@ -19,9 +19,9 @@
         <br><br>
 
         <div class="tabs">
-            <div class="passive-tab" onclick="location.href='/';">Proiecte active</div>
-            <div class="passive-tab" onclick="location.href='/?view=sent-projects';">Proiecte livrate</div>
-            <div class="passive-tab" onclick="location.href='/?view=workers';">Lucratori</div>
+            <div class="passive-tab" onclick="location.href='/index';">Proiecte active</div>
+            <div class="passive-tab" onclick="location.href='/index?view=sent-projects';">Proiecte livrate</div>
+            <div class="passive-tab" onclick="location.href='/index?view=workers';">Lucratori</div>
             <div class="active-tab">Zile libere</div>
             <div class="white-divisor"></div>
         </div>
@@ -34,7 +34,7 @@
             <h2 class="free-days-title">Zile libere (an-luna-zi)</h2>
             {{range $v := .}}
                 <span>{{$v}}</span>
-                <a id="delete-free-day-link" href="/?view=delete-free-day&free-day={{$v}}">Sterge</a>
+                <a id="delete-free-day-link" href="/index?view=delete-free-day&free-day={{$v}}">Sterge</a>
                 <br><br>
             {{end}}
         </div>

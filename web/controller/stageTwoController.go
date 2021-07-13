@@ -26,11 +26,11 @@ func StageTwoHandler(w http.ResponseWriter, r *http.Request) {
 	case "delete-free-day":
 		freeDayID := parseURI(r, "free-day")
 		model.Db.DeleteFreeDay(freeDayID)
-		http.Redirect(w, r, "/?view=free-days", http.StatusFound)
+		http.Redirect(w, r, "/index?view=free-days", http.StatusFound)
 	case "add-free-day":
 		freeDay := parseURI(r, "free-day")
 		model.Db.AddFreeDay(freeDay)
-		http.Redirect(w, r, "/?view=free-days", http.StatusFound)
+		http.Redirect(w, r, "/index?view=free-days", http.StatusFound)
 	case "edit-project":
 		editProject(&w, r)
 	case "add-project":
@@ -108,7 +108,7 @@ func editProject(w *http.ResponseWriter, r *http.Request) {
 		}(),
 	}
 	model.Db.UpdateProject(project)
-	http.Redirect(*w, r, "/", http.StatusFound)
+	http.Redirect(*w, r, "/index", http.StatusFound)
 }
 
 func addProject(w *http.ResponseWriter, r *http.Request) {
@@ -127,7 +127,7 @@ func addProject(w *http.ResponseWriter, r *http.Request) {
 
 		model.Db.AddProject(project)
 	}
-	http.Redirect(*w, r, "/", http.StatusFound)
+	http.Redirect(*w, r, "/index", http.StatusFound)
 }
 
 func showActiveProjects(w http.ResponseWriter, r *http.Request) {

@@ -15,10 +15,9 @@
                     <h2 class="modal-title">Editare proiect</h2>
                 </div>
                 <div>
-                    <form id="edit-project-form" method="GET" action="/">
+                    <form id="edit-project-form" method="POST" action="/index?view=edit-project">
                         <fieldset>
                             <legend>Toate campurile sunt obligatorii</legend>
-                            <input type="hidden" name="action" value="edit-project">
                             <input type="hidden" name="id" value="{{.ID}}">
                             <input type="hidden" name="ip" value="{{.IPAddress}}">
                             <label for="ge-no">Nr. Germania:</label>
@@ -53,7 +52,7 @@
                         </fieldset>
                         <div class="modal-footer">
                             <button type="submit">Salveaza</button>
-                            <button type="reset" class="cancel-modal" onclick="location.href='/';">Anuleaza</button>
+                            <button type="reset" class="cancel-modal" onclick="location.href='/index';">Anuleaza</button>
                         </div>
                     </form>
                 </div>

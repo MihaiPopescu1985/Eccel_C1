@@ -27,6 +27,8 @@ func main() {
 
 	http.HandleFunc("/login", controller.Login)
 	http.HandleFunc("/logout", controller.LogOutHandler)
+	http.HandleFunc("/save-time", controller.SaveTimeHandler)
+
 	http.Handle("/index", controller.JwtMiddleware(http.HandlerFunc(controller.HomePageHandler)))
 	log.Println(http.ListenAndServe(serverPort, nil))
 }

@@ -15,10 +15,9 @@
                     <h2 class="modal-title">Editare lucrator</h2>
                 </div>
                 <div>
-                    <form id="edit-worker-form" method="GET" action="/">
+                    <form id="edit-worker-form" method="POST" action="/index?view=save-worker">
                         <fieldset>
                             <legend>Toate camputile sunt obligatorii</legend>
-                            <input type="hidden" name="action" value="save-worker">
                             <input type="hidden" name="id" value="{{.Worker.ID}}">
                             <input type="hidden" name="active" value="{{.Worker.IsActive}}">
                             <input type="hidden" name="lvl" value="{{.Worker.AccessLevel}}">
@@ -54,7 +53,7 @@
                         </fieldset>
                         <div class="modal-footer">
                             <button type="submit">Salveaza</button>
-                            <button class="cancel-modal" type="reset" onclick="location.href='/';">Anuleaza</button>
+                            <button class="cancel-modal" type="reset" onclick="location.href='/index';">Anuleaza</button>
                         </div>
                     </form>
                 </div>
