@@ -453,8 +453,13 @@ func (db *MysqlDB) RetrieveFreeDays() ([]string, error) {
 // RetrieveOvertime ...
 func (db *MysqlDB) RetrieveMinutesOvertime(workerID string) (string, error) {
 
-	command := "CALL GET_OVERTIME('" + workerID + "');"
+	command := "CALL GET_OVERTIME('" + workerID + "', @overtime);"
 	log.Printf("Executing: %v \n", command)
+	if err := db.execute(command); err != nil {
+		log.Println(err)
+		return "", nil
+	}
+	command = "SELECT @overtime;"
 
 	rows, err := db.executeQuery(command)
 	if err != nil {
@@ -781,13 +786,14 @@ func (db *MysqlDB) RetrieveActiveWorkers() (map[string][]string, error) {
 		startTime          sql.NullString
 		minutes            sql.NullString
 		status             sql.NullString
+		overtime           sql.NullString
 	)
 
 	for rows.Next() {
-		if err := rows.Scan(&name, &project, &startTime, &minutes, &status); err != nil {
+		if err := rows.Scan(&name, &project, &startTime, &minutes, &status, &overtime); err != nil {
 			return nil, err
 		}
-		activeWorkerStatus[name.String] = []string{project.String, startTime.String, minutes.String, status.String}
+		activeWorkerStatus[name.String] = []string{project.String, startTime.String, minutes.String, status.String, overtime.String}
 	}
 	return activeWorkerStatus, nil
 }
