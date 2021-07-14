@@ -453,24 +453,21 @@ func (db *MysqlDB) RetrieveFreeDays() ([]string, error) {
 // RetrieveOvertime ...
 func (db *MysqlDB) RetrieveMinutesOvertime(workerID string) (string, error) {
 
-	command := "CALL GET_OVERTIME('" + workerID + "', @overtime);"
+	command := "CALL GET_OVERTIME('" + workerID + "');"
 	log.Printf("Executing: %v \n", command)
-	if err := db.execute(command); err != nil {
-		log.Println(err)
-		return "", nil
-	}
-	command = "SELECT @overtime;"
 
 	rows, err := db.executeQuery(command)
 	if err != nil {
-		return "", nil
+		log.Println(err)
+		return "0", nil
 	}
 
 	var overtime sql.NullString
 
 	for rows.Next() {
 		if err := rows.Scan(&overtime); err != nil {
-			return "", nil
+			log.Println(err)
+			return "0", nil
 		}
 	}
 	return overtime.String, nil
