@@ -142,3 +142,8 @@ func (m *MockPersist) AddFreeDay(freeDay string) error {
 	log.Println("implement function before using it")
 	return errors.New("implement function")
 }
+
+func (m *MockPersist) RetrieveActiveWorkers() (map[string][]string, error) {
+	log.Println("implement function before using it")
+	return nil, errors.New("implement function")
+}

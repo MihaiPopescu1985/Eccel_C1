@@ -32,3 +32,12 @@ func main() {
 	http.Handle("/index", controller.JwtMiddleware(http.HandlerFunc(controller.HomePageHandler)))
 	log.Println(http.ListenAndServe(serverPort, nil))
 }
+
+/*
+func serveTemplate(w http.ResponseWriter, r *http.Request) {
+  lp := filepath.Join("templates", "layout.html")
+  fp := filepath.Join("templates", filepath.Clean(r.URL.Path))
+
+  tmpl, _ := template.ParseFiles(lp, fp)
+  tmpl.ExecuteTemplate(w, "layout", nil)
+}*/

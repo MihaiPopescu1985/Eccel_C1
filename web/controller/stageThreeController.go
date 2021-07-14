@@ -8,16 +8,19 @@ import (
 	"example.com/c1/model"
 )
 
-const stageThreePage string = "./web/view/stage-three-access.html"
+const stageThreePage string = "./web/view/stage-three/stage-three-access.html"
 
 // StageThreeHandler - TODO: write about
 func StageThreeHandler(writer http.ResponseWriter, request *http.Request) {
 
-	activeWorkdays, err := model.Db.RetrieveActiveWorkdays()
+	activeWorkers, err := model.Db.RetrieveActiveWorkers()
 	if err != nil {
 		log.Println(err)
 		ErrorPageHandler(writer, request)
 	} else {
+		for k := range activeWorkers {
+			activeWorkers[k][2] = toHoursAndMinutes(activeWorkers[k][2])
+		}
 		templ, err := template.New("stageThree").ParseFiles(stageThreePage)
 
 		if err != nil {
@@ -26,7 +29,7 @@ func StageThreeHandler(writer http.ResponseWriter, request *http.Request) {
 			return
 		}
 
-		err = templ.ExecuteTemplate(writer, "stage-three-access.html", activeWorkdays)
+		err = templ.ExecuteTemplate(writer, "stage-three-access.html", activeWorkers)
 		if err != nil {
 			log.Println(err)
 			ErrorPageHandler(writer, request)

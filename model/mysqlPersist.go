@@ -764,3 +764,30 @@ func (db *MysqlDB) AddFreeDay(freeDay string) error {
 	log.Println(command)
 	return db.execute(command)
 }
+
+func (db *MysqlDB) RetrieveActiveWorkers() (map[string][]string, error) {
+	command := "CALL WORKERS_DAY_RAPORT();"
+	log.Println(command)
+
+	rows, err := db.executeQuery(command)
+	if err != nil {
+		return nil, err
+	}
+
+	var (
+		activeWorkerStatus = make(map[string][]string)
+		name               sql.NullString
+		project            sql.NullString
+		startTime          sql.NullString
+		minutes            sql.NullString
+		status             sql.NullString
+	)
+
+	for rows.Next() {
+		if err := rows.Scan(&name, &project, &startTime, &minutes, &status); err != nil {
+			return nil, err
+		}
+		activeWorkerStatus[name.String] = []string{project.String, startTime.String, minutes.String, status.String}
+	}
+	return activeWorkerStatus, nil
+}

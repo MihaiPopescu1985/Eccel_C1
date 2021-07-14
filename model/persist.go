@@ -26,4 +26,5 @@ type Persist interface {
 	RetrieveSentProjects() (map[Project]string, error)
 	DeleteFreeDay(freeDay string) error
 	AddFreeDay(freeDay string) error
+	RetrieveActiveWorkers() (map[string][]string, error)
 }

@@ -10,7 +10,7 @@
     </head>
     <body>
         <div class="title-holder">
-            <h1 class="title">Gestiune activitati curente</h1>
+            <h1 class="title">Activitati curente & statistici</h1>
             <a class="title-link" href="/logout">Log out</a>
         </div>
         <br>
@@ -21,11 +21,11 @@
         
         <table id="activeWorkdays">
             <tr>
-                <th>Id</th>
-                <th>Lucrator</th>
-                <th>Numar proiect RO</th>
-                <th>Numar Proiect GE</th>
-                <th>Descriere proiect</th>
+                <th>Nume</th>
+                <th>Proiect</th>
+                <th>Timp inceput</th>
+                <th>Total lucrat azi</th>
+                <th>Status lucrator</th>
             </tr>
             {{range $k,$v:=.}}
                 <tr>
