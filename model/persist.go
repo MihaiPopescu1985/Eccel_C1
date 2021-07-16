@@ -27,4 +27,5 @@ type Persist interface {
 	DeleteFreeDay(freeDay string) error
 	AddFreeDay(freeDay string) error
 	RetrieveActiveWorkers() (map[string][]string, error)
+	GetTodayBreak(workerID string) (string, error)
 }

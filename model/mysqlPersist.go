@@ -784,13 +784,31 @@ func (db *MysqlDB) RetrieveActiveWorkers() (map[string][]string, error) {
 		minutes            sql.NullString
 		status             sql.NullString
 		overtime           sql.NullString
+		breakTime          sql.NullString
 	)
 
 	for rows.Next() {
-		if err := rows.Scan(&name, &project, &startTime, &minutes, &status, &overtime); err != nil {
+		if err := rows.Scan(&name, &project, &startTime, &minutes, &status, &overtime, &breakTime); err != nil {
 			return nil, err
 		}
-		activeWorkerStatus[name.String] = []string{project.String, startTime.String, minutes.String, status.String, overtime.String}
+		activeWorkerStatus[name.String] = []string{project.String, startTime.String, minutes.String, status.String, overtime.String, breakTime.String}
 	}
 	return activeWorkerStatus, nil
+}
+
+func (db *MysqlDB) GetTodayBreak(workerID string) (string, error) {
+	command := "SELECT SUM(TIMESTAMPDIFF(MINUTE, STARTTIME, IFNULL(STOPTIME, NOW()))) AS BREAK FROM WORKDAY WHERE WORKERID=" + workerID + " AND DATE(STARTTIME)=DATE(NOW()) AND PROJECTID=1;"
+	log.Println(command)
+	db.executeQuery(command)
+
+	row, err := db.executeQuery(command)
+	if err != nil {
+		return "", err
+	}
+	var breakTime sql.NullString
+	row.Next()
+	if err = row.Scan(&breakTime); err != nil {
+		return "", err
+	}
+	return breakTime.String, nil
 }

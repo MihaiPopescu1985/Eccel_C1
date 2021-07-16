@@ -3,7 +3,7 @@
     background-color: #284b63;
 }
 
-#status, #today-worked, #overtime {
+#status, #today-worked, #overtime, #break {
     text-align: center;
     color: #d9d9d9;
     text-shadow: 2px 2px #353535;

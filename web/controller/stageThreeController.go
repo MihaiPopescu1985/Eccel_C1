@@ -21,6 +21,7 @@ func StageThreeHandler(writer http.ResponseWriter, request *http.Request) {
 		for k := range activeWorkers {
 			activeWorkers[k][2] = toHoursAndMinutes(activeWorkers[k][2])
 			activeWorkers[k][4] = toHoursAndMinutes(activeWorkers[k][4])
+			activeWorkers[k][5] = toHoursAndMinutes(activeWorkers[k][5])
 		}
 		templ, err := template.New("stageThree").ParseFiles(stageThreePage)
 

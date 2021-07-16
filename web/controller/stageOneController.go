@@ -24,6 +24,7 @@ type workerStatus struct {
 	Status     string
 	WorkedTime string
 	Overtime   string
+	Break      string
 }
 
 type timeReport struct {
@@ -129,6 +130,12 @@ func StageOneHandler(worker *model.Worker, writer http.ResponseWriter, request *
 			break
 		}
 		err = pageContent.setOvertime()
+		if err != nil {
+			log.Println(err)
+			ErrorPageHandler(writer, request)
+			break
+		}
+		err = pageContent.setBreak(worker.ID)
 		if err != nil {
 			log.Println(err)
 			ErrorPageHandler(writer, request)
@@ -307,4 +314,13 @@ func (pageContent *workerStatus) setStatusAndWorkedTime() error {
 		pageContent.WorkedTime = toHoursAndMinutes(pageContent.WorkedTime)
 	}
 	return err
+}
+
+func (pageContent *workerStatus) setBreak(workerId string) error {
+	breakTime, err := model.Db.GetTodayBreak(workerId)
+	if err != nil {
+		return err
+	}
+	pageContent.Break = toHoursAndMinutes(breakTime)
+	return nil
 }
