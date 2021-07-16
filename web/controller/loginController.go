@@ -10,7 +10,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-var loginPage string = `.\web\view\index.html`
+var loginPage string = `./web/view/index.html`
 
 func Login(rw http.ResponseWriter, r *http.Request) {
 
@@ -73,6 +73,7 @@ func Login(rw http.ResponseWriter, r *http.Request) {
 			Name:     "token",
 			Value:    string(token),
 			HttpOnly: true,
+			SameSite: http.SameSiteStrictMode,
 		})
 
 		// redirect
